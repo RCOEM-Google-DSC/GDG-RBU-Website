@@ -7,17 +7,19 @@ export function FormMessage({ message }: { message: Message }) {
   return (
     <div className="flex flex-col gap-2 w-full max-w-md text-sm">
       {"success" in message && (
-        <div className="text-foreground border-l-2 border-foreground px-4">
+        <div className="text-green-500  px-4 py-2 mx-2 justify-center text-center">
           {message.success}
         </div>
       )}
       {"error" in message && (
-        <div className="text-destructive-foreground border-l-2 border-destructive-foreground px-4">
+        <div className="text-red-500  px-4 py-2 mx-2 justify-center text-center">
           {message.error}
         </div>
       )}
       {"message" in message && (
-        <div className="text-foreground border-l-2 px-4">{message.message}</div>
+        <div className="text-gray-500  px-4 py-2 mx-2 justify-center text-center">
+          {message.message}
+        </div>
       )}
     </div>
   );
