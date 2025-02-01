@@ -1,0 +1,88 @@
+-- Database Schema -- 
+
+  1. Tables [ RLS Security Enable ]
+    - users
+      - id (uuid, primary key)
+      - name (text, not null)
+      - email (text, unique, not null)
+      - role (text, not null) [ using enum {'admin','team','user'}]
+      - image (text, default: 'user.png')
+      - created_at (timestamptz, default: now())
+    
+    - blogs
+      - id (uuid, primary key)
+      - writer_id (uuid, foreign key to users.id)
+      - image_url (text)
+      - content (text, not null)
+      - created_at (timestamptz, default: now())
+    
+    - events
+      - id (uuid, primary key)
+      - name (text, not null)
+      - post_image (text)
+      - description (text)
+      - event_time (timestamptz, not null)
+      - location (text)
+      - created_at (timestamptz, default: now())
+    
+    - registrations (many-to-many relationship table)
+      - id (uuid, primary key)
+      - event_id (uuid, foreign key to events.id)
+      - user_id (uuid, foreign key to users.id)
+      - created_at (timestamptz, default: now())
+      - Unique constraint on (event_id, user_id)
+
+    - members
+      - id (uuid, primary key)
+      - domain (ENUM domain_type, Not Null) [using enum {'Web Dev', 'Video Editing', 'Socials', 'App Dev', 'Cloud & AI', 'Graphics', 'Marketing', 'Management'}]
+      - role (text, not null)
+      - name (text, not null)
+      - user_id (uuid, foreign key to users.id)
+      - profile_links (text[])
+
+created_at (timestamptz, default: now())
+
+  2. Security Policies
+    - Users table:
+      - User can read all user data [ Reason : Can see other user (admin / team) profile pic ]
+      - Admin/team can update/delete user data 
+    - Blogs table:
+      - Anyone can read blogs
+      - Admin/team can create/update/delete blogs
+    - Events table:
+      - Anyone can read events
+      - Admin/team can create/update/delete events
+    - Registrations table:
+      - Users can read their own registrations
+      - Users can register for events
+      - Admin can read all registrations
+      - Users can read ( see ) all other user registrations [ Reason : Otherwise it doesn't display no. of registrations in events. ]
+    - Members table:
+      - Anyone can read members
+      - Only admins can insert/update/delete members
+
+  3. Functions & Trigger
+    - Handle new users:
+      - Use to insert new user data in user table 
+    - Validate Member User ID:
+      - Validates that the user_id in the members table references a user with the role 'team' or 'admin'.
+
+  4. Storage
+    - Two Buckets : blogs & profile
+
+-- Important consideration -- 
+
+    - Email Verification : OFF 
+
+-- Check List --
+
+  - Dynamic Blog and Event Pages : Implement dynamic pages for blogs and events using MDX to display individual blog posts and event details.
+  - Blogs & Events Insertion page : Add a page for blog and event insertion, allowing admin and team members to create new content.
+  - Update in Policies for blogs table : Rather than this "Admin/team can create/update/delete blogs" -> "Admin/team can create blogs" , "( writer_id (team member) ) writer can only update/delete his own blogs" ,"Admin can delete blogs".
+  - Admin Panel for Team Management :
+    - Admin can change role of members & their domain.
+    - Admin can decide the role of user in users table ( team , user )
+  - A live route to display the current upcoming event.
+  - Design and implement email templates and redirect URLs in supabase.
+  - Specific Team Member Information Popup : Implement a screen to display detailed information about a specific team member.
+  - Form Implementation [ Upcoming Plans ]
