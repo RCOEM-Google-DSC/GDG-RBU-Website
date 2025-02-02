@@ -7,6 +7,7 @@
 //   return <pre>{JSON.stringify(blogs, null, 2)}</pre>;
 // }
 import { createClient } from "@/utils/supabase/server";
+import ReactMarkdown from "react-markdown";
 
 export default async function Blogs() {
   const supabase = await createClient();
@@ -44,7 +45,7 @@ export default async function Blogs() {
                 {/*  NOW THE USER PROFILE PART IS NOT SETUP -- IMAGE */}
                 <img
                   src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile/${blog.users?.image}`}
-                  alt={blog.users?.name}
+                  // alt={blog.users?.name}
                   className="w-10 h-10 rounded-full mr-3"
                 />
                 <div>
@@ -55,7 +56,11 @@ export default async function Blogs() {
                 </div>
               </div>
               {/* Blog Content */}
-              <p className="text-gray-600">{blog.content.slice(0, 100)}...</p>
+              {/* <p className="text-gray-600">{blog.content.slice(0, 100)}...</p> */}
+              {/* Blog Content */}
+              <div className="p-4">
+                <ReactMarkdown>{blog.content}</ReactMarkdown>
+              </div>
             </div>
           </div>
         ))}
