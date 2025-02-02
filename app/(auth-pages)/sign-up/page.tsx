@@ -1,4 +1,4 @@
-import { signUpAction } from "@/app/actions";
+import { signInWithGoogleAction, signUpAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
@@ -43,6 +43,13 @@ export default async function Signup(props: {
           >
             Sign up
           </SubmitButton>
+          <button
+            type="button"
+            onClick={signInWithGoogleAction}
+            className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+          >
+            Continue with Google
+          </button>
           <FormMessage message={searchParams} />
         </div>
         <p className="text-sm text text-gray-500 mt-6">

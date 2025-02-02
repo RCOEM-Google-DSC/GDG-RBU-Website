@@ -6,13 +6,20 @@ export async function GET(request: Request) {
   // by the SSR package. It exchanges an auth code for the user's session.
   // https://supabase.com/docs/guides/auth/server-side/nextjs
   const requestUrl = new URL(request.url);
-  const code = requestUrl.searchParams.get("code");
+  const code = requestUrl.searchParams.get("code")?.toString();
   const origin = requestUrl.origin;
   const redirectTo = requestUrl.searchParams.get("redirect_to")?.toString();
 
   if (code) {
     const supabase = await createClient();
-    await supabase.auth.exchangeCodeForSession(code);
+    // await supabase.auth.exchangeCodeForSession(code);
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+    console.log(data);
+
+    if (error) {
+      console.error("Error exchanging code for session:", error.message);
+      return NextResponse.redirect("/sign-in?error=AuthFailed");
+    }
   }
 
   // Redirect to the URL provided in the `redirect_to` query parameter

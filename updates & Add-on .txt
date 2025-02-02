@@ -79,6 +79,7 @@ created_at (timestamptz, default: now())
 -- Check List --
 
   - Update Member table add two column description & thought  ; And Policies : Members can update their own data except domain.
+  - Instead of keeping the default user profile picture for all, we can allow users to choose from pre-uploaded options, and permit team members and admins to upload their own. 
   - Model for Members [ Details for each members should be shown. ] - frontend .
   - 404 Page Not Found - Page Needed to be Styled.
   - Dynamic Blog and Event Pages : Implement dynamic pages for blogs [dynamic route ] and events [ model ] using MDX to display individual blog posts and event details.
