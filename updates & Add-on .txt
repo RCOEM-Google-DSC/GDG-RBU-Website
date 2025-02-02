@@ -72,11 +72,12 @@ created_at (timestamptz, default: now())
 
 -- Important consideration -- 
 
-    - Email Verification : OFF 
+    - Email Verification [ supabase] : OFF 
     - Realtime : OFF
+    - Email Validation : OFF
 
 -- Check List --
-  - Email address validation needs to be added.
+
   - Update Member table add two column description & thought  ; And Policies : Members can update their own data except domain.
   - Model for Members [ Details for each members should be shown. ] - frontend .
   - 404 Page Not Found - Page Needed to be Styled.

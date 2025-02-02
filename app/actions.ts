@@ -20,15 +20,16 @@ export const signUpAction = async (formData: FormData) => {
     );
   }
 
+  //  Once Testing is complete, remove the following comment lines
   const isEmailValid = await validateEmail(email);
-  if (!isEmailValid) {
-    return encodedRedirect(
-      "error",
-      "/sign-up",
-      "Invalid or undeliverable email address"
-    );
-  }
 
+  // if (!isEmailValid) {
+  //   return encodedRedirect(
+  //     "error",
+  //     "/sign-up",
+  //     "Invalid or undeliverable email address"
+  //   );
+  // } else {
   const { error } = await supabase.auth.signUp({
     email,
     password,
@@ -47,6 +48,7 @@ export const signUpAction = async (formData: FormData) => {
       "Thanks for signing up! Please check your email for a verification link."
     );
   }
+  // }
 };
 
 export const signInAction = async (formData: FormData) => {
