@@ -1,3 +1,4 @@
+// tsconfig.json is a configuration file that TypeScript uses to configure its behavior.
 {
   "compilerOptions": {
     "target": "es5",

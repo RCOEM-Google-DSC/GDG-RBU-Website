@@ -77,7 +77,11 @@ created_at (timestamptz, default: now())
 
 -- Check List --
   - Email address validation needs to be added.
-  - Dynamic Blog and Event Pages : Implement dynamic pages for blogs [dynamic route ] and events using MDX to display individual blog posts and event details.
+  - 404 Page Not Found - Page Needed to be Styled.
+  - Dynamic Blog and Event Pages : Implement dynamic pages for blogs [dynamic route ] and events [ model ] using MDX to display individual blog posts and event details.
+  - Update Member table add two column description & thought .
+  - Model for Members [ Details for each members should be shown. ]
+  - Event Management Dashboard : Basically Admin / team can see the register user data .
   - Blogs & Events Insertion page : Add a page for blog and event insertion, allowing admin and team members to create new content.
   - Update in Policies for blogs table : Rather than this "Admin/team can create/update/delete blogs" -> "Admin/team can create blogs" , "( writer_id (team member) ) writer can only update/delete his own blogs" ,"Admin can delete blogs".
   - Admin Panel for Team Management :

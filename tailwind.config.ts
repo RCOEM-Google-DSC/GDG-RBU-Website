@@ -1,3 +1,4 @@
+// Note: This file is used to configure Tailwind CSS. It is used to define the theme, colors, and other styles that are used in the application. It is also used to define the breakpoints for the responsive design.
 import type { Config } from "tailwindcss";
 
 const config = {
