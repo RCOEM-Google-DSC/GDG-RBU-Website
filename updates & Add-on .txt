@@ -76,7 +76,7 @@ created_at (timestamptz, default: now())
     - Realtime : OFF
 
 -- Check List --
-
+  - Email address validation needs to be added.
   - Dynamic Blog and Event Pages : Implement dynamic pages for blogs and events using MDX to display individual blog posts and event details.
   - Blogs & Events Insertion page : Add a page for blog and event insertion, allowing admin and team members to create new content.
   - Update in Policies for blogs table : Rather than this "Admin/team can create/update/delete blogs" -> "Admin/team can create blogs" , "( writer_id (team member) ) writer can only update/delete his own blogs" ,"Admin can delete blogs".
