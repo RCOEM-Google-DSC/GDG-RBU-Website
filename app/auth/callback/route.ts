@@ -15,6 +15,7 @@ export async function GET(request: Request) {
     await supabase.auth.exchangeCodeForSession(code);
   }
 
+  // Redirect to the URL provided in the `redirect_to` query parameter
   if (redirectTo) {
     return NextResponse.redirect(`${origin}${redirectTo}`);
   }
