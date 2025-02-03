@@ -96,3 +96,5 @@ created_at (timestamptz, default: now())
   - Implement a "Search" feature for blogs and events using openai ( vector supabase ).
   - A Download as PDF feature for blogs.
   - Share Ongoing Event on Social Media : Implement a feature to share ongoing events on social media platforms.
+  - AI Implementation to enhance the blog and event text ( content ) .
+  - Chat Bot Implementation : Implement a chatbot to assist users with their queries.
