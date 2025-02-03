@@ -99,3 +99,21 @@ created_at (timestamptz, default: now())
   - AI Implementation to enhance the blog and event text ( content & then -> markdown ) .
   - Chat Bot Implementation : Implement a chatbot to assist users with their queries.
   - User will register in a event through form ( only ).
+  - User Event Page Development - Management 
+    - User Process Management
+      - Users will have a process status:
+          - Ongoing
+          - Completed
+        [ Team and admin can change the process status via a toggle button. ]
+    - Database Modifications:
+      - Add a Process Column [ Introduce a new column in the registrations table to store the process status. ]
+    - Policy Updates:
+      - Create policies that allow team and admin to update the registrations table.
+    - Event Selection: 
+      - Implement a dropdown to select events.
+      - Based on selected event show all the users register in that event.
+    - Event Status Logic:
+      - Determine event status based on time:
+        - If event_time + 12 hours > current_time, then the event is ongoing.
+        - Otherwise, the event is completed.
+      - If an event is completed, the team cannot update the user process [ Implement the  logic in the frontend to ensure proper user experience ]
