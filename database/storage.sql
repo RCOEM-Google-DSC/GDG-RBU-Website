@@ -1,0 +1,17 @@
+-- Create the bucket for blogs
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('blogs', 'blogs', true);
+
+-- Ensure the bucket is public
+UPDATE storage.buckets
+SET public = true
+WHERE id = 'blogs';
+
+-- Create the bucket for profile pictures
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('profile', 'profile', true);
+
+-- Ensure the bucket is public
+UPDATE storage.buckets
+SET public = true
+WHERE id = 'profile';
