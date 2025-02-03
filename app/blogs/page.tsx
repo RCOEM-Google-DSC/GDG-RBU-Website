@@ -1,13 +1,5 @@
-// import { createClient } from "@/utils/supabase/server";
-
-// export default async function Blogs() {
-//   const supabase = await createClient();
-//   const { data: blogs } = await supabase.from("blogs").select();
-
-//   return <pre>{JSON.stringify(blogs, null, 2)}</pre>;
-// }
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { createClient } from "@/utils/supabase/server";
-import ReactMarkdown from "react-markdown";
 
 export default async function Blogs() {
   const supabase = await createClient();
@@ -59,7 +51,8 @@ export default async function Blogs() {
               {/* <p className="text-gray-600">{blog.content.slice(0, 100)}...</p> */}
               {/* Blog Content */}
               <div className="p-4">
-                <ReactMarkdown>{blog.content}</ReactMarkdown>
+                {/* <ReactMarkdown>{blog.content}</ReactMarkdown> */}
+                <MDXRemote source={blog.content} />
               </div>
             </div>
           </div>

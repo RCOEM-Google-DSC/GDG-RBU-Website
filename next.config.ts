@@ -1,5 +1,9 @@
+const withMDX = require("@next/mdx")();
+
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+};
 
 export default nextConfig;
