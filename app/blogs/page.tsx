@@ -1,18 +1,36 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { createClient } from "@/utils/supabase/server";
 
+interface User {
+  id: string;
+  name: string;
+  image: string;
+}
+interface Blogs {
+  id: string;
+  writer_id: string;
+  image_url: string;
+  content: string;
+  created_at: string;
+  users: User;
+}
 export default async function Blogs() {
   const supabase = await createClient();
 
   // Fetch blogs along with the writer's details
-  const { data: blogs } = await supabase.from("blogs").select(`
+  const { data: blogs } = await supabase
+    .from("blogs")
+    .select(
+      `
       id,
       writer_id,
       image_url,
       content,
       created_at,
       users:writer_id (id, name, image)
-    `);
+    `
+    )
+    .returns<Blogs[]>();
 
   return (
     <div>

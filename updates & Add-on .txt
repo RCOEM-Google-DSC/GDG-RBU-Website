@@ -77,7 +77,7 @@ created_at (timestamptz, default: now())
     - Email Validation : OFF
 
 -- Check List --
-
+  - Docs for the Entire website  [ Do it at the End ]
   - Update Member table add two column description & thought  ; And Policies : Members can update their own data except domain.
   - Instead of keeping the default user profile picture for all, we can allow users to choose from pre-uploaded options, and permit team members and admins to upload their own. 
   - Model for Members [ Details for each members should be shown. ] - frontend .
@@ -96,5 +96,6 @@ created_at (timestamptz, default: now())
   - Implement a "Search" feature for blogs and events using openai ( vector supabase ).
   - A Download as PDF feature for blogs.
   - Share Ongoing Event on Social Media : Implement a feature to share ongoing events on social media platforms.
-  - AI Implementation to enhance the blog and event text ( content ) .
+  - AI Implementation to enhance the blog and event text ( content & then -> markdown ) .
   - Chat Bot Implementation : Implement a chatbot to assist users with their queries.
+  - User will register in a event through form ( only ).
