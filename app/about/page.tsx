@@ -14,6 +14,8 @@ interface Member {
   profile_links: string[];
   created_at: string;
   users: User;
+  description?: string;
+  thought?: string;
 }
 
 export default async function Members() {
@@ -29,6 +31,8 @@ export default async function Members() {
       role,
       name,
       profile_links,
+      description,
+      thought,
       created_at,
       users:user_id (id, image)
     `
@@ -62,6 +66,15 @@ export default async function Members() {
             <p className="text-gray-600 mb-2">
               <strong>Role:</strong> {member.role}
             </p>
+            {/* Description */}
+            {member.description && (
+              <p className="text-gray-600 mb-2">{member.description}</p>
+            )}
+            {/* Thought */}
+            {member.thought && (
+              <p className="text-gray-600 mb-2">{member.thought}</p>
+            )}
+            {/* Created At */}
             {/* Profile Links */}
             <div className="mt-4">
               <p className="text-sm font-semibold mb-2">Profile Links:</p>

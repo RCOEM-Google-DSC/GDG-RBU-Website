@@ -39,6 +39,8 @@
       - name (text, not null)
       - user_id (uuid, foreign key to users.id)
       - profile_links (text[])
+      - description (text, null)
+      - thought (text, null)
 
 created_at (timestamptz, default: now())
 
@@ -60,6 +62,7 @@ created_at (timestamptz, default: now())
     - Members table:
       - Anyone can read members
       - Only admins can insert/update/delete members
+      - Team Mebers & Admin can update their own data
 
   3. Functions & Trigger
     - Handle new users:
@@ -78,7 +81,6 @@ created_at (timestamptz, default: now())
 
 -- Check List --
   - Docs for the Entire website  [ Do it at the End ]
-  - Update Member table add two column description & thought  ; And Policies : Members can update their own data except domain.
   - Instead of keeping the default user profile picture for all, we can allow users to choose from pre-uploaded options, and permit team members and admins to upload their own. 
   - Model for Members [ Details for each members should be shown. ] - frontend .
   - 404 Page Not Found - Page Needed to be Styled.
