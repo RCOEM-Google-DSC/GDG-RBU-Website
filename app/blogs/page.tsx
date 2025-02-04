@@ -40,12 +40,12 @@ export default async function Blogs() {
         {blogs?.map((blog) => (
           <div
             key={blog.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className="bg-background rounded-lg shadow-md overflow-hidden border border-border"
           >
             {/* Blog Image */}
             <img
               src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blogs/${blog.image_url}`}
-              alt={blog.content.slice(0, 50)} // Use the first 50 chars of content as alt text
+              alt={blog.content.slice(0, 50)}
               className="w-full h-48 object-cover"
             />
             {/* Blog Details */}
@@ -59,18 +59,20 @@ export default async function Blogs() {
                   className="w-10 h-10 rounded-full mr-3"
                 />
                 <div>
-                  <p className="font-semibold">{blog.users?.name}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="font-semibold text-foreground">
+                    {blog.users?.name}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
                     {new Date(blog.created_at).toLocaleDateString()}
                   </p>
                 </div>
               </div>
               {/* Blog Content */}
-              {/* <p className="text-gray-600">{blog.content.slice(0, 100)}...</p> */}
-              {/* Blog Content */}
-              <div className="p-4">
-                {/* <ReactMarkdown>{blog.content}</ReactMarkdown> */}
+              {/* <div className="p-4 text-foreground">
                 <MDXRemote source={blog.content} />
+              </div> */}
+              <div className="p-4 text-foreground">
+                <MDXRemote source={blog.content.slice(0, 100)} />
               </div>
             </div>
           </div>
