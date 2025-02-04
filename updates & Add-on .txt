@@ -81,6 +81,7 @@ created_at (timestamptz, default: now())
 
 -- Check List --
   - Docs for the Entire website  [ Do it at the End ]
+  - Add Full Name field in sign up page.
   - Instead of keeping the default user profile picture for all, we can allow users to choose from pre-uploaded options, and permit team members and admins to upload their own. 
   - Model for Members [ Details for each members should be shown. ] - frontend .
   - 404 Page Not Found - Page Needed to be Styled.
