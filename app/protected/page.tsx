@@ -1,5 +1,5 @@
 //  SERVER SIDE RENDERED
-/*
+
 import { createClient } from "@/utils/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
@@ -36,7 +36,9 @@ export default async function ProtectedPage() {
     </div>
   );
 }
-*/
+
+// CLIENT SIDE RENDERED
+/*
 "use client";
 
 import { useEffect, useState } from "react";
@@ -90,3 +92,4 @@ export default function ProtectedPage() {
     </div>
   );
 }
+*/
