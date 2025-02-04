@@ -1,3 +1,5 @@
+//  SERVER SIDE RENDERED
+/*
 import { createClient } from "@/utils/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
@@ -11,6 +13,60 @@ export default async function ProtectedPage() {
 
   if (!user) {
     return redirect("/sign-in");
+  }
+
+  return (
+    <div className="flex-1 w-full flex flex-col gap-12">
+      <div className="w-full">
+        <div className="bg-accent text-sm p-3 px-5 rounded-md text-foreground flex gap-3 items-center">
+          <InfoIcon
+            size="16"
+            strokeWidth={2}
+          />
+          This is a protected page that you can only see as an authenticated
+          user
+        </div>
+      </div>
+      <div className="flex flex-col gap-2 items-start">
+        <h2 className="font-bold text-2xl mb-4">Your user details</h2>
+        <pre className="text-xs font-mono p-3 rounded border">
+          {JSON.stringify(user, null, 2)}
+        </pre>
+      </div>
+    </div>
+  );
+}
+*/
+"use client";
+
+import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import { InfoIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+export default function ProtectedPage() {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const getUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        setUser(user as any);
+      } else {
+        router.push("/sign-in");
+      }
+    };
+
+    getUser();
+  }, [router]);
+
+  if (!user) {
+    return null;
   }
 
   return (
