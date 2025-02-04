@@ -14,6 +14,7 @@ interface Blogs {
   writer_id: string;
   image_url: string;
   content: string;
+  title: string;
   created_at: string;
   users: User;
 }
@@ -28,6 +29,7 @@ async function getBlogs() {
       writer_id,
       image_url,
       content,
+      title,
       created_at,
       users:writer_id (id, name, image)
     `
@@ -78,8 +80,12 @@ export default async function Blogs() {
               </div>
               <div className="text content">
                 <div className="text-gray-50 relative z-10 my-4">
+                  {/* 
+                   THIS IS USED TO RENDER THE MDX CONTENT -- WILL BE USED TO DISPLAY THE BLOG CONTENT
                   <MDXRemote source={blog.content.slice(0, 100)} />
-                  {/* Will be replaced by Title */}
+                   */}
+
+                  <p>{blog.title}</p>
                 </div>
               </div>
             </div>
