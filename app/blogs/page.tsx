@@ -1,9 +1,7 @@
-"use client";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { createClient } from "@/utils/supabase/client";
-import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/server";
 
 interface User {
   id: string;
@@ -20,32 +18,27 @@ interface Blogs {
   users: User;
 }
 
-export default function Blogs() {
-  const [blogs, setBlogs] = useState<Blogs[] | null>(null);
+async function getBlogs() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("blogs")
+    .select(
+      `
+      id,
+      writer_id,
+      image_url,
+      content,
+      created_at,
+      users:writer_id (id, name, image)
+    `
+    )
+    .returns<Blogs[]>();
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      const supabase = createClient();
+  return data;
+}
 
-      const { data } = await supabase
-        .from("blogs")
-        .select(
-          `
-          id,
-          writer_id,
-          image_url,
-          content,
-          created_at,
-          users:writer_id (id, name, image)
-        `
-        )
-        .returns<Blogs[]>();
-
-      setBlogs(data);
-    };
-
-    fetchBlogs();
-  }, []);
+export default async function Blogs() {
+  const blogs = await getBlogs();
 
   return (
     <div>
@@ -72,7 +65,7 @@ export default function Blogs() {
                   width={40}
                   alt={blog.users?.name || "User"}
                   src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile/${blog.users?.image}`}
-                  className="h-10 w-10 rounded-full border-2 object-cover"
+                  className="h-10 w-10 rounded-full border-2 object-cover "
                 />
                 <div className="flex flex-col">
                   <p className="font-normal text-base text-gray-50 relative z-10">
@@ -86,6 +79,7 @@ export default function Blogs() {
               <div className="text content">
                 <div className="text-gray-50 relative z-10 my-4">
                   <MDXRemote source={blog.content.slice(0, 100)} />
+                  {/* Will be replaced by Title */}
                 </div>
               </div>
             </div>
