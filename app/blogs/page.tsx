@@ -1,11 +1,16 @@
+"use client";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
 
 interface User {
   id: string;
   name: string;
   image: string;
 }
+
 interface Blogs {
   id: string;
   writer_id: string;
@@ -14,65 +19,74 @@ interface Blogs {
   created_at: string;
   users: User;
 }
-export default async function Blogs() {
-  const supabase = await createClient();
 
-  // Fetch blogs along with the writer's details
-  const { data: blogs } = await supabase
-    .from("blogs")
-    .select(
-      `
-      id,
-      writer_id,
-      image_url,
-      content,
-      created_at,
-      users:writer_id (id, name, image)
-    `
-    )
-    .returns<Blogs[]>();
+export default function Blogs() {
+  const [blogs, setBlogs] = useState<Blogs[] | null>(null);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const supabase = createClient();
+
+      const { data } = await supabase
+        .from("blogs")
+        .select(
+          `
+          id,
+          writer_id,
+          image_url,
+          content,
+          created_at,
+          users:writer_id (id, name, image)
+        `
+        )
+        .returns<Blogs[]>();
+
+      setBlogs(data);
+    };
+
+    fetchBlogs();
+  }, []);
 
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Blogs</h1>
-      <pre>{JSON.stringify(blogs, null, 2)}</pre>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs?.map((blog) => (
           <div
             key={blog.id}
-            className="bg-background rounded-lg shadow-md overflow-hidden border border-border"
+            className="max-w-xs w-full group/card"
           >
-            {/* Blog Image */}
-            <img
-              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blogs/${blog.image_url}`}
-              alt={blog.content.slice(0, 50)}
-              className="w-full h-48 object-cover"
-            />
-            {/* Blog Details */}
-            <div className="p-4">
-              {/* Writer Details */}
-              <div className="flex items-center mb-4">
-                {/*  NOW THE USER PROFILE PART IS NOT SETUP -- IMAGE */}
-                <img
+            <div
+              className={cn(
+                "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl max-w-sm mx-auto flex flex-col justify-between p-4",
+                "bg-cover"
+              )}
+              style={{
+                backgroundImage: `url(${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blogs/${blog.image_url})`,
+              }}
+            >
+              <div className="absolute w-full h-full top-0 left-0 transition duration-300 group-hover/card:bg-black opacity-60"></div>
+              <div className="flex flex-row items-center space-x-4 z-10">
+                <Image
+                  height={40}
+                  width={40}
+                  alt={blog.users?.name || "User"}
                   src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile/${blog.users?.image}`}
-                  // alt={blog.users?.name}
-                  className="w-10 h-10 rounded-full mr-3"
+                  className="h-10 w-10 rounded-full border-2 object-cover"
                 />
-                <div>
-                  <p className="font-semibold text-foreground">
+                <div className="flex flex-col">
+                  <p className="font-normal text-base text-gray-50 relative z-10">
                     {blog.users?.name}
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-gray-400">
                     {new Date(blog.created_at).toLocaleDateString()}
                   </p>
                 </div>
               </div>
-              {/* Blog Content */}
-              {/* <div className="p-4 text-foreground">
-                <MDXRemote source={blog.content} />
-              </div> */}
-              <div className="p-4 text-foreground">
-                <MDXRemote source={blog.content.slice(0, 100)} />
+              <div className="text content">
+                <div className="text-gray-50 relative z-10 my-4">
+                  <MDXRemote source={blog.content.slice(0, 100)} />
+                </div>
               </div>
             </div>
           </div>
