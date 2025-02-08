@@ -55,9 +55,10 @@ export const updateSession = async (request: NextRequest) => {
     if (request.nextUrl.pathname.startsWith("/protected") && user.error) {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
-    //
+    // admin routes
     if (
-      request.nextUrl.pathname.startsWith("/admin/members") &&
+      (request.nextUrl.pathname.startsWith("/admin/members") ||
+        request.nextUrl.pathname.startsWith("/admin/user")) &&
       userRole !== "admin"
     ) {
       console.log("User is not an admin");
