@@ -238,23 +238,38 @@ USING (true);
 CREATE POLICY "Only admins can insert members"
 ON members
 FOR INSERT
-WITH CHECK (auth.jwt() ->> 'role' = 'admin');
+WITH CHECK (
+    EXISTS (
+    SELECT 1 FROM users 
+    WHERE id = auth.uid() 
+    AND role = 'admin'
+    )
+);
 
 CREATE POLICY "Only admins can update members"
 ON members
 FOR UPDATE
-USING (auth.jwt() ->> 'role' = 'admin');
+USING (EXISTS (
+    SELECT 1 FROM users 
+    WHERE id = auth.uid() 
+    AND role = 'admin'
+    ));
 
 CREATE POLICY "Only admins can delete members"
 ON members
 FOR DELETE
-USING (auth.jwt() ->> 'role' = 'admin');
+USING (EXISTS (
+    SELECT 1 FROM users 
+    WHERE id = auth.uid() 
+    AND role = 'admin'
+    ));
 
 CREATE POLICY "Team Mebers & Admin can update their own data"
 ON members
 FOR UPDATE
 USING (auth.uid() = user_id)
 WITH CHECK (auth.uid() = user_id);
+
 
 
 
