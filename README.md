@@ -1,3 +1,5 @@
+
+![gdg](gdg.svg)
 ## For Team members
 
 > [!IMPORTANT]
