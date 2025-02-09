@@ -1,3 +1,4 @@
+//  ADD A NEW MEMBER [ focus on selecting user id ]
 "use client";
 import React, { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
