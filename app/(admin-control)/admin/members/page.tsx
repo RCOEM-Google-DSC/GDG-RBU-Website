@@ -1,14 +1,3 @@
-// MEMBERS TABLE:
-// - Return name, domain, role, user_id
-// - Search bar to search by name
-// - Dropdown to filter by domain
-// - List all members with name, domain, role
-// - Delete button to remove member
-// - Dropdown to edit user domain
-// - Modal to edit user role with input field
-// - Edit button to change member role (text of the role)
-// - View button to see member details
-// - Add member button (consider implementation)
 "use client";
 import React, { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
@@ -113,7 +102,7 @@ export default function MembersPage() {
   };
 
   return (
-    <div>
+    <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Members</h1>
       <div className="flex gap-4 mb-4">
         <Input
@@ -121,10 +110,12 @@ export default function MembersPage() {
           placeholder="Search by name"
           value={searchTerm}
           onChange={handleSearch}
+          className="border rounded p-2"
         />
         <select
           value={selectedDomain}
           onChange={handleDomainChange}
+          className="border rounded p-2"
         >
           <option value="">All Domains</option>
           <option value="Web Dev">Web Dev</option>
@@ -137,26 +128,37 @@ export default function MembersPage() {
           <option value="Management">Management</option>
         </select>
       </div>
-      <table className="min-w-full bg-white">
+      <table className="min-w-full bg-white  rounded">
         <thead>
           <tr>
-            <th className="py-2">Name</th>
-            <th className="py-2">Domain</th>
-            <th className="py-2">Role</th>
-            <th className="py-2">Actions</th>
+            <th className="py-2 border-b">Name</th>
+            <th className="py-2 border-b">Domain</th>
+            <th className="py-2 border-b">Role</th>
+            <th className="py-2 border-b">Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredMembers.map((member) => (
-            <tr key={member.id}>
-              <td className="py-2">{member.name}</td>
-              <td className="py-2">{member.domain}</td>
-              <td className="py-2">{member.role}</td>
-              <td className="py-2">
-                <Button onClick={() => handleEditRole(member)}>
+            <tr
+              key={member.id}
+              className="hover:bg-gray-100"
+            >
+              <td className="py-2 border-b">{member.name}</td>
+              <td className="py-2 border-b">{member.domain}</td>
+              <td className="py-2 border-b">{member.role}</td>
+              <td className="py-2 border-b">
+                <Button
+                  onClick={() => handleEditRole(member)}
+                  className="mr-2 bg-blue-500 text-white rounded p-2"
+                >
                   Edit Role
                 </Button>
-                <Button onClick={() => handleDelete(member.id)}>Delete</Button>
+                <Button
+                  onClick={() => handleDelete(member.id)}
+                  className="bg-red-500 text-white rounded p-2"
+                >
+                  Delete
+                </Button>
               </td>
             </tr>
           ))}
@@ -164,13 +166,21 @@ export default function MembersPage() {
       </table>
       {isModalOpen && selectedMember && (
         <Modal onClose={() => setIsModalOpen(false)}>
-          <h2>Edit Role for {selectedMember.name}</h2>
+          <h2 className="text-xl font-bold mb-4">
+            Edit Role for {selectedMember.name}
+          </h2>
           <Input
             type="text"
             defaultValue={selectedMember.role}
             onBlur={(e) => handleRoleChange(e.target.value)}
+            className="border rounded p-2 mb-4"
           />
-          <Button onClick={() => setIsModalOpen(false)}>Save</Button>
+          <Button
+            onClick={() => setIsModalOpen(false)}
+            className="bg-green-500 text-white rounded p-2"
+          >
+            Save
+          </Button>
         </Modal>
       )}
     </div>
