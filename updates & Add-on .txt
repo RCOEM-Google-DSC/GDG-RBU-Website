@@ -89,7 +89,6 @@ created_at (timestamptz, default: now())
   - Event Management Dashboard : Basically Admin / team can see the register user data .
   - Blogs & Events Insertion page : Add a page for blog and event insertion, allowing admin and team members to create new content.
   - Admin Panel for Team Management :
-    - Admin can change role of members & their domain.
     - Admin can decide the role of user in users table ( team , user )
   - A live route to display the current upcoming event.
   - Design and implement email templates and redirect URLs in supabase.
