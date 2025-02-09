@@ -241,10 +241,14 @@ CREATE POLICY "Users can register for events"
   FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Admin can read all registrations"
+CREATE POLICY "Admin and Team can read all registrations"
   ON registrations
   FOR SELECT
-  USING (auth.jwt() ->> 'role' = 'admin');
+  USING (EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND role IN ('admin', 'team')
+    ));
 
 -- Members table policies
 CREATE POLICY "Anyone can read members"
