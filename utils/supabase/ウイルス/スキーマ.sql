@@ -172,23 +172,30 @@ CREATE POLICY "Anyone can read blogs"
 CREATE POLICY "Admin and team can create blogs"
   ON blogs
   FOR INSERT
-  WITH CHECK (auth.jwt() ->> 'role' IN ('admin', 'team'));
+  WITH CHECK (
+    EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND role IN ('admin', 'team')
+    )
+  );
 
 CREATE POLICY "Admin and team can update their own blogs"
   ON blogs
   FOR UPDATE
   USING (
-    auth.jwt() ->> 'role' IN ('admin', 'team')
+    EXISTS (SELECT 1 FROM users WHERE id = auth.uid() AND role IN ('admin', 'team'))
     AND writer_id = auth.uid()
   );
 
-CREATE POLICY "Admin and team can delete their own blogs"
+CREATE POLICY "Admin and team can delete blogs"
   ON blogs
   FOR DELETE
   USING (
-    auth.jwt() ->> 'role' IN ('admin', 'team')
+    EXISTS (SELECT 1 FROM users WHERE id = auth.uid() AND role IN ('admin', 'team'))
     AND writer_id = auth.uid()
   );
+
 
 -- Events table policies
 CREATE POLICY "Anyone can read events"
