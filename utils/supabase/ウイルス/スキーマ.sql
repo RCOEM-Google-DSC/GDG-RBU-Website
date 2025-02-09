@@ -155,12 +155,20 @@ CREATE POLICY "Users can read their own data"
 CREATE POLICY "Admin and team can update user data"
   ON users
   FOR UPDATE
-  USING (auth.jwt() ->> 'role' IN ('admin', 'team'));
+  USING (EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND role IN ('admin', 'team')
+    ));
 
 CREATE POLICY "Admin and team can delete user data"
   ON users
   FOR DELETE
-  USING (auth.jwt() ->> 'role' IN ('admin', 'team'));
+  USING (EXISTS (
+      SELECT 1 FROM users 
+      WHERE id = auth.uid() 
+      AND role IN ('admin', 'team')
+    ));
 
 -- Blogs table policies
 CREATE POLICY "Anyone can read blogs"
