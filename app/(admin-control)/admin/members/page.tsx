@@ -33,7 +33,7 @@ export default function MembersPage() {
 
   useEffect(() => {
     async function fetchMembers() {
-      const supabase = await createClient();
+      const supabase = createClient();
       const { data, error } = await supabase
         .from("members")
         .select("id, name, domain, role, user_id")
@@ -67,7 +67,7 @@ export default function MembersPage() {
 
   const handleDelete = async (id: string) => {
     console.log("Deleting member with ID:", id);
-    const supabase = await createClient();
+    const supabase = createClient();
     const { error } = await supabase.from("members").delete().eq("id", id);
     if (error) {
       console.error("Error deleting member:", error);
@@ -91,7 +91,7 @@ export default function MembersPage() {
         "to:",
         newRole
       );
-      const supabase = await createClient();
+      const supabase = createClient();
       const { error } = await supabase
         .from("members")
         .update({ role: newRole })
@@ -170,7 +170,7 @@ export default function MembersPage() {
             defaultValue={selectedMember.role}
             onBlur={(e) => handleRoleChange(e.target.value)}
           />
-          <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+          <Button onClick={() => setIsModalOpen(false)}>Save</Button>
         </Modal>
       )}
     </div>
