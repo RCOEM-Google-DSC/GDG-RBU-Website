@@ -9,19 +9,33 @@ USING (true);
 CREATE POLICY "Only admins can insert members"
 ON members
 FOR INSERT
-WITH CHECK (auth.jwt() ->> 'role' = 'admin');
+WITH CHECK (
+    EXISTS (
+    SELECT 1 FROM users 
+    WHERE id = auth.uid() 
+    AND role = 'admin'
+    )
+);
 
 -- ONLY ADMIN HAVE THE ACCESS OF ALL THE MEMBERS DATA 
 CREATE POLICY "Only admins can update members"
 ON members
 FOR UPDATE
-USING (auth.jwt() ->> 'role' = 'admin');
+USING (EXISTS (
+    SELECT 1 FROM users 
+    WHERE id = auth.uid() 
+    AND role = 'admin'
+    ));
 
 -- ONLY ADMIN CAN REMOVE MEMEBERS
 CREATE POLICY "Only admins can delete members"
 ON members
 FOR DELETE
-USING (auth.jwt() ->> 'role' = 'admin');
+USING (EXISTS (
+    SELECT 1 FROM users 
+    WHERE id = auth.uid() 
+    AND role = 'admin'
+    ));
 
 -- ALL TEAM MEMBERS CAN UPDATE THEIR OWN DATA LIKE PROFILE_LINKS , DESCRIPTION ,THOUGHT
 CREATE POLICY "Team Mebers & Admin can update their own data"
