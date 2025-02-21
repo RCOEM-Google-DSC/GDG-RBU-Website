@@ -81,6 +81,11 @@ created_at (timestamptz, default: now())
     - Email Validation : OFF
 
 -- Check List --
+  - [ 22 Feb ] : - Restrict login methods to Google only [ supabase email login for testing ]
+                 - Admins can change user roles and remove users or team members. Team members can only remove users.
+  - FIX THIS : Admin control -> Admin -> Members : add part ( user_id ) one to many connection 
+  - Storage of blog and event poster
+  - Logs : Team members' changes should be logged
   - Docs for the Entire website  [ Do it at the End ]
   - For Blogs & Events if the team members use different image so write some logic .
   - Instead of keeping the default user profile picture for all, we can allow users to choose from pre-uploaded options, and permit team members and admins to upload their own. 
@@ -99,6 +104,10 @@ created_at (timestamptz, default: now())
   - Chat Bot Implementation : Implement a chatbot to assist users with their queries.
   - User will register in a event through form ( only ).
   - Allow users to download certificates for events they've registered for.
+  - FIX THIS : Admin control -> Admin -> Members : add part ( user_id ) one to many connection 
+  - Storage of blog and event poster
+  - Logs : Team members' changes should be logged
+
   - User Event Page Development - Management 
     - User Process Management
       - Users will have a process status:

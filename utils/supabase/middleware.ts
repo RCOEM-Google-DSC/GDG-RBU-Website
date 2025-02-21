@@ -71,6 +71,22 @@ export const updateSession = async (request: NextRequest) => {
       console.log("User is not an admin");
       return NextResponse.redirect(new URL("/protected", request.url));
     }
+    if (
+      request.nextUrl.pathname.startsWith("/add-on/blog") &&
+      userRole !== "admin" &&
+      userRole !== "team"
+    ) {
+      console.log("User is not an admin | team member");
+      return NextResponse.redirect(new URL("/protected", request.url));
+    }
+    if (
+      request.nextUrl.pathname.startsWith("/add-on/event") &&
+      userRole !== "admin" &&
+      userRole !== "team"
+    ) {
+      console.log("User is not an admin | team member");
+      return NextResponse.redirect(new URL("/protected", request.url));
+    }
 
     // New check for sign-in and sign-up pages
     if (
