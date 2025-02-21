@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 const { NEXT_PUBLIC_SUPABASE_URL } = process.env;
 export default async function Events() {
@@ -32,7 +33,7 @@ export default async function Events() {
             key={event.id}
             className="bg-white rounded-lg shadow-md overflow-hidden"
           >
-            {/* Event Image : https://jupwefectbxpwjickcyu.supabase.co/storage/v1/object/public/blogs//5.jpg*/}
+            {/* Event Image : https://jupwefectbxpwjickcyu.supabase.co/storage/v1/object/public/blogs//5.jpg */}
             <img
               src={`${NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blogs//${event.post_image}`}
               alt={event.name}
@@ -41,7 +42,8 @@ export default async function Events() {
             {/* Event Details */}
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2">{event.name}</h2>
-              <p className="text-gray-600 mb-2">{event.description}</p>
+              {/* <p className="text-gray-600 mb-2">{event.description}</p> */}
+              <MDXRemote source={event.description} />
               <p className="text-gray-600 mb-2">
                 <strong>Time:</strong>{" "}
                 {new Date(event.event_time).toLocaleString()}

@@ -43,7 +43,7 @@ export default async function Blogs() {
   const blogs = await getBlogs();
 
   return (
-    <div>
+    <><div>
       <h1 className="text-2xl font-bold mb-4">Blogs</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs?.map((blog) => (
@@ -67,8 +67,7 @@ export default async function Blogs() {
                   width={40}
                   alt={blog.users?.name || "User"}
                   src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile/${blog.users?.image}`}
-                  className="h-10 w-10 rounded-full border-2 object-cover "
-                />
+                  className="h-10 w-10 rounded-full border-2 object-cover " />
                 <div className="flex flex-col">
                   <p className="font-normal text-base text-gray-50 relative z-10">
                     {blog.users?.name}
@@ -80,10 +79,12 @@ export default async function Blogs() {
               </div>
               <div className="text content">
                 <div className="text-gray-50 relative z-10 my-4">
-                  {/* 
-                   THIS IS USED TO RENDER THE MDX CONTENT -- WILL BE USED TO DISPLAY THE BLOG CONTENT
+
+                  {/* THIS IS USED TO RENDER THE MDX CONTENT -- WILL BE USED TO DISPLAY THE BLOG CONTENT */}
                   <MDXRemote source={blog.content.slice(0, 100)} />
-                   */}
+
+
+
 
                   <p>{blog.title}</p>
                 </div>
@@ -92,6 +93,9 @@ export default async function Blogs() {
           </div>
         ))}
       </div>
-    </div>
+    </div><pre className="text-sm p-4 rounded-md border">
+        {JSON.stringify(blogs, null, 2)}
+      </pre></>
+
   );
 }
