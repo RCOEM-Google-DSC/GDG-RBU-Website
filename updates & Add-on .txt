@@ -98,6 +98,7 @@ created_at (timestamptz, default: now())
   - AI Implementation to enhance the blog and event text ( content & then -> markdown ) .
   - Chat Bot Implementation : Implement a chatbot to assist users with their queries.
   - User will register in a event through form ( only ).
+  - Allow users to download certificates for events they've registered for.
   - User Event Page Development - Management 
     - User Process Management
       - Users will have a process status:
