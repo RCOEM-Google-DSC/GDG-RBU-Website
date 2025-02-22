@@ -33,9 +33,9 @@ export default async function Events() {
             key={event.id}
             className="bg-white rounded-lg shadow-md overflow-hidden"
           >
-            {/* Event Image : https://jupwefectbxpwjickcyu.supabase.co/storage/v1/object/public/blogs//5.jpg */}
+            {/* Event Image : https://jupwefectbxpwjickcyu.supabase.co/storage/v1/object/public/events//5.jpg */}
             <img
-              src={`${NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blogs//${event.post_image}`}
+              src={`${NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/events//${event.post_image}`}
               alt={event.name}
               className="w-full h-48 object-cover"
             />
