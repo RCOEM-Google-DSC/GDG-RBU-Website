@@ -9,11 +9,10 @@ export default function InsertBlog() {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
-  const [uploading, setUploading] = useState(false); // Track upload state
+  const [uploading, setUploading] = useState(false);
 
   const supabase = createClient();
 
-  // Handle image upload
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -21,23 +20,23 @@ export default function InsertBlog() {
     setUploading(true);
 
     try {
-      // Generate a unique file name
-      const fileName = `${Date.now()}_${file.name}`;
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const fileName = `${hours}${minutes}-${day}-${month}`;
 
-      // Upload the image to the "blogs" bucket
       const { data, error } = await supabase.storage
         .from("blogs")
         .upload(fileName, file, {
-          cacheControl: "3600", // Cache the image for 1 hour
-          upsert: false, // Do not overwrite existing files
-          contentType: file.type, // Set the content type based on the file type
+          cacheControl: "3600",
+          upsert: false,
+          contentType: file.type,
         });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
-      // Set the image URL in the state
       setImageUrl(fileName);
       setError("");
     } catch (error) {
@@ -48,7 +47,6 @@ export default function InsertBlog() {
     }
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -65,9 +63,7 @@ export default function InsertBlog() {
           { writer_id: user.user.id, title, content, image_url: imageUrl },
         ]);
 
-      if (insertError) {
-        throw insertError;
-      }
+      if (insertError) throw insertError;
 
       setError("");
       setTitle("");
