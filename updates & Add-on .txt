@@ -103,9 +103,8 @@ created_at (timestamptz, default: now())
   - Chat Bot Implementation : Implement a chatbot to assist users with their queries.
   - User will register in a event through form ( only ).
   - Allow users to download certificates for events they've registered for.
-  - FIX THIS : Admin control -> Admin -> Members : add part ( user_id ) one to many connection 
-  - Storage of blog and event poster
-  - Logs : Team members' changes should be logged
+  - Determine when certificates should be created and made available for users.
+
 
   - User Event Page Development - Management 
     - User Process Management
