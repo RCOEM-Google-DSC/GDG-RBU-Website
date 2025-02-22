@@ -20,16 +20,49 @@ export default function UsersPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [newRole, setNewRole] = useState("");
+  const [currentUserRole, setCurrentUserRole] = useState<string | null>(null); // Track the logged-in user's role
 
-  // Fetch users from Supabase (excluding admins)
+  // Fetch the logged-in user's role
+  useEffect(() => {
+    async function fetchCurrentUserRole() {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data, error } = await supabase
+          .from("users")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+
+        if (data) {
+          setCurrentUserRole(data.role);
+        }
+      }
+    }
+
+    fetchCurrentUserRole();
+  }, []);
+
+  // Fetch users based on the logged-in user's role
   useEffect(() => {
     async function fetchUsers() {
       const supabase = createClient();
-      const { data, error } = await supabase
-        .from("users")
-        .select("id, name, email, role, image")
-        .neq("role", "admin") // Exclude admin users
-        .returns<User[]>();
+      let query = supabase.from("users").select("id, name, email, role, image");
+
+      // If the current user is a team member, only fetch users with the "user" role
+      if (currentUserRole === "team") {
+        query = query.eq("role", "user");
+      }
+
+      // Admins can see all users except other admins
+      if (currentUserRole === "admin") {
+        query = query.neq("role", "admin");
+      }
+
+      const { data, error } = await query.returns<User[]>();
 
       if (error) {
         console.error("Error fetching users:", error);
@@ -38,8 +71,10 @@ export default function UsersPage() {
       }
     }
 
-    fetchUsers();
-  }, []);
+    if (currentUserRole) {
+      fetchUsers();
+    }
+  }, [currentUserRole]);
 
   // Handle search by name
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,15 +146,18 @@ export default function UsersPage() {
           onChange={handleSearch}
           className="border rounded p-2"
         />
-        <select
-          value={selectedRole}
-          onChange={handleRoleChange}
-          className="border rounded p-2"
-        >
-          <option value="">All Roles</option>
-          <option value="team">Team</option>
-          <option value="user">User</option>
-        </select>
+        {/* Only show role filter dropdown for admins */}
+        {currentUserRole === "admin" && (
+          <select
+            value={selectedRole}
+            onChange={handleRoleChange}
+            className="border rounded p-2"
+          >
+            <option value="">All Roles</option>
+            <option value="team">Team</option>
+            <option value="user">User</option>
+          </select>
+        )}
       </div>
       <table className="min-w-full bg-white rounded">
         <thead>
@@ -148,18 +186,25 @@ export default function UsersPage() {
                 />
               </td>
               <td className="py-2 border-b">
-                <Button
-                  onClick={() => handleEditRole(user)}
-                  className="mr-2 bg-blue-500 text-white rounded p-2"
-                >
-                  Edit Role
-                </Button>
-                <Button
-                  onClick={() => handleDelete(user.id)}
-                  className="bg-red-500 text-white rounded p-2"
-                >
-                  Delete
-                </Button>
+                {/* Only admins can edit roles */}
+                {currentUserRole === "admin" && (
+                  <Button
+                    onClick={() => handleEditRole(user)}
+                    className="mr-2 bg-blue-500 text-white rounded p-2"
+                  >
+                    Edit Role
+                  </Button>
+                )}
+                {/* Team members can only delete users with the "user" role */}
+                {(currentUserRole === "admin" ||
+                  (currentUserRole === "team" && user.role === "user")) && (
+                  <Button
+                    onClick={() => handleDelete(user.id)}
+                    className="bg-red-500 text-white rounded p-2"
+                  >
+                    Delete
+                  </Button>
+                )}
               </td>
             </tr>
           ))}
