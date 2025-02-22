@@ -9,10 +9,16 @@ export default function InsertEvent() {
   const [description, setDescription] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [location, setLocation] = useState("");
-  const [postImage, setPostImage] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [error, setError] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const supabase = createClient();
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setImageFile(file);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,26 +29,58 @@ export default function InsertEvent() {
       return;
     }
 
-    const { data, error: insertError } = await supabase.from("events").insert([
-      {
-        name,
-        description,
-        event_time: eventTime,
-        location,
-        post_image: postImage,
-      },
-    ]);
+    if (!imageFile) {
+      setError("Please select an image to upload.");
+      return;
+    }
 
-    if (insertError) {
-      setError(insertError.message);
-    } else {
+    setUploading(true);
+
+    try {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const seconds = String(now.getSeconds()).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const fileName = `${hours}${minutes}${seconds}-${day}-${month}`;
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("events")
+        .upload(fileName, imageFile, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: imageFile.type,
+        });
+
+      if (uploadError) throw uploadError;
+
+      const { data: insertData, error: insertError } = await supabase
+        .from("events")
+        .insert([
+          {
+            name,
+            description,
+            event_time: eventTime,
+            location,
+            post_image: fileName,
+          },
+        ]);
+
+      if (insertError) throw insertError;
+
       setError("");
       setName("");
       setDescription("");
       setEventTime("");
       setLocation("");
-      setPostImage("");
+      setImageFile(null);
       alert("Event created successfully!");
+    } catch (error) {
+      console.error("Error creating event:", error);
+      setError("Failed to create event. Please try again.");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -91,18 +129,29 @@ export default function InsertEvent() {
           />
         </div>
         <div>
-          <label className="block mb-2">Post Image URL:</label>
+          <label className="block mb-2">Post Image:</label>
           <Input
-            type="text"
-            value={postImage}
-            onChange={(e) => setPostImage(e.target.value)}
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            disabled={uploading}
           />
+          {imageFile && (
+            <div className="mt-2">
+              <img
+                src={URL.createObjectURL(imageFile)}
+                alt="Selected"
+                className="w-32 h-32 object-cover rounded"
+              />
+            </div>
+          )}
         </div>
         <Button
           type="submit"
           className="bg-blue-500 text-white"
+          disabled={uploading || !imageFile}
         >
-          Create Event
+          {uploading ? "Creating Event..." : "Create Event"}
         </Button>
       </form>
     </div>
