@@ -79,10 +79,9 @@ created_at (timestamptz, default: now())
     - Email Verification [ supabase] : OFF 
     - Realtime : OFF
     - Email Validation : OFF
+    - Storage File Name format for bucket blogs is : HHmm-dd-MM  [ 1930-22-04 for 19:30 on February 22 ]
 
 -- Check List --
-  - [ 22 Feb ] : - Restrict login methods to Google only [ supabase email login for testing ]
-                 - Admins can change user roles and remove users or team members. Team members can only remove users.
   - FIX THIS : Admin control -> Admin -> Members : add part ( user_id ) one to many connection 
   - Storage of blog and event poster
   - Logs : Team members' changes should be logged
