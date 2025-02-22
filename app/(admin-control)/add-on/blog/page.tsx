@@ -7,44 +7,15 @@ import { Button } from "@/components/ui/button";
 export default function InsertBlog() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
 
   const supabase = createClient();
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploading(true);
-
-    try {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, "0");
-      const minutes = String(now.getMinutes()).padStart(2, "0");
-      const day = String(now.getDate()).padStart(2, "0");
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const fileName = `${hours}${minutes}-${day}-${month}`;
-
-      const { data, error } = await supabase.storage
-        .from("blogs")
-        .upload(fileName, file, {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: file.type,
-        });
-
-      if (error) throw error;
-
-      setImageUrl(fileName);
-      setError("");
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      setError("Failed to upload image. Please try again.");
-    } finally {
-      setUploading(false);
-    }
+    if (file) setImageFile(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,11 +27,41 @@ export default function InsertBlog() {
       return;
     }
 
+    if (!imageFile) {
+      setError("Please select an image to upload.");
+      return;
+    }
+
+    setUploading(true);
+
     try {
-      const { data, error: insertError } = await supabase
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const seconds = String(now.getSeconds()).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const fileName = `${hours}${minutes}${seconds}-${day}-${month}`;
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("blogs")
+        .upload(fileName, imageFile, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: imageFile.type,
+        });
+
+      if (uploadError) throw uploadError;
+
+      const { data: insertData, error: insertError } = await supabase
         .from("blogs")
         .insert([
-          { writer_id: user.user.id, title, content, image_url: imageUrl },
+          {
+            writer_id: user.user.id,
+            title,
+            content,
+            image_url: fileName,
+          },
         ]);
 
       if (insertError) throw insertError;
@@ -68,11 +69,13 @@ export default function InsertBlog() {
       setError("");
       setTitle("");
       setContent("");
-      setImageUrl("");
+      setImageFile(null);
       alert("Blog created successfully!");
     } catch (error) {
       console.error("Error creating blog:", error);
       setError("Failed to create blog. Please try again.");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -107,15 +110,14 @@ export default function InsertBlog() {
           <Input
             type="file"
             accept="image/*"
-            onChange={handleImageUpload}
+            onChange={handleImageChange}
             disabled={uploading}
           />
-          {uploading && <p className="text-gray-500">Uploading image...</p>}
-          {imageUrl && (
+          {imageFile && (
             <div className="mt-2">
               <img
-                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blogs/${imageUrl}`}
-                alt="Uploaded"
+                src={URL.createObjectURL(imageFile)}
+                alt="Selected"
                 className="w-32 h-32 object-cover rounded"
               />
             </div>
@@ -124,9 +126,9 @@ export default function InsertBlog() {
         <Button
           type="submit"
           className="bg-blue-500 text-white"
-          disabled={uploading || !imageUrl}
+          disabled={uploading || !imageFile}
         >
-          {uploading ? "Uploading..." : "Create Blog"}
+          {uploading ? "Creating Blog..." : "Create Blog"}
         </Button>
       </form>
     </div>
