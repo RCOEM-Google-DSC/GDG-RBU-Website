@@ -1,9 +1,11 @@
 -- ENUMS
 
 -- Create enum for user roles
+
 CREATE TYPE user_role AS ENUM ('admin', 'team', 'user');
 
 -- Create the domain ENUM
+
 CREATE TYPE domain_type AS ENUM (
   'Web Dev',
   'Video Editing',
@@ -18,6 +20,7 @@ CREATE TYPE domain_type AS ENUM (
 -- TABLES
 
 -- Create users table
+
 CREATE TABLE IF NOT EXISTS users (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name text NOT NULL,
@@ -28,6 +31,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Create blogs table
+
 CREATE TABLE IF NOT EXISTS blogs (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   writer_id uuid REFERENCES users(id) ON DELETE CASCADE,
@@ -38,6 +42,7 @@ CREATE TABLE IF NOT EXISTS blogs (
 );
 
 -- Create events table
+
 CREATE TABLE IF NOT EXISTS events (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name text NOT NULL,
@@ -49,6 +54,7 @@ CREATE TABLE IF NOT EXISTS events (
 );
 
 -- Create registrations table (many-to-many relationship)
+
 CREATE TABLE IF NOT EXISTS registrations (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   event_id uuid REFERENCES events(id) ON DELETE CASCADE,
@@ -58,6 +64,7 @@ CREATE TABLE IF NOT EXISTS registrations (
 );
 
 -- Create members table
+
 CREATE TABLE IF NOT EXISTS members (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   domain domain_type NOT NULL, -- Use the ENUM here
@@ -70,10 +77,44 @@ CREATE TABLE IF NOT EXISTS members (
   created_at timestamptz DEFAULT now()
 );
 
+-- STORAGE BUCKETS
+
+-- Create the blog bucket
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('blogs', 'blogs', true);
+
+-- Ensure the bucket is public
+
+UPDATE storage.buckets
+SET public = true
+WHERE id = 'blogs';
+
+-- Create the profile bucket
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('profile', 'profile', true);
+
+-- Ensure the bucket is public
+
+UPDATE storage.buckets
+SET public = true
+WHERE id = 'profile';
+
+-- Create the bucket
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('events', 'events', true);
+
+-- Ensure the bucket is public
+UPDATE storage.buckets
+SET public = true
+WHERE id = 'events';
 
 -- FUNCTIONS
 
 -- CREATE A FUNCTION TO HANDLE NEW USERS
+
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -111,12 +152,14 @@ $$ LANGUAGE plpgsql;
 -- TRIGGERS
 
 -- CREATE A TRIGGER
+
 CREATE TRIGGER on_auth_user_created
     AFTER INSERT ON auth.users
     FOR EACH ROW
     EXECUTE FUNCTION public.handle_new_user();
 
 -- Create a trigger to validate user_id on insert or update
+
 CREATE TRIGGER validate_member_user_id_trigger
 BEFORE INSERT OR UPDATE ON members
 FOR EACH ROW
@@ -127,6 +170,7 @@ EXECUTE FUNCTION validate_member_user_id();
 -- INDEXES
 
 -- Create indexes for better query performance
+
 CREATE INDEX IF NOT EXISTS idx_blogs_writer_id ON blogs(writer_id);
 CREATE INDEX IF NOT EXISTS idx_registrations_event_id ON registrations(event_id);
 CREATE INDEX IF NOT EXISTS idx_registrations_user_id ON registrations(user_id);
@@ -136,17 +180,19 @@ CREATE INDEX IF NOT EXISTS idx_members_user_id ON members(user_id);
 -- ROW LEVEL SECURITY (RLS)
 
 -- Enable Row Level Security
+
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE registrations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE members ENABLE ROW LEVEL SECURITY;
-
+ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
 
 
 -- POLICIES
 
 -- Users table policies
+
 CREATE POLICY "Users can read their own data"
   ON users
   FOR SELECT
@@ -171,6 +217,7 @@ CREATE POLICY "Admin and team can delete user data"
     ));
 
 -- Blogs table policies
+
 CREATE POLICY "Anyone can read blogs"
   ON blogs
   FOR SELECT
@@ -205,6 +252,7 @@ CREATE POLICY "Admin and team can delete blogs"
   );
 
 -- Events table policies
+
 CREATE POLICY "Anyone can read events"
   ON events
   FOR SELECT
@@ -239,6 +287,7 @@ CREATE POLICY "Admin and team can delete events"
     ));
 
 -- Registrations table policies
+
 CREATE POLICY "Users can read their own registrations"
   ON registrations
   FOR SELECT
@@ -259,6 +308,7 @@ CREATE POLICY "Admin and Team can read all registrations"
     ));
 
 -- Members table policies
+
 CREATE POLICY "Anyone can read members"
 ON members
 FOR SELECT
@@ -301,34 +351,103 @@ USING (auth.uid() = user_id)
 WITH CHECK (auth.uid() = user_id);
 
 
+-- events bucket policies
+
+CREATE POLICY "Public read access for events"
+ON storage.objects
+FOR SELECT
+TO public
+USING (bucket_id = 'events');
+
+CREATE POLICY "Admins and team can upload to events"
+ON storage.objects
+FOR INSERT
+TO authenticated
+WITH CHECK (
+    bucket_id = 'events'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);
+
+CREATE POLICY "Admins and team can update events"
+ON storage.objects
+FOR UPDATE
+TO authenticated
+USING (
+    bucket_id = 'events'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);
+
+CREATE POLICY "Only admins and team can delete from events"
+ON storage.objects
+FOR DELETE
+TO authenticated
+USING (
+    bucket_id = 'events'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);
 
 
+-- blogs bucket policies
 
--- STORAGE BUCKETS
+CREATE POLICY "Public read access for blogs"
+ON storage.objects
+FOR SELECT
+TO public
+USING (bucket_id = 'blogs');
 
--- Create the blog bucket
-INSERT INTO storage.buckets (id, name, public)
-VALUES ('blogs', 'blogs', true);
+CREATE POLICY "Admins and team can upload to blogs"
+ON storage.objects
+FOR INSERT
+TO authenticated
+WITH CHECK (
+    bucket_id = 'blogs'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);
 
--- Ensure the bucket is public
-UPDATE storage.buckets
-SET public = true
-WHERE id = 'blogs';
+CREATE POLICY "Admins and team can update blogs"
+ON storage.objects
+FOR UPDATE
+TO authenticated
+USING (
+    bucket_id = 'blogs'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);
 
--- Create the profile bucket
-INSERT INTO storage.buckets (id, name, public)
-VALUES ('profile', 'profile', true);
-
--- Ensure the bucket is public
-UPDATE storage.buckets
-SET public = true
-WHERE id = 'profile';
-
--- Create the bucket
-INSERT INTO storage.buckets (id, name, public)
-VALUES ('events', 'events', true);
-
--- Ensure the bucket is public
-UPDATE storage.buckets
-SET public = true
-WHERE id = 'events';
+CREATE POLICY "Admins and team can delete from blogs"
+ON storage.objects
+FOR DELETE
+TO authenticated
+USING (
+    bucket_id = 'blogs'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);

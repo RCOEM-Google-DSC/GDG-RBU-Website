@@ -91,7 +91,6 @@ created_at (timestamptz, default: now())
   - Model for Members [ Details for each members should be shown. ] - frontend .
   - Dynamic Blog and Event Pages : Implement dynamic pages for blogs [dynamic route ] and events [ model ] using MDX to display individual blog posts and event details.
   - Event Management Dashboard : Basically Admin / team can see the register user data .
-  - Blogs & Events Insertion page : Add a page for blog and event insertion, allowing admin and team members to create new content.
   - A live route to display the current upcoming event.
   - Design and implement email templates and redirect URLs in supabase.
   - Specific Team Member Information Popup : Implement a screen to display detailed information about a specific team member.
