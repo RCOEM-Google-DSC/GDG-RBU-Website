@@ -83,7 +83,7 @@ created_at (timestamptz, default: now())
 
 -- Check List --
   - FIX THIS : Admin control -> Admin -> Members : add part ( user_id ) one to many connection 
-  - Storage of blog and event poster
+  - edit blogs and events - [ 23 feb ]
   - Logs : Team members' changes should be logged
   - Docs for the Entire website  [ Do it at the End ]
   - For Blogs & Events if the team members use different image so write some logic .

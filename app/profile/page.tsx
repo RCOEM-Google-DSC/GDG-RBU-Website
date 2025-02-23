@@ -22,6 +22,13 @@ interface Registration {
   events: Event;
 }
 
+interface Blog {
+  id: string;
+  title: string;
+  content: string;
+  created_at: string;
+}
+
 export default async function Profile() {
   const supabase = await createClient();
   const {
@@ -51,6 +58,13 @@ export default async function Profile() {
     )
     .eq("user_id", user.id)
     .returns<Registration[]>();
+
+  // Fetch blogs written by the user
+  const { data: blogs } = await supabase
+    .from("blogs")
+    .select("*")
+    .eq("writer_id", user.id)
+    .returns<Blog[]>();
 
   return (
     <div>
@@ -83,11 +97,29 @@ export default async function Profile() {
           </ul>
         </div>
       </div>
+      <div>
+        <h2 className="underline">Blogs Written</h2>
+        <div>
+          <ul>
+            {blogs?.map((blog) => (
+              <li key={blog.id}>
+                <p>Title: {blog.title}</p>
+                <p>Content: {blog.content.slice(0, 100)}...</p>
+                <p>
+                  Created At: {new Date(blog.created_at).toLocaleDateString()}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
       <h2 className="font-bold p-6">This is how we are getting data:</h2>
       <h2>User Details:</h2>
       <pre>{JSON.stringify(userDetails, null, 2)}</pre>
       <h2 className="font-bold p-6">Registrations:</h2>
       <pre>{JSON.stringify(registrations, null, 2)}</pre>
+      <h2 className="font-bold p-6">Blogs:</h2>
+      <pre>{JSON.stringify(blogs, null, 2)}</pre>
     </div>
   );
 }
