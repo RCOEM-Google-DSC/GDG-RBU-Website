@@ -79,11 +79,10 @@ created_at (timestamptz, default: now())
     - Email Verification [ supabase] : OFF 
     - Realtime : OFF
     - Email Validation : OFF
-    - Storage File Name format for bucket blogs is : HHmm-dd-MM  [ 1930-22-04 for 19:30 on February 22 ]
+    - Storage File Name format for bucket blogs is : HHmmss-dd-MM  [ 193022-22-04 for 19:30:22 on February 22 ]
 
 -- Check List --
   - FIX THIS : Admin control -> Admin -> Members : add part ( user_id ) one to many connection 
-  - edit blogs and events - [ 23 feb ]
   - Logs : Team members' changes should be logged
   - Docs for the Entire website  [ Do it at the End ]
   - For Blogs & Events if the team members use different image so write some logic .
