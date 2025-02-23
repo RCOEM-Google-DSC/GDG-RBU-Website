@@ -15,12 +15,15 @@ export default function EditBlog({ params }: { params: { id: string } }) {
   const supabase = createClient();
   const router = useRouter();
 
+  // Unwrap params using React.use()
+  const { id } = React.use(params);
+
   useEffect(() => {
     const fetchBlog = async () => {
       const { data, error } = await supabase
         .from("blogs")
         .select("*")
-        .eq("id", params.id)
+        .eq("id", id)
         .single();
 
       if (error) {
@@ -34,7 +37,7 @@ export default function EditBlog({ params }: { params: { id: string } }) {
     };
 
     fetchBlog();
-  }, [params.id, supabase]);
+  }, [id, supabase]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -88,7 +91,7 @@ export default function EditBlog({ params }: { params: { id: string } }) {
           content,
           image_url: imageUrl,
         })
-        .eq("id", params.id);
+        .eq("id", id);
 
       if (updateError) throw updateError;
 
