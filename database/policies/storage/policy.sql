@@ -108,3 +108,52 @@ USING (
         AND role IN ('admin', 'team')
     )
 );
+
+-- Policies for the profile bucket
+CREATE POLICY "Public read access for profile images"
+ON storage.objects
+FOR SELECT
+TO public
+USING (bucket_id = 'profile');
+
+CREATE POLICY "Admins and team can upload to profile"
+ON storage.objects
+FOR INSERT
+TO authenticated
+WITH CHECK (
+    bucket_id = 'profile'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);
+
+CREATE POLICY "Admins and team can update profile images"
+ON storage.objects
+FOR UPDATE
+TO authenticated
+USING (
+    bucket_id = 'profile'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);
+
+CREATE POLICY "Only admins and team can delete from profile"
+ON storage.objects
+FOR DELETE
+TO authenticated
+USING (
+    bucket_id = 'profile'
+    AND EXISTS (
+        SELECT 1
+        FROM users
+        WHERE id = auth.uid()
+        AND role IN ('admin', 'team')
+    )
+);
