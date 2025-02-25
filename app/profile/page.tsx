@@ -142,10 +142,13 @@ export default function ProfilePage() {
                     </span>{" "}
                     Events Registered
                   </p>
-                  <p className="text-gray-600">
-                    <span className="font-semibold">{blogs.length}</span> Blogs
-                    Written
-                  </p>
+                  {(userDetails.role === "admin" ||
+                    userDetails.role === "team") && (
+                    <p className="text-gray-600">
+                      <span className="font-semibold">{blogs.length}</span>{" "}
+                      Blogs Written
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -190,42 +193,45 @@ export default function ProfilePage() {
               <p className="text-gray-500">No events registered yet.</p>
             )}
           </div>
-
           {/* Blogs Written Section */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              Blogs Written
-            </h2>
-            {blogs.length > 0 ? (
-              <div className="space-y-4">
-                {blogs.map((blog) => (
-                  <div
-                    key={blog.id}
-                    className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex justify-between items-start">
-                      <p className="font-medium text-gray-800">{blog.title}</p>
-                      <Button
-                        onClick={() => handleEditBlog(blog.id)}
-                        className="bg-green-600 hover:bg-green-700 text-white"
-                      >
-                        Edit
-                      </Button>
+          {(userDetails.role === "admin" || userDetails.role === "team") && (
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                Blogs Written
+              </h2>
+              {blogs.length > 0 ? (
+                <div className="space-y-4">
+                  {blogs.map((blog) => (
+                    <div
+                      key={blog.id}
+                      className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <div className="flex justify-between items-start">
+                        <p className="font-medium text-gray-800">
+                          {blog.title}
+                        </p>
+                        <Button
+                          onClick={() => handleEditBlog(blog.id)}
+                          className="bg-green-600 hover:bg-green-700 text-white"
+                        >
+                          Edit
+                        </Button>
+                      </div>
+                      <div className="text-gray-600 prose prose-sm max-w-none">
+                        <MDXRemote {...blog.mdxSource} />
+                      </div>
+                      <p className="text-gray-500 text-sm mt-2">
+                        Created At:{" "}
+                        {new Date(blog.created_at).toLocaleDateString()}
+                      </p>
                     </div>
-                    <div className="text-gray-600 prose prose-sm max-w-none">
-                      <MDXRemote {...blog.mdxSource} />
-                    </div>
-                    <p className="text-gray-500 text-sm mt-2">
-                      Created At:{" "}
-                      {new Date(blog.created_at).toLocaleDateString()}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500">No blogs written yet.</p>
-            )}
-          </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500">No blogs written yet.</p>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
