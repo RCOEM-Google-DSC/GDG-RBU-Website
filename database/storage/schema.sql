@@ -24,3 +24,12 @@ VALUES ('events', 'events', true);
 UPDATE storage.buckets
 SET public = true
 WHERE id = 'events';
+
+-- Create the bucket
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('emo', 'emo', true);
+
+-- Ensure the bucket is public
+UPDATE storage.buckets
+SET public = true
+WHERE id = 'emo';

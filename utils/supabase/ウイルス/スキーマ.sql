@@ -107,9 +107,21 @@ INSERT INTO storage.buckets (id, name, public)
 VALUES ('events', 'events', true);
 
 -- Ensure the bucket is public
+
 UPDATE storage.buckets
 SET public = true
 WHERE id = 'events';
+
+-- Create the bucket
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('emo', 'emo', true);
+
+-- Ensure the bucket is public
+
+UPDATE storage.buckets
+SET public = true
+WHERE id = 'emo';
 
 -- FUNCTIONS
 
@@ -215,6 +227,12 @@ CREATE POLICY "Admin and team can delete user data"
       WHERE id = auth.uid() 
       AND role IN ('admin', 'team')
     ));
+
+CREATE POLICY "Allow users to update their name and image"
+ON users
+FOR UPDATE
+USING (auth.role() = 'user')
+WITH CHECK (auth.uid() = id);
 
 -- Blogs table policies
 
@@ -502,3 +520,10 @@ USING (
         AND role IN ('admin', 'team')
     )
 );
+
+-- emo bucket policies
+
+CREATE POLICY "Allow public read access to emo bucket"
+ON storage.objects
+FOR SELECT
+USING (bucket_id = 'emo');

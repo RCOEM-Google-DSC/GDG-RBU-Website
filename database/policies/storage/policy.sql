@@ -162,3 +162,11 @@ USING (
         AND role IN ('admin', 'team')
     )
 );
+
+-- POLICIES FOR THE 'EMO' BUCKET
+
+-- PUBLIC READ ACCESS FOR EMO
+CREATE POLICY "Allow public read access to emo bucket"
+ON storage.objects
+FOR SELECT
+USING (bucket_id = 'emo');

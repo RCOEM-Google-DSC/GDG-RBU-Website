@@ -25,3 +25,10 @@ CREATE POLICY "Admin and team can delete user data"
       WHERE id = auth.uid() 
       AND role IN ('admin', 'team')
     ));
+
+-- USERS CAN UPDATE THEIR OWN NAME AND IMAGE
+CREATE POLICY "Allow users to update their name and image"
+ON users
+FOR UPDATE
+USING (auth.role() = 'user')
+WITH CHECK (auth.uid() = id);
