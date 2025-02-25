@@ -5,6 +5,14 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"; // Import shadcn Dialog components
+import { Input } from "@/components/ui/input"; // Import shadcn Input component
 
 interface UserDetails {
   id: string;
@@ -40,6 +48,10 @@ export default function ProfilePage() {
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [error, setError] = useState("");
+  const [name, setName] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const [emoImages, setEmoImages] = useState<string[]>([]);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const supabase = createClient();
   const router = useRouter();
 
@@ -63,7 +75,7 @@ export default function ProfilePage() {
       }
 
       setUserDetails(data);
-
+      setName(data.name || "");
       // Fetch registrations
       const { data: registrationsData } = await supabase
         .from("registrations")
@@ -100,11 +112,39 @@ export default function ProfilePage() {
         );
         setBlogs(blogsWithMdx);
       }
+
+      // Fetch images from the "emo" bucket
+      const { data: images } = await supabase.storage.from("emo").list();
+      if (images) {
+        const imageUrls = images.map(
+          (image) =>
+            `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/emo/${image.name}`
+        );
+        setEmoImages(imageUrls);
+      }
     };
 
     fetchUserDetails();
   }, [supabase]);
 
+  const handleEditProfileUser = async () => {
+    if (!userDetails) return;
+
+    // Extract the filename from the selected image URL
+    const filename = selectedImage.split("/").pop();
+
+    const { error } = await supabase
+      .from("users")
+      .update({ name, image: filename })
+      .eq("id", userDetails.id);
+
+    if (error) {
+      setError("Failed to update profile.");
+    } else {
+      setUserDetails({ ...userDetails, name, image: filename });
+      setIsDialogOpen(false); // Close the dialog after successful update
+    }
+  };
   const handleEditProfile = () => {
     router.push("/edit/profile");
   };
@@ -125,8 +165,12 @@ export default function ProfilePage() {
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg shadow-lg">
             <div className="flex items-center space-x-6">
               <img
-                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile/${userDetails.image}`}
-                alt="Profile"
+                src={`${
+                  userDetails.role === "user"
+                    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/emo/${userDetails.image}`
+                    : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile/${userDetails.image}`
+                }`}
+                alt="Profile "
                 className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md"
               />
               <div>
@@ -159,6 +203,52 @@ export default function ProfilePage() {
               >
                 Edit Profile
               </Button>
+            )}
+            {userDetails.role === "user" && (
+              <Dialog
+                open={isDialogOpen}
+                onOpenChange={setIsDialogOpen}
+              >
+                <DialogTrigger asChild>
+                  <Button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white">
+                    Update Profile
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Update Profile</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <Input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Enter your name"
+                    />
+                    <div className="grid grid-cols-3 gap-4">
+                      {emoImages.map((image) => (
+                        <img
+                          key={image}
+                          src={image}
+                          alt="Profile Option"
+                          className={`w-24 h-24 rounded-full object-cover cursor-pointer border-4 ${
+                            selectedImage === image
+                              ? "border-blue-500"
+                              : "border-white"
+                          }`}
+                          onClick={() => setSelectedImage(image)}
+                        />
+                      ))}
+                    </div>
+                    <Button
+                      onClick={handleEditProfileUser}
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                    >
+                      Update
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             )}
           </div>
 
