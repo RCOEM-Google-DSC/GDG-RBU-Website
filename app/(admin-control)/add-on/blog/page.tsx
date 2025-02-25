@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function InsertBlog() {
   const [title, setTitle] = useState("");
@@ -10,6 +11,7 @@ export default function InsertBlog() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const router = useRouter();
 
   const supabase = createClient();
 
@@ -71,6 +73,7 @@ export default function InsertBlog() {
       setContent("");
       setImageFile(null);
       alert("Blog created successfully!");
+      router.push("/blogs");
     } catch (error) {
       console.error("Error creating blog:", error);
       setError("Failed to create blog. Please try again.");

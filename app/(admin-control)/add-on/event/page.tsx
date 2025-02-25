@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function InsertEvent() {
   const [name, setName] = useState("");
@@ -12,6 +13,7 @@ export default function InsertEvent() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const router = useRouter();
 
   const supabase = createClient();
 
@@ -76,6 +78,7 @@ export default function InsertEvent() {
       setLocation("");
       setImageFile(null);
       alert("Event created successfully!");
+      router.push("/events");
     } catch (error) {
       console.error("Error creating event:", error);
       setError("Failed to create event. Please try again.");
