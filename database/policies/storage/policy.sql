@@ -109,13 +109,16 @@ USING (
     )
 );
 
--- Policies for the profile bucket
+-- POLICIES FOR THE 'BLOGS' BUCKET
+
+-- PUBLIC READ ACCESS FOR PROFILE IMAGES
 CREATE POLICY "Public read access for profile images"
 ON storage.objects
 FOR SELECT
 TO public
 USING (bucket_id = 'profile');
 
+-- ADMINS AND TEAM MEMBERS CAN UPLOAD TO PROFILE
 CREATE POLICY "Admins and team can upload to profile"
 ON storage.objects
 FOR INSERT
@@ -130,6 +133,7 @@ WITH CHECK (
     )
 );
 
+-- ADMINS AND TEAM MEMBERS CAN UPDATE PROFILE IMAGES
 CREATE POLICY "Admins and team can update profile images"
 ON storage.objects
 FOR UPDATE
@@ -144,6 +148,7 @@ USING (
     )
 );
 
+-- ONLY ADMINS AND TEAM MEMBERS CAN DELETE FROM PROFILE
 CREATE POLICY "Only admins and team can delete from profile"
 ON storage.objects
 FOR DELETE

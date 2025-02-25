@@ -8,14 +8,12 @@ import { useRouter } from "next/navigation";
 interface UserDetails {
   id: string;
   name: string;
-  email: string;
   role: string;
   image?: string;
 }
 
 export default function EditProfilePage() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -44,7 +42,6 @@ export default function EditProfilePage() {
 
       setUserDetails(data);
       setName(data.name);
-      setEmail(data.email);
     };
 
     fetchUserDetails();
@@ -99,7 +96,6 @@ export default function EditProfilePage() {
         .from("users")
         .update({
           name,
-          email,
           image: imageUrl,
         })
         .eq("id", userDetails?.id);
@@ -131,15 +127,6 @@ export default function EditProfilePage() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label className="block mb-2">Email:</label>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
