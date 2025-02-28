@@ -11,8 +11,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"; // Import shadcn Dialog components
-import { Input } from "@/components/ui/input"; // Import shadcn Input component
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 interface UserDetails {
   id: string;
@@ -52,6 +52,9 @@ export default function ProfilePage() {
   const [selectedImage, setSelectedImage] = useState("");
   const [emoImages, setEmoImages] = useState<string[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isAdminDialogOpen, setIsAdminDialogOpen] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
   const supabase = createClient();
   const router = useRouter();
 
@@ -145,8 +148,60 @@ export default function ProfilePage() {
       setIsDialogOpen(false); // Close the dialog after successful update
     }
   };
-  const handleEditProfile = () => {
-    router.push("/edit/profile");
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setImageFile(file);
+  };
+
+  const handleAdminProfileUpdate = async () => {
+    if (!userDetails) return;
+
+    setUploading(true);
+
+    try {
+      let imageUrl = userDetails?.image;
+
+      if (imageFile) {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const fileName = `${hours}${minutes}${seconds}-${day}-${month}`;
+
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from("profile")
+          .upload(fileName, imageFile, {
+            cacheControl: "3600",
+            upsert: false,
+            contentType: imageFile.type,
+          });
+
+        if (uploadError) throw uploadError;
+        imageUrl = fileName;
+      }
+
+      const { data: updateData, error: updateError } = await supabase
+        .from("users")
+        .update({
+          name,
+          image: imageUrl,
+        })
+        .eq("id", userDetails?.id);
+
+      if (updateError) throw updateError;
+
+      setError("");
+      alert("Profile updated successfully!");
+      setIsAdminDialogOpen(false);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      setError("Failed to update profile. Please try again.");
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleEditBlog = (blogId: string) => {
@@ -196,14 +251,61 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
+            {/* Admin Profile Edit Model */}
             {(userDetails.role === "admin" || userDetails.role === "team") && (
-              <Button
-                onClick={handleEditProfile}
-                className="mt-4 bg-blue-600 hover:bg-blue-700 text-white"
+              <Dialog
+                open={isAdminDialogOpen}
+                onOpenChange={setIsAdminDialogOpen}
               >
-                Edit Profile
-              </Button>
+                <DialogTrigger asChild>
+                  <Button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white">
+                    Update Profile
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Update Profile</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <Input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Enter your name"
+                    />
+                    <div>
+                      <label className="block mb-2">Upload Image:</label>
+                      <p className="text-sm text-gray-500 p-1">
+                        jpg, jpeg, png, gif.
+                      </p>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        disabled={uploading}
+                      />
+                      {imageFile && (
+                        <div className="mt-2">
+                          <img
+                            src={URL.createObjectURL(imageFile)}
+                            alt="Selected"
+                            className="w-32 h-32 object-cover rounded"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <Button
+                      onClick={handleAdminProfileUpdate}
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                      disabled={uploading}
+                    >
+                      {uploading ? "Updating Profile..." : "Update"}
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             )}
+            {/* User Profile Edit Model */}
             {userDetails.role === "user" && (
               <Dialog
                 open={isDialogOpen}

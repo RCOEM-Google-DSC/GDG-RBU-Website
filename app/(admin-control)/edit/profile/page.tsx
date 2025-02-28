@@ -132,6 +132,7 @@ export default function EditProfilePage() {
         </div>
         <div>
           <label className="block mb-2">Upload Image:</label>
+          <p className="text-sm text-gray-500 p-1">jpg, jpeg, png, gif.</p>
           <Input
             type="file"
             accept="image/*"
