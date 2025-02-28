@@ -180,7 +180,11 @@ export default function UsersPage() {
               <td className="py-2 border-b">{user.role}</td>
               <td className="py-2 border-b">
                 <img
-                  src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile/${user.image}`}
+                  src={`${
+                    user.role === "user"
+                      ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/emo/${user.image}`
+                      : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile/${user.image}`
+                  }`}
                   alt={user.name}
                   className="w-10 h-10 rounded-full"
                 />
