@@ -12,3 +12,27 @@
 > [!IMPORTANT]
 > Use conventional commits for commit messages.
 > Set up a cron job to run daily to prevent Supabase from deactivating the project.
+
+## Route Access Permissions
+
+| **Route**                   | **Admin (DB Access)** | **Team** | **User** |
+| --------------------------- | --------------------- | -------- | -------- |
+| `/`                         | ✅                    | ✅       | ✅       |
+| `/protected`                | ✅                    | ✅       | ✅       |
+| `/sign-in`                  | ✅                    | ✅       | ✅       |
+| `/sign-up`                  | ✅                    | ✅       | ✅       |
+| `/forgot-password`          | ✅                    | ✅       | ✅       |
+| `/about`                    | ✅                    | ✅       | ✅       |
+| `/blogs`                    | ✅                    | ✅       | ✅       |
+| `/events`                   | ✅                    | ✅       | ✅       |
+| `/admin/members`            | ✅                    | ❌       | ❌       |
+| `/admin/users`              | ✅                    | ✅       | ❌       |
+| `/protected/reset-password` | ✅                    | ✅       | ✅       |
+| `/profile`                  | ✅                    | ✅       | ✅       |
+| `/add-on/blog`              | ✅                    | ✅       | ❌       |
+| `/add-on/event`             | ✅                    | ✅       | ❌       |
+| `/edit/blog`                | ✅ (Own)              | ✅ (Own) | ❌       |
+| `/edit/blog/[id]`           | ✅ (Own)              | ✅ (Own) | ❌       |
+| `/edit/event`               | ✅                    | ✅       | ❌       |
+| `/edit/event/[id]`          | ✅                    | ✅       | ❌       |
+| `/dashboard`                | ✅                    | ✅       | ❌       |
