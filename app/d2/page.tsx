@@ -64,7 +64,7 @@ const ExpandableCardStack = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const getCardStyle = (index:number) => {
+  const getCardStyle = (index: number) => {
     const image = cards[index].image
     const baseStyle = {
       backgroundImage: `url(${image})`,
@@ -87,13 +87,31 @@ const ExpandableCardStack = () => {
         zIndex: cards.length - index,
       }
     } else {
-      // Expanded position - shifted further right
-      const baseX = 15 + index * 15 // Changed from 5 to 15 to shift right
-      const baseY = 35 + index * 15 // Start at 35% from top
+      // ADJUST EXPANDED CARD POSITION HERE
+      // ----------------------------------
+      // baseStartX: Controls the starting point from the left (smaller = more left)
+      const baseStartX = 11; // CHANGE THIS VALUE to move all cards left/right
+      
+      // horizontalSpread: Controls how far apart the cards are horizontally
+      const horizontalSpread = 15; // CHANGE THIS VALUE to adjust spacing between cards
+      
+      // Calculate the horizontal position for each card
+      const baseX = baseStartX + (index * horizontalSpread)
+      
+      // verticalStartY: Controls how far from the top the cards start
+      const verticalStartY = 35; // CHANGE THIS VALUE to move all cards up/down
+      
+      // verticalSpread: Controls how far apart the cards are vertically
+      const verticalSpread = 15; // CHANGE THIS VALUE to adjust vertical spacing
+      
+      // Calculate the vertical position for each card
+      const baseY = verticalStartY + (index * verticalSpread)
+      // ----------------------------------
+      
       return {
         ...baseStyle,
         top: `${baseY}%`,
-        left: `${baseX + 10}%`, // Added an additional 10% to shift more to the right
+        left: `${baseX}%`, // Remove the extra 10% to move slightly left compared to previous version
         transform: "translate(-50%, -50%) rotate(0deg)",
         zIndex: cards.length - index,
       }
@@ -136,53 +154,50 @@ const ExpandableCardStack = () => {
             Contact
           </Link>
         </div>
-        <div className="w-12 h-6 rounded-full flex justify-between">
+        <div className="w-12 h-6 rounded-full flex justify-between mb-3">
           <ThemeSwitcher />
         </div>
       </nav>
 
-      <div className="min-h-screen  pt-16 px-4 bg-white dark:bg-gray-900 dark:text-white transition-all duration-500">
+      {/* Reduced top padding from pt-24 to pt-20 */}
+      <div className="min-h-screen pt-20 px-4 bg-white dark:bg-gray-900 dark:text-white transition-all duration-500">
+        {/* Reduced margin-bottom from mb-8 to mb-4 */}
+        <h1
+          className={`text-5xl font-bold text-center mt-3 mb-4 transition-opacity duration-500 ${scrolled ? "opacity-0" : "opacity-100"}`}
+        >
+          Our Domains
+        </h1>
+        
         <div className="max-w-6xl mx-auto relative">
-          {/* Reduced margin-bottom on the heading */}
-          <h1
-            className={`text-5xl font-bold text-center mb-2 transition-opacity duration-500 ${scrolled ? "opacity-0" : "opacity-100"}`}
-          >
-            Our Domains
-          </h1>
-
-          {/* Our Domains text in top right */}
+          {/* Our Domains text in top right when scrolled */}
           <div
-            className={`absolute top-0 right-0 text-right transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
+            className={`absolute top-28 right-0 text-right transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
           >
             <h2 className="text-4xl font-bold mb-2">Our Domains</h2>
             <p className="text-lg max-w-xs">Be part of the innovation—grow, build, and inspire with GDG!</p>
           </div>
 
-          {/* Added a negative margin-top to move the card container up */}
-          <div ref={cardContainerRef} className="relative h-[650px] -mt-4 mb-6 mx-auto">
+          {/* Added negative margin-top to move cards closer to the heading */}
+          <div ref={cardContainerRef} className="relative flex justify-center items-center h-[650px] mx-auto -mt-7">
             <div className="relative w-full h-full">
-              {/* Speech bubbles adjusted for the new positions */}
-            
-
               {cards.map((card, index) => (
                 <div key={card.id} className="absolute rounded-2xl shadow-xl" style={getCardStyle(index)}>
                   
                 </div>
               ))}
             </div>
+            {/* Bottom left text */}
+            <div
+              className={`absolute bottom-0 left-0 max-w-md transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
+            >
+              <p className="text-lg top-6">
+                Be part of the innovation—grow, build, and inspire with GDG! Be part of the innovation—grow, build, and
+                inspire with GDG!
+              </p>
+            </div>
           </div>
 
-          {/* Bottom left text */}
-          <div
-            className={`absolute bottom-0 left-0 max-w-md transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
-          >
-            <p className="text-lg">
-              Be part of the innovation—grow, build, and inspire with GDG! Be part of the innovation—grow, build, and
-              inspire with GDG!
-            </p>
-          </div>
-
-          {/* Reduced spacing in disappearing content - moved closer to heading */}
+          {/* Description text moved up closer to heading */}
           <div 
             className={`max-w-3xl mx-auto mb-6 -mt-4 text-center space-y-2 transition-all duration-500 ease-in-out ${
               scrolled || expanded ? "opacity-0 pointer-events-none" : "opacity-100"
