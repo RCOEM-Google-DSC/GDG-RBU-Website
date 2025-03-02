@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { Button } from "@/components/ui/button";
+
 
 const ExpandableCardStack = () => {
   const [expanded, setExpanded] = useState(false)
@@ -137,18 +139,22 @@ const ExpandableCardStack = () => {
           <Link href="/events" className="text-black hover:text-gray-700">
             Events
           </Link>
+          <Link href="/blogs" className="text-black hover:text-gray-700">
+            Blogs
+          </Link>
           <Link href="/team" className="text-black hover:text-gray-700">
             Team
           </Link>
-          <Link href="/alumni" className="text-black hover:text-gray-700">
-            Alumni
+          <Link href="/domains" className="text-black hover:text-gray-700">
+            Domains
           </Link>
           <Link href="/contact" className="text-black hover:text-gray-700">
             Contact
           </Link>
         </div>
         <div className="w-12 h-6 rounded-full flex justify-between mb-3">
-          <ThemeSwitcher />
+          <Button>Sign Out</Button>
+          
         </div>
       </nav>
 

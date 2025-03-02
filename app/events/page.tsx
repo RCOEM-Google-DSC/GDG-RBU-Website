@@ -56,10 +56,10 @@ export default async function Events() {
             Team
           </Link>
           <Link
-            href="/alumni"
+            href="/domains"
             className="text-black hover:text-gray-700"
           >
-            Alumni
+            Domains
           </Link>
           <Link
             href="/contact"

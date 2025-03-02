@@ -51,10 +51,10 @@ export default function TeamPage() {
               <span className="underline underline-offset-4">Team</span>
             </Link>
             <Link
-              href="/alumni"
+              href="/domains"
               className="text-black hover:text-gray-700"
             >
-              Alumni
+             Domains
             </Link>
             <Link
               href="/contact"
