@@ -18,8 +18,8 @@ export default function TeamPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <header className="container mx-auto px-4 py-3">
-        <nav className="flex items-center justify-between mb-4 w-[76rem] mr-28 ml-28 ">
+      <header className="container mx-auto px-4 ">
+        <nav className=" fixed flex items-center justify-between mb-4 w-[76rem] mr-28 ml-28 backdrop-blur-sm z-10 border-none">
           <img
             src="/gdgico.svg"
             alt="GDG Logo"
@@ -69,7 +69,7 @@ export default function TeamPage() {
         </nav>
       </header>
 
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-20">
         {/* Top team members grid */}
         <Marquee
           pauseOnHover

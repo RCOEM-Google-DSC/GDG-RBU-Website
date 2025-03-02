@@ -235,7 +235,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
         {/* Navigation bar */}
         
         
-        <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28  ">
+        <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28 backdrop-blur-sm  ">
           <img
             src="/gdgico.svg"
             alt="GDG Logo"
@@ -268,10 +268,10 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
               Team
             </Link>
             <Link
-              href="/alumni"
+              href="/domains"
               className="text-black hover:text-gray-700"
             >
-              Alumni
+              Domains
             </Link>
             <Link
               href="/contact"
