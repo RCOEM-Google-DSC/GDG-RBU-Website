@@ -1,95 +1,44 @@
-//  SERVER SIDE RENDERED
+// SERVER SIDE RENDERED
 
 import { createClient } from "@/utils/supabase/server";
-import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import { EnvVarWarning } from "@/components/env-var-warning";
+import HeaderAuth from "@/components/header-auth";
+import HomeClientComponent from "@/components/home-client";
 
 export default async function ProtectedPage() {
+  // Create Supabase client
   const supabase = await createClient();
 
+  // Fetch user data
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Redirect if not authenticated
   if (!user) {
     return redirect("/sign-in");
   }
 
-  return (
-    <div className="flex-1 w-full flex flex-col gap-12">
-      <div className="w-full">
-        <div className="bg-accent text-sm p-3 px-5 rounded-md text-foreground flex gap-3 items-center">
-          <InfoIcon
-            size="16"
-            strokeWidth={2}
-          />
-          This is a protected page that you can only see as an authenticated
-          user
-        </div>
+  // Check for environment variables
+  if (!hasEnvVars) {
+    return (
+      <div className="flex flex-col gap-16 items-center">
+        <h1 className="text-3xl text-center">Environment variables missing</h1>
+        <p className="text-center">
+          Please make sure to add the required environment variables to your
+          project.
+        </p>
       </div>
-      <div className="flex flex-col gap-2 items-start">
-        <h2 className="font-bold text-2xl mb-4">Your user details</h2>
-        <pre className="text-xs font-mono p-3 rounded border">
-          {JSON.stringify(user, null, 2)}
-        </pre>
-      </div>
-    </div>
-  );
-}
-
-// CLIENT SIDE RENDERED
-/*
-"use client";
-
-import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
-import { InfoIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-
-export default function ProtectedPage() {
-  const [user, setUser] = useState(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    const supabase = createClient();
-
-    const getUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        setUser(user as any);
-      } else {
-        router.push("/sign-in");
-      }
-    };
-
-    getUser();
-  }, [router]);
-
-  if (!user) {
-    return null;
+    );
   }
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-12">
-      <div className="w-full">
-        <div className="bg-accent text-sm p-3 px-5 rounded-md text-foreground flex gap-3 items-center">
-          <InfoIcon
-            size="16"
-            strokeWidth={2}
-          />
-          This is a protected page that you can only see as an authenticated
-          user
-        </div>
-      </div>
-      <div className="flex flex-col gap-2 items-start">
-        <h2 className="font-bold text-2xl mb-4">Your user details</h2>
-        <pre className="text-xs font-mono p-3 rounded border">
-          {JSON.stringify(user, null, 2)}
-        </pre>
-      </div>
+    <div>
+      <HomeClientComponent
+        headerAuthComponent={!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+      />
     </div>
   );
 }
-*/

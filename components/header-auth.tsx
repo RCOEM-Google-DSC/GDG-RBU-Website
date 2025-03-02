@@ -5,62 +5,53 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function AuthButton() {
+export default async function HeaderAuth() {
   const supabase = await createClient();
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Early return if env vars are missing
   if (!hasEnvVars) {
     return (
-      <>
-        <div className="flex gap-4 items-center">
-          <div>
-            <Badge
-              variant={"default"}
-              className="font-normal pointer-events-none"
-            >
-              Please update .env.local file with anon key and url
-            </Badge>
-          </div>
-          <div className="flex gap-2">
-            <Button
-              asChild
-              size="sm"
-              variant={"outline"}
-              disabled
-              className="opacity-75 cursor-none pointer-events-none"
-            >
-              <Link href="/sign-in">Sign in</Link>
-            </Button>
-            <Button
-              asChild
-              size="sm"
-              variant={"default"}
-              disabled
-              className="opacity-75 cursor-none pointer-events-none"
-            >
-              <Link href="/sign-up">Sign up</Link>
-            </Button>
-          </div>
+      <div className="flex gap-4 items-center p-4 border border-dashed border-red-500/30 rounded-lg bg-red-500/10">
+        <Badge
+          variant="destructive"
+          className="font-normal"
+        >
+          Please update .env.local file with anon key and URL
+        </Badge>
+        <div className="flex gap-2">
+          <Button
+            asChild
+            size="sm"
+            variant="outline"
+            disabled
+            className="opacity-50"
+          >
+            <Link href="/sign-in">Sign in</Link>
+          </Button>
+          <Button
+            asChild
+            size="sm"
+            variant="default"
+            disabled
+            className="opacity-50"
+          >
+            <Link href="/sign-up">Sign up</Link>
+          </Button>
         </div>
-      </>
+      </div>
     );
   }
+
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
-      <Button
-        type="submit"
-        variant={"outline"}
-      >
-        <Link href="/profile">Profile</Link>
-      </Button>
       <form action={signOutAction}>
         <Button
           type="submit"
-          variant={"outline"}
+          variant="ghost"
+          className="hover:bg-red-500/10 hover:text-red-500"
         >
           Sign out
         </Button>
@@ -71,14 +62,16 @@ export default async function AuthButton() {
       <Button
         asChild
         size="sm"
-        variant={"outline"}
+        variant="outline"
+        className="hover:bg-gray-100"
       >
         <Link href="/sign-in">Sign in</Link>
       </Button>
       <Button
         asChild
         size="sm"
-        variant={"default"}
+        variant="default"
+        className="bg-blue-600 hover:bg-blue-700"
       >
         <Link href="/sign-up">Sign up</Link>
       </Button>

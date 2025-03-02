@@ -3,6 +3,7 @@ import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function Signup(props: {
@@ -19,8 +20,8 @@ export default async function Signup(props: {
 
   return (
     <>
-      <form className="flex flex-col min-w-64 max-w-64 mx-auto">
-        <h1 className="text-2xl font-medium">Sign up</h1>
+      <form className="flex flex-col min-w-64 max-w-64 mx-auto mt-32">
+        <h1 className="text-3xl font-medium text-center">Sign up</h1>
 
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
           <Label htmlFor="fullName">Full Name</Label>
@@ -28,12 +29,14 @@ export default async function Signup(props: {
             name="fullName"
             placeholder="Full Name"
             required
+            className="border-black"
           />
           <Label htmlFor="email">Email</Label>
           <Input
             name="email"
             placeholder="you@example.com"
             required
+            className="border-black"
           />
           <Label htmlFor="password">Password</Label>
           <Input
@@ -42,6 +45,7 @@ export default async function Signup(props: {
             placeholder="Your password"
             minLength={6}
             required
+            className="border-black"
           />
           <SubmitButton
             formAction={signUpAction}
@@ -58,7 +62,7 @@ export default async function Signup(props: {
           </button>
           <FormMessage message={searchParams} />
         </div>
-        <p className="text-sm text text-gray-500 mt-6">
+        <p className="text-sm text text-gray-500 mt-6 text-center">
           Already have an account?{" "}
           <Link
             className="text-primary font-medium text-black-500 "
@@ -68,6 +72,13 @@ export default async function Signup(props: {
           </Link>
         </p>
       </form>
+      <Image
+        src="/sidebar.svg"
+        alt="Sidebar"
+        height={200}
+        width={200}
+        className="absolute md:w-1/5 right-0 top-0 z-20 max-md:-right-20 overflow-x-hidden max-md:top-8 max-md:h-80 max-md:-z-10"
+      />
     </>
   );
 }

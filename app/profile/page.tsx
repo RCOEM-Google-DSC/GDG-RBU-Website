@@ -205,7 +205,8 @@ export default function ProfilePage() {
   };
 
   const handleEditBlog = (blogId: string) => {
-    router.push(`/edit/blog/${blogId}`);
+    // router.push(`/edit/blog/${blogId}`);
+    console.log("Edit Blog:", blogId);
   };
 
   return (
@@ -385,7 +386,7 @@ export default function ProfilePage() {
               <p className="text-gray-500">No events registered yet.</p>
             )}
           </div>
-          {/* Blogs Written Section */}
+
           {(userDetails.role === "admin" || userDetails.role === "team") && (
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-2xl font-bold text-gray-800 mb-6">
