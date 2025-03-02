@@ -12,6 +12,7 @@ import {
   CSSProperties,
 } from "react";
 
+
 interface HomeClientComponentProps {
   headerAuthComponent: ReactNode;
 }
@@ -232,7 +233,9 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     >
       <main className="container">
         {/* Navigation bar */}
-        <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28 ">
+        
+        
+        <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28  ">
           <img
             src="/gdgico.svg"
             alt="GDG Logo"
@@ -281,6 +284,9 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
             
           </div>
         </nav>
+        
+        
+      
 
         {/* Domain name heading */}
         <h1 className="text-7xl font-bold text-center mb-16">rbu.gdgoc.one</h1>

@@ -5,13 +5,21 @@ import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { EnvVarWarning } from "@/components/env-var-warning";
 import HeaderAuth from "@/components/header-auth";
 import { Marquee } from "@/components/magicui/marquee";
+import Design from "@/components/team/design";
+import Web from "@/components/team/web";
+import Mentor from "@/components/team/mentor";
+import Mac from "@/components/team/mac";
+import Cp from "@/components/team/cp";
+import Management from "@/components/team/management";
+import Marketing from "@/components/team/marketing";
+import Social from "@/components/team/socials";
 
 export default function TeamPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <header className="container mx-auto px-4 py-3">
-        <nav className="flex items-center justify-between mb-4 w-[76rem] mr-28 ml-28">
+        <nav className="flex items-center justify-between mb-4 w-[76rem] mr-28 ml-28 ">
           <img
             src="/gdgico.svg"
             alt="GDG Logo"
@@ -67,11 +75,11 @@ export default function TeamPage() {
           pauseOnHover
           className="[--duration:20s]"
         >
-          <div className="grid grid-cols-8 gap-4 mb-8 p-4">
+          <div className="grid grid-cols-9 gap-4 mb-8 p-4">
             {/* First div moved up */}
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 -mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp1.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -81,7 +89,7 @@ export default function TeamPage() {
             {/* Second div moved down */}
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp2.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -91,7 +99,7 @@ export default function TeamPage() {
             {/* Other team member divs */}
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 -mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp3.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -100,7 +108,7 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp4.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -109,7 +117,7 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 -mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp5.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -118,7 +126,7 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp6.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -127,7 +135,7 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 -mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp7.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -136,7 +144,16 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp8.svg"
+                alt="Team member"
+                width={250}
+                height={300}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
+              <Image
+                src="/teampic/tp9.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -163,11 +180,11 @@ export default function TeamPage() {
           pauseOnHover
           className="[--duration:20s]"
         >
-          <div className="grid grid-cols-8 gap-4 mt-16">
+          <div className="grid grid-cols-7 gap-4 mt-16">
             {/* First div moved up */}
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 -mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp10.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -177,7 +194,7 @@ export default function TeamPage() {
             {/* Second div moved down */}
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp11.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -187,7 +204,7 @@ export default function TeamPage() {
             {/* Other team member divs */}
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 -mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp12.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -196,7 +213,7 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp13.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -205,7 +222,7 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 -mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp14.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -214,7 +231,7 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp15.svg"
                 alt="Team member"
                 width={250}
                 height={300}
@@ -223,14 +240,14 @@ export default function TeamPage() {
             </div>
             <div className="col-span-1 rounded-[30px] overflow-hidden h-40 -mt-4">
               <Image
-                src="/lead.png"
+                src="/teampic/tp16.svg"
                 alt="Team member"
                 width={250}
                 height={300}
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
+            {/* <div className="col-span-1 rounded-[30px] overflow-hidden h-40 mt-4">
               <Image
                 src="/lead.png"
                 alt="Team member"
@@ -238,10 +255,22 @@ export default function TeamPage() {
                 height={300}
                 className="w-full h-full object-cover"
               />
-            </div>
+            </div> */}
           </div>
         </Marquee>
       </main>
+<Mentor/>
+<Web/>
+<Mac />
+<Design/>
+<Cp/>
+<Management/>
+<Marketing/>
+<Social/>
+
     </div>
+
+
+
   );
 }

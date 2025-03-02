@@ -46,7 +46,7 @@ export default async function HeaderAuth() {
   }
 
   return user ? (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-4 ">
       <form action={signOutAction}>
         <Button
           type="submit"
