@@ -76,6 +76,14 @@ export const updateSession = async (request: NextRequest) => {
       return NextResponse.redirect(new URL("/protected", request.url));
     }
     if (
+      request.nextUrl.pathname.startsWith("/admin/explore") &&
+      userRole !== "admin" &&
+      userRole !== "team"
+    ) {
+      console.log("User is not an admin");
+      return NextResponse.redirect(new URL("/protected", request.url));
+    }
+    if (
       request.nextUrl.pathname.startsWith("/add-on/blog") &&
       userRole !== "admin" &&
       userRole !== "team"
