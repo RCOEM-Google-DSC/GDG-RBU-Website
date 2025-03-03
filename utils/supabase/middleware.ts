@@ -1,12 +1,43 @@
 import { createServerClient } from "@supabase/ssr";
-import { type NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+
+const RESTRICTED_PATHS = [
+  "/protected",
+  "/profile",
+  "/admin/members",
+  "/admin/user",
+  "/add-on/blog",
+  "/edit/event",
+  "/edit/blog",
+  "/add-on/event",
+];
+
+const ROLE_RESTRICTIONS: Record<string, string[]> = {
+  admin: ["/admin/members", "/admin/user", "/add-on/blog", "/edit/event", "/edit/blog", "/add-on/event"],
+  team: ["/admin/user", "/add-on/blog", "/edit/event", "/edit/blog", "/add-on/event"],
+};
+
+const handleRedirect = (url: string, request: NextRequest) => {
+  return NextResponse.redirect(new URL(url, request.url));
+};
+
+const fetchUserRole = async (supabase: any, userId: string) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("role")
+    .eq("id", userId)
+    .single();
+
+  if (error || !data) {
+    return null;
+  }
+
+  return data.role;
+};
 
 export const updateSession = async (request: NextRequest) => {
-  // This `try/catch` block is only here for the interactive tutorial.
-  // Feel free to remove once you have Supabase connected.
   try {
-    // Create an unmodified response
-    let response = NextResponse.next({
+    const response = NextResponse.next({
       request: {
         headers: request.headers,
       },
@@ -24,9 +55,6 @@ export const updateSession = async (request: NextRequest) => {
             cookiesToSet.forEach(({ name, value }) =>
               request.cookies.set(name, value)
             );
-            response = NextResponse.next({
-              request,
-            });
             cookiesToSet.forEach(({ name, value, options }) =>
               response.cookies.set(name, value, options)
             );
@@ -35,97 +63,43 @@ export const updateSession = async (request: NextRequest) => {
       }
     );
 
-    // This will refresh session if expired - required for Server Components
-    // https://supabase.com/docs/guides/auth/server-side/nextjs
     const user = await supabase.auth.getUser();
-    // Get user role from users table if user exists
     let userRole = null;
-    if (!user.error) {
-      const { data: userData, error: userError } = await supabase
-        .from("users")
-        .select("role")
-        .eq("id", user.data.user.id)
-        .single();
 
-      if (!userError && userData) {
-        userRole = userData.role;
+    if (user.data && user.data.user) {
+      userRole = await fetchUserRole(supabase, user.data.user.id);
+    }
+
+    const pathname = request.nextUrl.pathname;
+
+    if (RESTRICTED_PATHS.some(path => pathname.startsWith(path)) && user.error) {
+      return handleRedirect("/sign-in", request);
+    }
+
+    if (pathname.startsWith("/admin/members") && userRole !== "admin") {
+      return handleRedirect("/protected", request);
+    }
+
+    for (const role in ROLE_RESTRICTIONS) {
+      if (ROLE_RESTRICTIONS[role].some(path => pathname.startsWith(path)) && userRole !== role) {
+        return handleRedirect("/protected", request);
       }
     }
-    // protected routes
-    if (request.nextUrl.pathname.startsWith("/protected") && user.error) {
-      return NextResponse.redirect(new URL("/sign-in", request.url));
-    }
-    // profile routes
-    if (request.nextUrl.pathname.startsWith("/profile") && user.error) {
-      return NextResponse.redirect(new URL("/sign-in", request.url));
-    }
-    // admin routes -- Members Management
-    if (
-      request.nextUrl.pathname.startsWith("/admin/members") &&
-      userRole !== "admin"
-    ) {
-      return NextResponse.redirect(new URL("/protected", request.url));
-    }
-    // admin & team routes -- User Management
-    if (
-      request.nextUrl.pathname.startsWith("/admin/user") &&
-      userRole !== "admin" &&
-      userRole !== "team"
-    ) {
-      console.log("User is not an admin");
-      return NextResponse.redirect(new URL("/protected", request.url));
-    }
-    if (
-      request.nextUrl.pathname.startsWith("/add-on/blog") &&
-      userRole !== "admin" &&
-      userRole !== "team"
-    ) {
-      console.log("User is not an admin | team member");
-      return NextResponse.redirect(new URL("/protected", request.url));
-    }
-    if (
-      request.nextUrl.pathname.startsWith("/edit/event") &&
-      userRole !== "admin" &&
-      userRole !== "team"
-    ) {
-      console.log("User is not an admin | team member");
-      return NextResponse.redirect(new URL("/protected", request.url));
-    }
-    if (
-      request.nextUrl.pathname.startsWith("/edit/blog") &&
-      userRole !== "admin" &&
-      userRole !== "team"
-    ) {
-      console.log("User is not an admin | team member");
-      return NextResponse.redirect(new URL("/protected", request.url));
-    }
-    if (
-      request.nextUrl.pathname.startsWith("/add-on/event") &&
-      userRole !== "admin" &&
-      userRole !== "team"
-    ) {
-      console.log("User is not an admin | team member");
-      return NextResponse.redirect(new URL("/protected", request.url));
-    }
 
-    // New check for sign-in and sign-up pages
     if (
-      (request.nextUrl.pathname === "/sign-in" ||
-        request.nextUrl.pathname === "/sign-up") &&
+      (pathname === "/sign-in" || pathname === "/sign-up") &&
       !user.error
     ) {
-      return NextResponse.redirect(new URL("/protected", request.url));
+      return handleRedirect("/protected", request);
     }
 
-    if (request.nextUrl.pathname === "/" && !user.error) {
-      return NextResponse.redirect(new URL("/protected", request.url));
+    if (pathname === "/" && !user.error) {
+      return handleRedirect("/protected", request);
     }
 
     return response;
   } catch (e) {
-    // If you are here, a Supabase client could not be created!
-    // This is likely because you have not set up environment variables.
-    // Check out http://localhost:3000 for Next Steps.
+    console.error("Error in updateSession middleware", e);
     return NextResponse.next({
       request: {
         headers: request.headers,
