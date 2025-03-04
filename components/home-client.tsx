@@ -27,8 +27,17 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
   const pageRef = useRef<HTMLDivElement>(null);
 
   // Calculate animation values based on scroll position
-  const maxScroll = 500; // Adjust this value to control when animation completes
+  const maxScroll = 300; // Reduced from 500 to make animation complete faster
   const scrollProgress = Math.min(scrollY / maxScroll, 1);
+
+  // Helper function to interpolate between two values based on progress
+  const interpolate = (
+    start: number,
+    end: number,
+    progress: number
+  ): number => {
+    return start + (end - start) * progress;
+  };
 
   // Client-side only code
   useEffect(() => {
@@ -53,11 +62,11 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     // Handle manual scroll inputs during locked period
     const handleWheel = (e: WheelEvent) => {
       if (!animationComplete) {
-        // Accumulate scroll progress artificially
+        // Accumulate scroll progress artificially with increased sensitivity
         setScrollY((prev) => {
           const newScroll = Math.max(
             0,
-            Math.min(prev + e.deltaY * 0.5, maxScroll)
+            Math.min(prev + e.deltaY * 1.0, maxScroll) // Increased multiplier from 0.5 to 1.0
           );
 
           // Check if animation should complete
@@ -96,100 +105,137 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
 
     // Base positions for the fan layout (final positions)
     const positions = [
-      { left: "-120px", top: "40px", rotate: "-6deg" }, // GenAI
-      { left: "80px", top: "18px", rotate: "-3deg" }, // Orientation
-      { left: "250px", top: "12px", rotate: "-2deg" }, // Spidercry
-      { left: "420px", top: "18px", rotate: "0deg" }, // RecruitMe
-      { left: "580px", top: "28px", rotate: "6deg" }, // Team Up
-      { left: "720px", top: "44px", rotate: "12deg" }, // Bappa Ka Prashad
+      { left: -120, top: 40, rotate: -6 }, // GenAI
+      { left: 80, top: 18, rotate: -3 }, // Orientation
+      { left: 250, top: 12, rotate: -2 }, // Spidercry
+      { left: 420, top: 18, rotate: 0 }, // RecruitMe
+      { left: 580, top: 28, rotate: 6 }, // Team Up
+      { left: 720, top: 44, rotate: 12 }, // Bappa Ka Prashad
     ];
 
     // Initial positions (all cards stacked at the position of the last card)
-    const initialLeft = "calc(50% - 140px)";
-    // Center position
-    const initialTop = "54px";
-    const initialRotate = "2deg"; // No rotation
+    const initialLeft =
+      typeof window !== "undefined" ? window.innerWidth / 2 - 140 : 500; // Center position with default fallback
+    const initialTop = 54;
+    const initialRotate = 2; // Initial rotation angle
 
-    // Interpolate between initial and final positions based on scroll progress
-    const left =
-      scrollProgress < 0.1 && index !== totalCards - 1
-        ? initialLeft
-        : `calc(${initialLeft} + (${positions[index].left} - ${initialLeft}) * ${(scrollProgress - 0.1) * 1.25})`;
+    // Calculate animation phase - adjusted for earlier start
+    const cardAnimationStart = 0.05; // Reduced from 0.1 for earlier animation start
+    const cardAnimationRange = 0.65; // Reduced from 0.8 for faster completion
 
-    const top =
-      scrollProgress < 0.1 && index !== totalCards - 1
-        ? initialTop
-        : `calc(${initialTop} + (${positions[index].top} - ${initialTop}) * ${(scrollProgress - 0.1) * 1.25})`;
+    // Calculate the normalized progress for card animation (0 to 1 during animation phase)
+    const cardAnimationProgress =
+      scrollProgress <= cardAnimationStart
+        ? 0
+        : scrollProgress >= cardAnimationStart + cardAnimationRange
+          ? 1
+          : (scrollProgress - cardAnimationStart) / cardAnimationRange;
 
-    const rotate =
-      scrollProgress < 0.1 && index !== totalCards - 1
-        ? initialRotate
-        : `${parseFloat(positions[index].rotate) * scrollProgress}`;
-
-    // Opacity based on scroll (only the last card is visible initially)
+    // For all but the last card, they start invisible
     const opacity =
       index === totalCards - 1
-        ? 1
-        : scrollProgress < 0.1
-          ? 0
-          : Math.min((scrollProgress - 0.1) * 5, 1);
+        ? 1 // Last card is always visible
+        : interpolate(0, 1, Math.min(cardAnimationProgress * 3.5, 1)); // Increased from 3 to 3.5 for faster fade-in
+
+    // Calculate position with smooth interpolation
+    let leftPos = initialLeft;
+    let topPos = initialTop;
+    let rotateAngle = initialRotate;
+
+    // Only apply fan layout transformation based on animation progress
+    if (cardAnimationProgress > 0 || index === totalCards - 1) {
+      leftPos = interpolate(
+        initialLeft,
+        positions[index].left,
+        cardAnimationProgress
+      );
+      topPos = interpolate(
+        initialTop,
+        positions[index].top,
+        cardAnimationProgress
+      );
+      rotateAngle = interpolate(
+        initialRotate,
+        positions[index].rotate,
+        cardAnimationProgress
+      );
+    }
 
     const zIndex = index + 1;
 
     return {
-      left,
-      top,
-      transformOrigin: "center", // Added this line
-      transform: `rotate(${rotate}) scale(1)`, // Modified this line
+      left: `${leftPos}px`,
+      top: `${topPos}px`,
+      transformOrigin: "center",
+      transform: `rotate(${rotateAngle}deg) scale(1)`,
       opacity,
       zIndex,
-      boxSizing: "border-box" as CSSProperties["boxSizing"], // Added this line
-      transition: "opacity 0.3s ease-out",
+      boxSizing: "border-box" as CSSProperties["boxSizing"],
+      transition:
+        "opacity 0.2s ease-out, transform 0.2s ease-out, left 0.2s ease-out, top 0.2s ease-out",
     };
   };
 
-  // Tag animation styles
+  // Tag animation styles for global tags
   const getTagStyle = (isExplore: boolean) => {
     const initialOpacity = 0;
     const finalOpacity = 1;
 
-    const initialLeft = isExplore ? "300px" : "300px";
-    const finalLeft = isExplore ? "300px" : "720px";
+    const initialLeft = 300;
+    const finalLeft = isExplore ? 300 : 720;
 
-    const initialTop = "-20px";
-    const finalTop = isExplore ? "-20px" : "-28px";
+    const initialTop = -20;
+    const finalTop = isExplore ? -20 : -28;
 
-    const initialRotate = "0deg";
-    const finalRotate = isExplore ? "-12deg" : "-6deg";
+    const initialRotate = 0;
+    const finalRotate = isExplore ? -12 : -6;
 
-    // Only show tags after cards start spreading
-    const tagOpacity =
-      scrollProgress < 0.3
-        ? initialOpacity
-        : initialOpacity +
-          (finalOpacity - initialOpacity) * ((scrollProgress - 0.3) * 2);
+    // Only show tags after cards start spreading (reduced threshold for earlier appearance)
+    const tagAnimationStart = 0.2; // Reduced from 0.3 for earlier appearance
+    const tagAnimationRange = 0.4; // Reduced from 0.5 for faster completion
 
-    const tagLeft =
-      scrollProgress < 0.3
-        ? initialLeft
-        : `calc(${initialLeft} + (${finalLeft} - ${initialLeft}) * ${(scrollProgress - 0.3) * 2})`;
+    const tagAnimationProgress =
+      scrollProgress <= tagAnimationStart
+        ? 0
+        : scrollProgress >= tagAnimationStart + tagAnimationRange
+          ? 1
+          : (scrollProgress - tagAnimationStart) / tagAnimationRange;
 
-    const tagTop =
-      scrollProgress < 0.3
-        ? initialTop
-        : `calc(${initialTop} + (${finalTop} - ${initialTop}) * ${(scrollProgress - 0.3) * 2})`;
-
-    const tagRotate =
-      scrollProgress < 0.3
-        ? initialRotate
-        : `${parseFloat(finalRotate) * ((scrollProgress - 0.3) * 2)}`;
+    // Calculate with smooth interpolation
+    const tagOpacity = interpolate(
+      initialOpacity,
+      finalOpacity,
+      tagAnimationProgress
+    );
+    const tagLeft = interpolate(initialLeft, finalLeft, tagAnimationProgress);
+    const tagTop = interpolate(initialTop, finalTop, tagAnimationProgress);
+    const tagRotate = interpolate(
+      initialRotate,
+      finalRotate,
+      tagAnimationProgress
+    );
 
     return {
       opacity: tagOpacity,
-      left: tagLeft,
-      top: tagTop,
-      transform: `rotate(${tagRotate})`,
-      transition: "opacity 0.3s ease-out",
+      left: `${tagLeft}px`,
+      top: `${tagTop}px`,
+      transform: `rotate(${tagRotate}deg)`,
+      transition:
+        "opacity 0.2s ease-out, transform 0.2s ease-out, left 0.2s ease-out, top 0.2s ease-out",
+    };
+  };
+
+  // Function to get card-specific tag style - NEW FUNCTION
+  const getCardTagStyle = (index: number) => {
+    const cardStyle = getCardStyle(index, cardImages.length);
+    return {
+      position: "absolute" as CSSProperties["position"],
+      left: cardStyle.left, // Align with the card's left position
+      top: `calc(${cardStyle.top} - 30px)`, // Position slightly above the card
+      transform: cardStyle.transform, // Ensure the same rotation and scale as the card
+      opacity: cardStyle.opacity, // Match the card's fade-in animation
+      zIndex: (cardStyle.zIndex as number) + 1, // Keep tags above cards
+      transition: cardStyle.transition, // Inherit card's transition
     };
   };
 
@@ -211,6 +257,13 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     "Team Up",
     "Bappa Ka Prashad",
   ];
+
+  // Define tags for specific cards - NEW DATA
+  const cardTags: Record<number, string> = {
+    1: "@orientation", // Tag for the second card (index 1)
+    4: "@webwiz", // Tag for the fifth card (index 4)
+    // You can add more tags for other cards here
+  };
 
   // Function to handle "Explore" button click
   const handleExplore = () => {
@@ -267,20 +320,6 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
 
         {/* Cards display with animation */}
         <div className="relative h-80 mb-20">
-          {/* Tags - with animation */}
-          <div
-            className="absolute -top-4 left-72 -rotate-6 z-50 bg-green-500 text-white px-3 py-1 rounded-full"
-            style={getTagStyle(true)}
-          >
-            @explore
-          </div>
-          <div
-            className="absolute -top-4 left-72 -rotate-6z-50 bg-blue-500 text-white px-3 py-1 rounded-full"
-            style={getTagStyle(false)}
-          >
-            @webwiz
-          </div>
-
           {/* Card stack with position animation */}
           <div className="relative ml-60 h-full">
             {/* Each card positioned with animation */}
@@ -288,13 +327,27 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
               <div
                 key={src}
                 className="absolute origin-bottom-right"
-                style={getCardStyle(index, cardImages.length)} // Corrected spacing
+                style={getCardStyle(index, cardImages.length)}
               >
+                {/* Card tag positioned relative to its card */}
+                {cardTags[index] && (
+                  <div
+                    className={`text-white px-3 py-1 rounded-full absolute -top-8 left-1/2 transform -translate-x-1/2 ${
+                      index % 2 === 0 ? "bg-blue-500" : "bg-green-500"
+                    }`}
+                    style={{
+                      zIndex: 10,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {cardTags[index]}
+                  </div>
+                )}
                 <Image
                   src={src}
                   alt={cardAlts[index]}
-                  width={280} // Updated from 280
-                  height={380} // Updated from 380
+                  width={280}
+                  height={380}
                   className="rounded-2xl"
                   style={{ backgroundColor: "transparent" }}
                 />
