@@ -286,35 +286,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
       className={`${!animationComplete ? "h-screen overflow-hidden" : ""}`}
     >
       <main className="container">
-        {/* Navigation bar */}
-        <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28 backdrop-blur-sm">
-          <img src="/gdgico.svg" alt="GDG Logo" className="w-16 h-16" />
-
-          <div className="flex items-center space-x-8">
-            <Link href="/" className="text-black hover:text-gray-700">
-              <span className="underline underline-offset-4">Home</span>
-            </Link>
-            <Link href="/events" className="text-black hover:text-gray-700">
-              Events
-            </Link>
-            <Link href="/blogs" className="text-black hover:text-gray-700">
-              Blogs
-            </Link>
-            <Link href="/team" className="text-black hover:text-gray-700">
-              Team
-            </Link>
-            <Link href="/domains" className="text-black hover:text-gray-700">
-              Domains
-            </Link>
-            <Link href="/contact" className="text-black hover:text-gray-700">
-              Contact
-            </Link>
-          </div>
-          <div className="flex items-center">
-            {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
-          </div>
-        </nav>
-
+        
         {/* Domain name heading */}
         <h1 className="text-7xl font-bold text-center mb-16">rbu.gdgoc.one</h1>
 

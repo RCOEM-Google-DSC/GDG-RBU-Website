@@ -126,37 +126,6 @@ const ExpandableCardStack = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <nav className="fixed flex items-center justify-between mb-8 w-[76rem] z-50 backdrop-blur-sm ">
-        <img
-          src="/gdgico.svg"
-          alt="GDG Logo"
-          className="w-16 h-16 mr-32 ml-6"
-        />
-        <div className="flex items-center space-x-8">
-          <Link href="/" className="text-black hover:text-gray-700">
-            Home
-          </Link>
-          <Link href="/events" className="text-black hover:text-gray-700">
-            Events
-          </Link>
-          <Link href="/blogs" className="text-black hover:text-gray-700">
-            Blogs
-          </Link>
-          <Link href="/team" className="text-black hover:text-gray-700">
-            Team
-          </Link>
-          <Link href="/domains" className="text-black hover:text-gray-700">
-            Domains
-          </Link>
-          <Link href="/contact" className="text-black hover:text-gray-700">
-            Contact
-          </Link>
-        </div>
-        <div className="w-12 h-6 rounded-full flex justify-between mb-3">
-          <Button>Sign Out</Button>
-          
-        </div>
-      </nav>
 
       {/* Reduced top padding from pt-24 to pt-20 */}
       <div className="min-h-[120vh] pt-16 px-4 bg-white dark:bg-gray-900 dark:text-white transition-all duration-500">
