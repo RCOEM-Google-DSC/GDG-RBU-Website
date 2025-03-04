@@ -195,12 +195,12 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
 
   // Image paths in order of appearance
   const cardImages = [
-    "/genai.svg", // GenAI Study Jams
-    "/orentiation.svg", // Orientation
-    "/spiderevent.svg", // Spidercry
-    "/rec.svg", // RecruitMe
-    "/webwiz.svg", // Team Up
-    "/bkp.svg", // Bappa Ka Prashad
+    "/gen.png", // GenAI Study Jams
+    "/orentiation.png", // Orientation
+    "/spidercraft.png", // Spidercry
+    "/recuritment.png", // RecruitMe
+    "/webwiz.png", // Team Up
+    "/bkp.png", // Bappa Ka Prashad
   ];
 
   const cardAlts = [
