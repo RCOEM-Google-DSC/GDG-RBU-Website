@@ -1,6 +1,5 @@
 "use client";
 
-
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,10 +10,12 @@ import {
   ReactNode,
   CSSProperties,
 } from "react";
-
+import HeaderAuth from "@/components/header-auth";
+import { EnvVarWarning } from "@/components/env-var-warning";
+import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 
 interface HomeClientComponentProps {
-  headerAuthComponent: ReactNode;
+  headerAuthComponent?: ReactNode;
 }
 
 const HomeClientComponent: FC<HomeClientComponentProps> = ({
@@ -233,60 +234,33 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     >
       <main className="container">
         {/* Navigation bar */}
-        
-        
-        <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28 backdrop-blur-sm  ">
-          <img
-            src="/gdgico.svg"
-            alt="GDG Logo"
-            className="w-16 h-16 "
-          />
+        <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28 backdrop-blur-sm">
+          <img src="/gdgico.svg" alt="GDG Logo" className="w-16 h-16" />
 
           <div className="flex items-center space-x-8">
-            <Link
-              href="/"
-              className="text-black hover:text-gray-700"
-            >
+            <Link href="/" className="text-black hover:text-gray-700">
               <span className="underline underline-offset-4">Home</span>
             </Link>
-            <Link
-              href="/events"
-              className="text-black hover:text-gray-700"
-            >
+            <Link href="/events" className="text-black hover:text-gray-700">
               Events
             </Link>
-            <Link
-              href="/blogs"
-              className="text-black hover:text-gray-700"
-            >
+            <Link href="/blogs" className="text-black hover:text-gray-700">
               Blogs
             </Link>
-            <Link
-              href="/team"
-              className="text-black hover:text-gray-700"
-            >
+            <Link href="/team" className="text-black hover:text-gray-700">
               Team
             </Link>
-            <Link
-              href="/domains"
-              className="text-black hover:text-gray-700"
-            >
+            <Link href="/domains" className="text-black hover:text-gray-700">
               Domains
             </Link>
-            <Link
-              href="/contact"
-              className="text-black hover:text-gray-700"
-            >
+            <Link href="/contact" className="text-black hover:text-gray-700">
               Contact
             </Link>
           </div>
-          <div className="flex items-center  ">{headerAuthComponent}
-            
+          <div className="flex items-center">
+            {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
           </div>
         </nav>
-        
-        
-      
 
         {/* Domain name heading */}
         <h1 className="text-7xl font-bold text-center mb-16">rbu.gdgoc.one</h1>
@@ -308,7 +282,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
           </div>
 
           {/* Card stack with position animation */}
-          <div className="relative  ml-60 h-full">
+          <div className="relative ml-60 h-full">
             {/* Each card positioned with animation */}
             {cardImages.map((src, index) => (
               <div
