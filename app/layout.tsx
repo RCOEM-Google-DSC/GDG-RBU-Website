@@ -1,10 +1,5 @@
-import { EnvVarWarning } from "@/components/env-var-warning";
-import HeaderAuth from "@/components/header-auth";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import Link from "next/link";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/navigation/header";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -22,35 +17,22 @@ export const metadata = {
   },
 };
 
-const geistSans = Geist({
-  display: "swap",
-  subsets: ["latin"],
-});
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={geistSans.className}
-      suppressHydrationWarning
-    >
-      {/* <body className="bg-background text-foreground">{children}</body> */}
-      <body className="bg-background text-foreground">
+    <html lang="en" className="font-sans" suppressHydrationWarning>
+      <body className="min-h-screen bg-background text-foreground">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem={true}
+          defaultTheme="system"
+          enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col items-center">
-            <div className="flex-1 w-full flex flex-col gap-20 items-center">
-              {children}
-            </div>
-          </main>
+          <Header />
+          <main className="container mx-auto px-4 pt-20">{children}</main>
         </ThemeProvider>
       </body>
     </html>
