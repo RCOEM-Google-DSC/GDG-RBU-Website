@@ -27,7 +27,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
   const pageRef = useRef<HTMLDivElement>(null);
 
   // Calculate animation values based on scroll position
-  const maxScroll = 500; // Adjust this value to control when animation completes
+  const maxScroll = 300; // Reduced from 500 to make animation complete faster
   const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
   // Helper function to interpolate between two values based on progress
@@ -62,11 +62,11 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     // Handle manual scroll inputs during locked period
     const handleWheel = (e: WheelEvent) => {
       if (!animationComplete) {
-        // Accumulate scroll progress artificially
+        // Accumulate scroll progress artificially with increased sensitivity
         setScrollY((prev) => {
           const newScroll = Math.max(
             0,
-            Math.min(prev + e.deltaY * 0.5, maxScroll)
+            Math.min(prev + e.deltaY * 1.0, maxScroll) // Increased multiplier from 0.5 to 1.0
           );
 
           // Check if animation should complete
@@ -119,9 +119,9 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     const initialTop = 54;
     const initialRotate = 2; // Initial rotation angle
 
-    // Calculate animation phase - cards start moving after 10% scroll progress
-    const cardAnimationStart = 0.1;
-    const cardAnimationRange = 0.8; // Animation spans from 10% to 90% of scroll
+    // Calculate animation phase - adjusted for earlier start
+    const cardAnimationStart = 0.05; // Reduced from 0.1 for earlier animation start
+    const cardAnimationRange = 0.65; // Reduced from 0.8 for faster completion
 
     // Calculate the normalized progress for card animation (0 to 1 during animation phase)
     const cardAnimationProgress =
@@ -135,7 +135,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     const opacity =
       index === totalCards - 1
         ? 1 // Last card is always visible
-        : interpolate(0, 1, Math.min(cardAnimationProgress * 3, 1)); // Others fade in gradually
+        : interpolate(0, 1, Math.min(cardAnimationProgress * 3.5, 1)); // Increased from 3 to 3.5 for faster fade-in
 
     // Calculate position with smooth interpolation
     let leftPos = initialLeft;
@@ -190,9 +190,9 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     const initialRotate = 0;
     const finalRotate = isExplore ? -12 : -6;
 
-    // Only show tags after cards start spreading (30% scroll)
-    const tagAnimationStart = 0.3;
-    const tagAnimationRange = 0.5;
+    // Only show tags after cards start spreading (reduced threshold for earlier appearance)
+    const tagAnimationStart = 0.2; // Reduced from 0.3 for earlier appearance
+    const tagAnimationRange = 0.4; // Reduced from 0.5 for faster completion
 
     const tagAnimationProgress =
       scrollProgress <= tagAnimationStart
