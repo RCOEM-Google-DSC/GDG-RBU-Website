@@ -1,16 +1,11 @@
-import type { NextConfig } from "next";
-
-// Extract the hostname from the Supabase URL
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseDomain = new URL(supabaseUrl).hostname;
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
     domains: [
-      supabaseDomain,
+      'jupwefectbxpwjickcyu.supabase.co',
       // Add more domains as needed
     ],
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

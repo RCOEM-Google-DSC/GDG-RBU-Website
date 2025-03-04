@@ -1,11 +1,7 @@
-// app/page.tsx - Server component
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import HeaderAuth from "@/components/header-auth";
 import HomeClientComponent from "@/components/home-client";
 
 export default async function Page() {
-  // Server-side checks
   if (!hasEnvVars) {
     return (
       <div className="flex flex-col gap-16 items-center">
@@ -18,9 +14,5 @@ export default async function Page() {
     );
   }
 
-  return (
-    <HomeClientComponent
-      headerAuthComponent={!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
-    />
-  );
+  return <HomeClientComponent />;
 }
