@@ -23,7 +23,6 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
 }) => {
   const [scrollY, setScrollY] = useState(0);
   const [animationComplete, setAnimationComplete] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
 
@@ -42,17 +41,6 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
 
   // Client-side only code
   useEffect(() => {
-    // Check if device is mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    // Run on initial load
-    checkMobile();
-    
-    // Add resize listener
-    window.addEventListener('resize', checkMobile);
-
     // Prevent scrolling until animation completes
     const preventScroll = (e: Event) => {
       if (!animationComplete) {
@@ -107,7 +95,6 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
       window.removeEventListener("scroll", preventScroll);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener('resize', checkMobile);
     };
   }, [animationComplete, maxScroll]);
 
@@ -117,8 +104,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     // Final state: all cards are in fan layout
 
     // Base positions for the fan layout (final positions)
-    // Adjust positions based on screen size
-    const desktopPositions = [
+    const positions = [
       { left: -120, top: 40, rotate: -6 }, // GenAI
       { left: 80, top: 18, rotate: -3 }, // Orientation
       { left: 250, top: 12, rotate: -2 }, // Spidercry
@@ -126,26 +112,10 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
       { left: 580, top: 28, rotate: 6 }, // Team Up
       { left: 720, top: 44, rotate: 12 }, // Bappa Ka Prashad
     ];
-    
-    const mobilePositions = [
-      { left: -40, top: 40, rotate: -6 }, // GenAI
-      { left: 40, top: 18, rotate: -3 }, // Orientation
-      { left: 100, top: 12, rotate: -2 }, // Spidercry
-      { left: 160, top: 18, rotate: 0 }, // RecruitMe
-      { left: 220, top: 28, rotate: 6 }, // Team Up
-      { left: 280, top: 44, rotate: 12 }, // Bappa Ka Prashad
-    ];
-
-    const positions = isMobile ? mobilePositions : desktopPositions;
-
-    // Calculate card scale based on screen size
-    const cardScale = isMobile ? 0.6 : 1;
 
     // Initial positions (all cards stacked at the position of the last card)
     const initialLeft =
-      typeof window !== "undefined" 
-        ? (isMobile ? window.innerWidth / 2 - 80 : window.innerWidth / 2 - 140) 
-        : 500; // Center position with default fallback
+      typeof window !== "undefined" ? window.innerWidth / 2 - 140 : 500; // Center position with default fallback
     const initialTop = 54;
     const initialRotate = 2; // Initial rotation angle
 
@@ -197,7 +167,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
       left: `${leftPos}px`,
       top: `${topPos}px`,
       transformOrigin: "center",
-      transform: `rotate(${rotateAngle}deg) scale(${cardScale})`,
+      transform: `rotate(${rotateAngle}deg) scale(1)`,
       opacity,
       zIndex,
       boxSizing: "border-box" as CSSProperties["boxSizing"],
@@ -211,10 +181,8 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     const initialOpacity = 0;
     const finalOpacity = 1;
 
-    const initialLeft = isMobile ? 150 : 300;
-    const finalLeft = isExplore 
-      ? (isMobile ? 150 : 300) 
-      : (isMobile ? 360 : 720);
+    const initialLeft = 300;
+    const finalLeft = isExplore ? 300 : 720;
 
     const initialTop = -20;
     const finalTop = isExplore ? -20 : -28;
@@ -317,15 +285,15 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
       ref={pageRef}
       className={`${!animationComplete ? "h-screen overflow-hidden" : ""}`}
     >
-      <main className="container px-4 md:px-6">
-
+      <main className="container">
+        
         {/* Domain name heading */}
-        <h1 className="text-4xl md:text-7xl font-bold text-center mb-8 md:mb-16">rbu.gdgoc.one</h1>
+        <h1 className="text-7xl font-bold text-center mb-16">rbu.gdgoc.one</h1>
 
         {/* Cards display with animation */}
-        <div className="relative h-80 mb-12 md:mb-20">
+        <div className="relative h-80 mb-20">
           {/* Card stack with position animation */}
-          <div className={`relative ${isMobile ? 'ml-4' : 'ml-60'} h-full`}>
+          <div className="relative ml-60 h-full">
             {/* Each card positioned with animation */}
             {cardImages.map((src, index) => (
               <div
@@ -336,7 +304,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
                 {/* Card tag positioned relative to its card */}
                 {cardTags[index] && (
                   <div
-                    className={`text-white px-2 py-1 text-sm md:text-base md:px-3 md:py-1 rounded-full absolute -top-8 left-1/2 transform -translate-x-1/2 ${
+                    className={`text-white px-3 py-1 rounded-full absolute -top-8 left-1/2 transform -translate-x-1/2 ${
                       index % 2 === 0 ? "bg-blue-500" : "bg-green-500"
                     }`}
                     style={{
@@ -361,14 +329,14 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
 
           {/* Description text with fade-in effect */}
           <div
-            className="text-center max-w-3xl mx-auto mb-8 md:mb-12 px-4"
+            className="text-center max-w-3xl mx-auto mb-12"
             style={{
               opacity: Math.min(scrollProgress * 2, 1),
               transform: `translateY(${20 - scrollProgress * 20}px)`,
               transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
             }}
           >
-            <p className="text-lg md:text-xl">
+            <p className="text-xl">
               Google Developer Groups are community groups for college and
               university students interested in Google developer technologies.
             </p>
@@ -376,7 +344,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
 
           {/* Join Us button with fade-in effect */}
           <div
-            className="text-center mb-10 md:mb-16"
+            className="text-center mb-16"
             style={{
               opacity: Math.min((scrollProgress - 0.3) * 2, 1),
               transform: `translateY(${30 - scrollProgress * 30}px)`,
@@ -384,7 +352,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
             }}
           >
             <button
-              className="bg-gray-800 text-white px-6 py-2 md:px-10 md:py-3 rounded-full hover:bg-gray-700 transition-colors"
+              className="bg-gray-800 text-white px-10 py-3 rounded-full hover:bg-gray-700 transition-colors"
               onClick={handleExplore}
             >
               Join Us
