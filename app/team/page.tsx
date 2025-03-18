@@ -17,57 +17,6 @@ import Social from "@/components/team/socials";
 export default function TeamPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <header className="container mx-auto px-4 ">
-        <nav className=" fixed flex items-center justify-between mb-4 w-[76rem] mr-28 ml-28 backdrop-blur-sm z-10 border-none">
-          <img
-            src="/gdgico.svg"
-            alt="GDG Logo"
-            className="w-16 h-16"
-          />
-          <div className="flex items-center space-x-8">
-            <Link
-              href="/"
-              className="text-black hover:text-gray-700"
-            >
-              Home
-            </Link>
-            <Link
-              href="/events"
-              className="text-black hover:text-gray-700"
-            >
-              Events
-            </Link>
-            <Link
-              href="/blogs"
-              className="text-black hover:text-gray-700"
-            >
-              Blogs
-            </Link>
-            <Link
-              href="/team"
-              className="text-black hover:text-gray-700"
-            >
-              <span className="underline underline-offset-4">Team</span>
-            </Link>
-            <Link
-              href="/domains"
-              className="text-black hover:text-gray-700"
-            >
-             Domains
-            </Link>
-            <Link
-              href="/contact"
-              className="text-black hover:text-gray-700"
-            >
-              Contact
-            </Link>
-          </div>
-          <div className="flex items-center">
-            {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
-          </div>
-        </nav>
-      </header>
 
       <main className="container mx-auto px-4 py-20">
         {/* Top team members grid */}
