@@ -2,90 +2,71 @@ import Image from "next/image";
 
 export default function Social() {
   return (
-    <div className="min-h-screen bg-white px-4 py-8 md:py-12">
-      <div className="max-w-7xl mx-auto">
-        {/* Title Section */}
-        <div className="text-center lg:text-right lg:pr-8 mb-12 lg:mb-24">
-          <h1 className="text-5xl md:text-6xl lg:text-8xl text-black font-bold">Socials Team</h1>
-          <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 mt-4">
-            Bringing ideas to life with creativity
-            <br className="hidden md:block" />
-            and precision!
-          </p>
-        </div>
+    <div className="min-h-screen bg-black text-white px-4 sm:px-6 md:px-8 py-10 sm:py-16">
+      {/* Mobile heading */}
+      <div className="block md:hidden text-center px-4 mt-8 mb-6">
+        <h1 className="text-5xl text-white">Socials Team</h1>
+        <p className="text-xl text-white mt-2">
+          Bringing ideas to life with creativity
+          <br />
+          and precision!
+        </p>
+      </div>
 
-        {/* Socials Lead */}
-        <div className="flex flex-col items-center mb-16">
+      {/* Main container */}
+      <div className="flex flex-col md:flex-row justify-between items-center md:mt-32 px-4 md:px-0">
+        {/* Team Lead */}
+        <div className="flex flex-col items-center mx-auto md:mx-16 mb-10 md:mb-0">
           <Image
             src="/teampic/social.svg"
             alt="Tanay Pande"
-            width={400}
-            height={450}
-            className="object-cover w-48 md:w-64 lg:w-80"
+            width={600}
+            height={700}
+            className="object-cover w-72 md:w-[500px]"
           />
-          <h1 className="text-2xl md:text-3xl font-bold text-black mt-4">Tanay Pande</h1>
-          <h2 className="text-xl md:text-2xl text-black">Socials Lead</h2>
+          <div className="text-center mt-4">
+            <h1 className="text-3xl font-bold text-white">Tanay Pande</h1>
+            <h2 className="text-xl text-white mt-1">Socials Lead</h2>
+          </div>
         </div>
 
-        {/* Team Members Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mx-auto lg:mx-10">
-          {/* Team member 1 */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-32 md:w-40 lg:w-48 h-46 md:h-48 overflow-hidden">
-              <Image
-                src="/teampic/s1.svg"
-                alt="Tanmay Gupta"
-                width={200}
-                height={250}
-                className="object-cover w-32 md:w-40 lg:w-48"
-              />
-            </div>
-            <h3 className="text-base md:text-lg lg:text-xl font-medium mt-2 text-center">Tanmay Gupta</h3>
+        {/* Right side content */}
+        <div className="flex flex-col justify-center">
+          {/* Desktop heading */}
+          <div className="hidden md:block text-right pr-8 mb-24">
+            <h1 className="text-8xl text-white">Socials Team</h1>
+            <p className="text-3xl text-white">
+              Bringing ideas to life with creativity
+              <br />
+              and precision!
+            </p>
           </div>
 
-          {/* Team member 2 */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-32 md:w-40 lg:w-48 h-46 md:h-48 overflow-hidden">
-              <Image
-                src="/teampic/s4.svg"
-                alt="Aniruddha Lahoti"
-                width={200}
-                height={250}
-                className="object-cover w-32 md:w-40 lg:w-48"
-              />
-            </div>
-            <h3 className="text-base md:text-lg lg:text-xl font-medium mt-2 text-center">Aniruddha Lahoti</h3>
-          </div>
-
-          {/* Team member 3 */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-32 md:w-40 lg:w-48 h-46 md:h-48 overflow-hidden">
-              <Image
-                src="/teampic/s2.svg"
-                alt="Siddhi Totala"
-                width={200}
-                height={250}
-                className="object-cover w-32 md:w-40 lg:w-48"
-              />
-            </div>
-            <h3 className="text-base md:text-lg lg:text-xl font-medium mt-2 text-center">Siddhi Totala</h3>
-          </div>
-
-          {/* Team member 4 */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-32 md:w-40 lg:w-48 h-46 md:h-48 overflow-hidden">
-              <Image
-                src="/teampic/s3.svg"
-                alt="Tisha Parmar"
-                width={200}
-                height={250}
-                className="object-cover w-32 md:w-40 lg:w-48"
-              />
-            </div>
-            <h3 className="text-base md:text-lg lg:text-xl font-medium mt-2 text-center">Tisha Parmar</h3>
+          {/* Team members grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-7 mx-2 md:mx-10">
+            {[
+              { name: "Tanmay Gupta", img: "s1.svg" },
+              { name: "Aniruddha Lahoti", img: "s4.svg" },
+              { name: "Siddhi Totala", img: "s2.svg" },
+              { name: "Tisha Parmar", img: "s3.svg" },
+            ].map((member, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="overflow-hidden">
+                  <Image
+                    src={`/teampic/${member.img}`}
+                    alt={member.name}
+                    width={200}
+                    height={150}
+                    className="object-cover w-32 md:w-auto"
+                  />
+                </div>
+                <h3 className="text-base md:text-xl font-medium mt-2 text-center text-white">{member.name}</h3>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
 }
+
