@@ -2,11 +2,11 @@ import Image from "next/image";
 
 export default function Design() {
   return (
-    <div className="min-h-screen bg-black text-white px-4 sm:px-6 md:px-8 py-10 sm:py-16">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white px-4 sm:px-6 md:px-8 py-10 sm:py-16">
       {/* Mobile heading */}
       <div className="block md:hidden text-center px-4 mt-8 mb-6">
-        <h1 className="text-5xl text-white">Design Team</h1>
-        <p className="text-xl text-white mt-2">
+        <h1 className="text-5xl">Design Team</h1>
+        <p className="text-xl mt-2">
           Bringing ideas to life with creativity
           <br />
           and precision!
@@ -20,13 +20,13 @@ export default function Design() {
           <Image
             src="/teampic/design.svg"
             alt="Khushi Sonkusare"
-            width={300} // Reduced size
+            width={300}
             height={350}
             className="object-cover w-48 md:w-64"
           />
           <div className="text-center mt-4">
-            <h1 className="text-2xl md:text-3xl font-bold text-white">Khushi Sonkusare</h1>
-            <h2 className="text-lg md:text-xl text-white mt-1">Design Lead</h2>
+            <h1 className="text-2xl md:text-3xl font-bold">Khushi Sonkusare</h1>
+            <h2 className="text-lg md:text-xl mt-1">Design Lead</h2>
           </div>
         </div>
 
@@ -34,8 +34,8 @@ export default function Design() {
         <div className="flex flex-col justify-center">
           {/* Desktop heading */}
           <div className="hidden md:block text-right pr-8 mb-24">
-            <h1 className="text-8xl text-white">Design Team</h1>
-            <p className="text-3xl text-white">
+            <h1 className="text-8xl">Design Team</h1>
+            <p className="text-3xl">
               Bringing ideas to life with creativity
               <br />
               and precision!
@@ -59,7 +59,7 @@ export default function Design() {
                     className="object-cover w-32 md:w-auto"
                   />
                 </div>
-                <h3 className="text-base md:text-xl font-medium mt-2 text-right text-white">{member.name}</h3>
+                <h3 className="text-base md:text-xl font-medium mt-2 text-right">{member.name}</h3>
               </div>
             ))}
           </div>

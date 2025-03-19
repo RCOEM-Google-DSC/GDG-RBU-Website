@@ -2,11 +2,11 @@ import Image from "next/image";
 
 export default function Social() {
   return (
-    <div className="min-h-screen bg-black text-white px-4 sm:px-6 md:px-8 py-10 sm:py-16">
+    <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white px-4 sm:px-6 md:px-8 py-10 sm:py-16">
       {/* Mobile heading */}
       <div className="block md:hidden text-center px-4 mt-8 mb-6">
-        <h1 className="text-5xl text-white">Socials Team</h1>
-        <p className="text-xl text-white mt-2">
+        <h1 className="text-5xl">Socials Team</h1>
+        <p className="text-xl mt-2">
           Bringing ideas to life with creativity
           <br />
           and precision!
@@ -25,8 +25,8 @@ export default function Social() {
             className="object-cover w-72 md:w-[500px]"
           />
           <div className="text-center mt-4">
-            <h1 className="text-3xl font-bold text-white">Tanay Pande</h1>
-            <h2 className="text-xl text-white mt-1">Socials Lead</h2>
+            <h1 className="text-3xl font-bold">Tanay Pande</h1>
+            <h2 className="text-xl mt-1">Socials Lead</h2>
           </div>
         </div>
 
@@ -34,8 +34,8 @@ export default function Social() {
         <div className="flex flex-col justify-center">
           {/* Desktop heading */}
           <div className="hidden md:block text-right pr-8 mb-24">
-            <h1 className="text-8xl text-white">Socials Team</h1>
-            <p className="text-3xl text-white">
+            <h1 className="text-8xl">Socials Team</h1>
+            <p className="text-3xl">
               Bringing ideas to life with creativity
               <br />
               and precision!
@@ -60,7 +60,7 @@ export default function Social() {
                     className="object-cover w-32 md:w-auto"
                   />
                 </div>
-                <h3 className="text-base md:text-xl font-medium mt-2 text-center text-white">{member.name}</h3>
+                <h3 className="text-base md:text-xl font-medium mt-2 text-center">{member.name}</h3>
               </div>
             ))}
           </div>
@@ -69,4 +69,3 @@ export default function Social() {
     </div>
   );
 }
-

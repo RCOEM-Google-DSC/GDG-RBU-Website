@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Mac() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
       {/* Mobile heading - visible only on mobile */}
       <div className="block md:hidden text-center px-4 mt-8 mb-6">
         <h1 className="text-5xl">MAC Team</h1>
@@ -44,53 +44,23 @@ export default function Mac() {
 
           {/* Team members grid - 2 columns on mobile, 4 on desktop */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mx-2 md:mx-10">
-            {/* Team member 1 */}
-            <div className="flex flex-col items-center">
-              <Image
-                src="/teampic/m1.svg"
-                alt="Team member"
-                width={200}
-                height={150}
-                className="object-cover w-32 md:w-auto"
-              />
-              <h3 className="text-base md:text-xl font-medium mt-2 text-center">Annalhq Shaikh</h3>
-            </div>
-
-            {/* Team member 2 */}
-            <div className="flex flex-col items-center">
-              <Image
-                src="/teampic/m2.svg"
-                alt="Team member"
-                width={200}
-                height={150}
-                className="object-cover w-32 md:w-auto"
-              />
-              <h3 className="text-base md:text-xl font-medium mt-2 text-center">Bhuvnesh Verma</h3>
-            </div>
-
-            {/* Team member 3 */}
-            <div className="flex flex-col items-center">
-              <Image
-                src="/teampic/m3.svg"
-                alt="Team member"
-                width={200}
-                height={150}
-                className="object-cover w-32 md:w-auto"
-              />
-              <h3 className="text-base md:text-xl font-medium mt-2 text-center">Harsh Pashine</h3>
-            </div>
-
-            {/* Team member 4 */}
-            <div className="flex flex-col items-center">
-              <Image
-                src="/teampic/m4.svg"
-                alt="Team member"
-                width={200}
-                height={150}
-                className="object-cover w-32 md:w-auto"
-              />
-              <h3 className="text-base md:text-xl font-medium mt-2 text-center">Shantanu Anantwar</h3>
-            </div>
+            {[
+              { name: "Annalhq Shaikh", img: "m1.svg" },
+              { name: "Bhuvnesh Verma", img: "m2.svg" },
+              { name: "Harsh Pashine", img: "m3.svg" },
+              { name: "Shantanu Anantwar", img: "m4.svg" },
+            ].map((member, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <Image
+                  src={`/teampic/${member.img}`}
+                  alt={member.name}
+                  width={200}
+                  height={150}
+                  className="object-cover w-32 md:w-auto"
+                />
+                <h3 className="text-base md:text-xl font-medium mt-2 text-center">{member.name}</h3>
+              </div>
+            ))}
           </div>
         </div>
       </div>
