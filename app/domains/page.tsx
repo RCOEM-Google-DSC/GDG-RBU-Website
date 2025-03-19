@@ -139,7 +139,7 @@ const ExpandableCardStack = () => {
         <div className="max-w-6xl mx-auto relative">
           {/* Our Domains text in top right when scrolled */}
           <div
-            className={`absolute top-32 -right-48 text-right transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
+            className={`absolute top-32 -right-4 text-right transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
           >
             <h2 className="text-4xl font-bold mb-2">Our Domains</h2>
             <p className="text-lg max-w-xs">
@@ -164,7 +164,7 @@ const ExpandableCardStack = () => {
             </div>
             {/* Bottom left text */}
             <div
-              className={`absolute -bottom-32 -left-48 max-w-md transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
+              className={`absolute -bottom-32 -left-4 max-w-md transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
             >
               <p className="text-lg">
                 Be part of the innovation—grow, build, and inspire with GDG! Be
