@@ -1,0 +1,3 @@
+- [ ] Home mobile-view 
+- [ ] Convert blogs to use dynamic route
+- [ ] Componentize the code, use ESM modules
