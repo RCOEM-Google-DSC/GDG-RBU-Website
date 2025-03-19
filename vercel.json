@@ -1,0 +1,11 @@
+{
+     "git": {
+          "deploymentEnabled": {
+               "main": false,
+               "annalhq": false,
+               "abhay": false,
+               "mishra": false,
+               "fix/mobile-domain-home-responsive": false
+          }
+     }
+}

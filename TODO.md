@@ -1,2 +1,6 @@
+ ## Website developement updates
+
  - [ ] Markdown Blog with custom mdx compiler [Annalhq] 
-  - Use 
+ - [ ] Team Page [Ashutosh]
+ - [x] Sign-in/Sign-up [Abhay]
+ - [x] Supabase backend [Bhuvnesh]
