@@ -37,11 +37,11 @@ export default function TeamPage() {
 
         {/* Heading */}
         <div className="text-center mb-4 px-2">
-          <h1 className="text-3xl sm:text-5xl font-bold mb-2 sm:mb-4">Meet the team</h1>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-4 sm:mb-8">
+          <h1 className="text-3xl sm:text-5xl font-thin mb-2 sm:mb-4">Meet the team</h1>
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-4 sm:mb-8 font-thin">
             Get to know the minds shaping our GDG community!
           </p>
-          <button className="bg-black dark:bg-white text-white dark:text-black px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-base">
+          <button className="bg-black dark:bg-white text-white dark:text-black px-6 sm:px-8 py-2 sm:py-3 rounded-full font-thin text-sm sm:text-base">
             Our Team
           </button>
         </div>

@@ -288,7 +288,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
       <main className="container">
         
         {/* Domain name heading */}
-        <h1 className="text-7xl font-bold text-center mb-16">rbu.gdgoc.one</h1>
+        <h1 className="text-7xl  text-center mb-16 font-thin">rbu.gdgoc.one</h1>
 
         {/* Cards display with animation */}
         <div className="relative h-80 mb-20">
@@ -336,7 +336,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
               transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
             }}
           >
-            <p className="text-xl">
+            <p className="text-xl font-thin">
               Google Developer Groups are community groups for college and
               university students interested in Google developer technologies.
             </p>
@@ -352,7 +352,7 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
             }}
           >
             <button
-              className="bg-gray-800 text-white px-10 py-3 rounded-full hover:bg-gray-700 transition-colors"
+              className="bg-gray-800 text-white px-10 py-3 rounded-full hover:bg-gray-700 transition-colors font-thin"
               onClick={handleExplore}
             >
               Join Us

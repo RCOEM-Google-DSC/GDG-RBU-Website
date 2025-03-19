@@ -5,8 +5,8 @@ export default function Mac() {
     <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
       {/* Mobile heading - visible only on mobile */}
       <div className="block md:hidden text-center px-4 mt-8 mb-6">
-        <h1 className="text-5xl">Management Team</h1>
-        <p className="text-xl mt-2">
+        <h1 className="text-5xl font-thin">Management Team</h1>
+        <p className="text-xl font-thin mt-2">
           Bringing ideas to life with creativity
           <br />
           and precision!
@@ -25,8 +25,8 @@ export default function Mac() {
             className="object-cover w-72 md:w-[500px] mx-4"
           />
           <div className="text-center mt-4">
-            <h1 className="text-3xl font-bold">Varad Bodke</h1>
-            <h2 className="text-2xl">Management Lead</h2>
+            <h1 className="text-3xl font-thin">Varad Bodke</h1>
+            <h2 className="text-2xl font-thin">Management Lead</h2>
           </div>
         </div>
 
@@ -34,8 +34,8 @@ export default function Mac() {
         <div className="flex flex-col justify-center md:order-1">
           {/* Desktop heading - hidden on mobile, visible on desktop */}
           <div className="hidden md:block text-left pl-8 mb-24">
-            <h1 className="text-8xl">Management Team</h1>
-            <p className="text-3xl">
+            <h1 className="text-8xl font-thin">Management Team</h1>
+            <p className="text-3xl font-thin">
               Bringing ideas to life with creativity
               <br />
               and precision!
@@ -53,7 +53,7 @@ export default function Mac() {
                 height={150}
                 className="object-cover w-32 md:w-auto"
               />
-              <h3 className="text-base md:text-xl font-medium mt-2 text-center">Netal Rathi</h3>
+              <h3 className="text-base md:text-xl font-thin mt-2 text-center">Netal Rathi</h3>
             </div>
 
             {/* Team member 2 */}
@@ -65,7 +65,7 @@ export default function Mac() {
                 height={150}
                 className="object-cover w-32 md:w-auto"
               />
-              <h3 className="text-base md:text-xl font-medium mt-2 text-center">Aditya Ralhan</h3>
+              <h3 className="text-base md:text-xl font-thin mt-2 text-center">Aditya Ralhan</h3>
             </div>
 
             {/* Team member 3 */}
@@ -77,7 +77,7 @@ export default function Mac() {
                 height={150}
                 className="object-cover w-32 md:w-auto"
               />
-              <h3 className="text-base md:text-xl font-medium mt-2 text-center">Devyani Kheche</h3>
+              <h3 className="text-base md:text-xl font-thin mt-2 text-center">Devyani Kheche</h3>
             </div>
           </div>
         </div>

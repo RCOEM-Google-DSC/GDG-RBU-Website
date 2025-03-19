@@ -5,8 +5,8 @@ export default function CPTeam() {
     <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white px-4 sm:px-6 md:px-8 py-10 sm:py-16">
       {/* Mobile heading */}
       <div className="block md:hidden text-center px-4 mt-8 mb-6">
-        <h1 className="text-5xl">CP Team</h1>
-        <p className="text-xl mt-2">
+        <h1 className="text-5xl font-thin">CP Team</h1>
+        <p className="text-xl mt-2 font-thin">
           Bringing ideas to life with creativity
           <br />
           and precision!
@@ -25,8 +25,8 @@ export default function CPTeam() {
             className="object-cover w-72 md:w-[500px]"
           />
           <div className="text-center mt-4">
-            <h1 className="text-3xl font-bold">Aditya Singh</h1>
-            <h2 className="text-xl mt-1">CP Lead</h2>
+            <h1 className="text-3xl font-thin">Aditya Singh</h1>
+            <h2 className="text-xl mt-1 font-thin">CP Lead</h2>
           </div>
         </div>
 
@@ -34,8 +34,8 @@ export default function CPTeam() {
         <div className="flex flex-col justify-center">
           {/* Desktop heading */}
           <div className="hidden md:block text-right pr-8 mb-24">
-            <h1 className="text-8xl">CP Team</h1>
-            <p className="text-3xl">
+            <h1 className="text-8xl font-thin">CP Team</h1>
+            <p className="text-3xl font-thin">
               Bringing ideas to life with creativity
               <br />
               and precision!
@@ -60,7 +60,7 @@ export default function CPTeam() {
                     className="object-cover w-32 md:w-auto"
                   />
                 </div>
-                <h3 className="text-base md:text-xl font-medium mt-2 text-right">{member.name}</h3>
+                <h3 className="text-base md:text-xl font-thin mt-2 text-right">{member.name}</h3>
               </div>
             ))}
           </div>

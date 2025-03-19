@@ -43,7 +43,7 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         isScrolled
           ? "bg-background/80 backdrop-blur-lg shadow-sm"
           : "bg-transparent"
@@ -56,39 +56,27 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="nav-link">
-              Home
-            </Link>
-            <Link href="/events" className="nav-link">
-              Events
-            </Link>
-            <Link href="/blogs" className="nav-link">
-              Blogs
-            </Link>
-            <Link href="/team" className="nav-link">
-              Team
-            </Link>
-            <Link href="/domains" className="nav-link">
-              Domains
-            </Link>
-            <Link href="/contact" className="nav-link">
-              Contact
-            </Link>
+          <div className="hidden md:flex items-center space-x-8 font-thin  ">
+            <Link href="/" className="nav-link">Home</Link>
+            <Link href="/events" className="nav-link">Events</Link>
+            <Link href="/blogs" className="nav-link">Blogs</Link>
+            <Link href="/team" className="nav-link">Team</Link>
+            <Link href="/domains" className="nav-link">Domains</Link>
+            <Link href="/contact" className="nav-link">Contact</Link>
           </div>
 
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4 font-thin">
             <ThemeSwitcher />
             {user ? (
-              <Button onClick={handleSignOut} variant="outline">
+              <Button onClick={handleSignOut} variant="outline" className="font-thin">
                 Sign Out
               </Button>
             ) : (
               <div className="flex space-x-2">
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="font-thin">
                   <Link href="/sign-in">Sign In</Link>
                 </Button>
-                <Button asChild>
+                <Button asChild className="font-thin">
                   <Link href="/sign-up">Sign Up</Link>
                 </Button>
               </div>
@@ -107,75 +95,36 @@ export function Header() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`mobile-menu ${isOpen ? "open" : ""}`}>
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col space-y-4">
-            <Link
-              href="/"
-              className="nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/events"
-              className="nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Events
-            </Link>
-            <Link
-              href="/blogs"
-              className="nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Blogs
-            </Link>
-            <Link
-              href="/team"
-              className="nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Team
-            </Link>
-            <Link
-              href="/domains"
-              className="nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Domains
-            </Link>
-            <Link
-              href="/contact"
-              className="nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
-            </Link>
-
-            <div className="pt-4 border-t border-border">
-              <ThemeSwitcher />
-            </div>
-
-            <div className="flex flex-col space-y-2">
-              {user ? (
-                <Button onClick={handleSignOut} variant="outline">
-                  Sign Out
-                </Button>
-              ) : (
-                <>
-                  <Button asChild variant="outline">
-                    <Link href="/sign-in">Sign In</Link>
-                  </Button>
-                  <Button asChild>
-                    <Link href="/sign-up">Sign Up</Link>
-                  </Button>
-                </>
-              )}
-            </div>
-          </div>
+      {isOpen && (
+        <div className="fixed inset-0 bg-background/90 z-40 flex flex-col items-center p-6 space-y-6">
+          <button
+            className="absolute top-4 right-4 p-2"
+            onClick={() => setIsOpen(false)}
+            aria-label="Close menu"
+          >
+            <X size={24} />
+          </button>
+          <Link href="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</Link>
+          <Link href="/events" className="nav-link" onClick={() => setIsOpen(false)}>Events</Link>
+          <Link href="/blogs" className="nav-link" onClick={() => setIsOpen(false)}>Blogs</Link>
+          <Link href="/team" className="nav-link" onClick={() => setIsOpen(false)}>Team</Link>
+          <Link href="/domains" className="nav-link" onClick={() => setIsOpen(false)}>Domains</Link>
+          <Link href="/contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</Link>
+          <ThemeSwitcher />
+          {user ? (
+            <Button onClick={handleSignOut} variant="outline">Sign Out</Button>
+          ) : (
+            <>
+              <Button asChild variant="outline">
+                <Link href="/sign-in">Sign In</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/sign-up">Sign Up</Link>
+              </Button>
+            </>
+          )}
         </div>
-      </div>
+      )}
     </header>
   );
 }

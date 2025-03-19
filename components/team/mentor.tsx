@@ -5,8 +5,8 @@ export default function Mentor() {
     <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white px-4 sm:px-6 md:px-8 py-10 sm:py-16">
       {/* Team Header Section */}
       <div className="text-center mb-8 sm:mb-12">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-2">Our Team</h1>
-        <p>Get to know the minds shaping our GDG community!</p>
+        <h1 className="text-3xl sm:text-4xl font-thin mb-2">Our Team</h1>
+        <p className="font-thin">Get to know the minds shaping our GDG community!</p>
       </div>
 
       {/* Main content */}
@@ -22,13 +22,13 @@ export default function Mentor() {
               className="object-cover w-full"
             />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold mt-4">Jayesh Shete</h1>
-          <h1 className="text-xl sm:text-2xl">Club Lead</h1>
+          <h1 className="text-2xl sm:text-3xl font-thin mt-4">Jayesh Shete</h1>
+          <h1 className="text-xl sm:text-2xl font-thin">Club Lead</h1>
         </div>
 
         {/* Mentors Section */}
         <div className="flex-1 w-full">
-          <h2 className="text-xl font-semibold text-center mb-6">Mentors</h2>
+          <h2 className="text-xl font-thin text-center mb-6">Mentors</h2>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
               { name: "Mohit Sahare", img: "mohit.svg" },
@@ -50,7 +50,7 @@ export default function Mentor() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-sm sm:text-md font-medium mt-2 text-center">{mentor.name}</h3>
+                <h3 className="text-sm sm:text-md font-thin mt-2 text-center">{mentor.name}</h3>
               </div>
             ))}
           </div>
