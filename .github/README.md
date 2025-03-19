@@ -1,4 +1,4 @@
-![gdg](gdg.svg)
+![gdg](../public/gdg.svg)
 
 ## About the Project
 
