@@ -131,7 +131,7 @@ const ExpandableCardStack = () => {
       <div className="min-h-[120vh] pt-16 px-4 bg-white dark:bg-gray-900 dark:text-white transition-all duration-500">
         {/* Reduced margin-bottom from mb-8 to mb-4 */}
         <h1
-          className={`text-5xl font-bold text-center mt-3 mb-2 transition-opacity duration-500 ${scrolled ? "opacity-0" : "opacity-100"}`}
+          className={`text-5xl font-thin text-center mt-3 mb-2 transition-opacity duration-500 ${scrolled ? "opacity-0" : "opacity-100"}`}
         >
           Our Domains
         </h1>
@@ -141,8 +141,8 @@ const ExpandableCardStack = () => {
           <div
             className={`absolute top-32 -right-4 text-right transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
           >
-            <h2 className="text-4xl font-bold mb-2">Our Domains</h2>
-            <p className="text-lg max-w-xs">
+            <h2 className="text-4xl mb-2 font-thin">Our Domains</h2>
+            <p className="text-lg max-w-xs font-thin">
               Be part of the innovation—grow, build, and inspire with GDG!
             </p>
           </div>
@@ -166,7 +166,7 @@ const ExpandableCardStack = () => {
             <div
               className={`absolute -bottom-32 -left-4 max-w-md transition-all duration-500 ease-in-out ${scrolled ? "opacity-100" : "opacity-0"}`}
             >
-              <p className="text-lg">
+              <p className="text-lg font-thin">
                 Be part of the innovation—grow, build, and inspire with GDG! Be
                 part of the innovation—grow, build, and inspire with GDG!
               </p>
@@ -181,14 +181,14 @@ const ExpandableCardStack = () => {
                 : "opacity-100"
             }`}
           >
-            <h2 className="text-4xl font-medium">
+            <h2 className="text-4xl font-thin">
               Whether you're into{" "}
-              <span className="text-red-500">management</span>,{" "}
-              <span className="text-green-500">tech</span>, or{" "}
-              <span className="text-blue-500">design</span>, GDG has something
+              <span className="text-red-500 font-thin">{" "}management</span>,{" "}
+              <span className="text-green-500 font-thin">tech</span>, or{" "}
+              <span className="text-blue-500 font-thin">design</span>, GDG has something
               for you!
             </h2>
-            <p className="text-3xl text-gray-500 dark:text-gray-400">
+            <p className="text-3xl text-gray-500 dark:text-gray-400 font-thin">
               Be part of the innovation—grow, build, and inspire with GDG!
             </p>
           </div>

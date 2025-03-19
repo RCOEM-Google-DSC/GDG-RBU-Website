@@ -86,8 +86,9 @@ export default function Events() {
       </div>
 
      
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-0 border-0 lg:border lg:border-gray-200 dark:border-white font-thin">
+      <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-gray-100 font-thin">Past Events</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-0 border-white lg:border-white  dark:border-white font-thin">
+        
         {events.map((event) => (
           <div key={event.id} className="flex flex-col border border-gray-200 dark:border-white shadow-sm hover:shadow-md transition-shadow duration-300 p-4 md:p-6 h-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-thin">
             <div className="text-center mb-3 md:mb-4 text-black dark:text-white font-thin">{event.date}</div>
