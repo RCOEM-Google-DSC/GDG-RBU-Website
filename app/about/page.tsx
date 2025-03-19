@@ -74,7 +74,7 @@ export default async function Members() {
             Events
           </Link>
           <Link
-            href="/blogs"
+            href="/blog"
             className="text-black hover:text-gray-700"
           >
             Blogs

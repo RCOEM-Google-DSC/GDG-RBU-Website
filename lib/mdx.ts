@@ -1,4 +1,6 @@
 /* eslint-disable */
+// Author: Annalhq Shaikh
+
 import fs from "fs";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
@@ -16,6 +18,7 @@ export interface Post {
      slug: string;
      content: string;
      readingTime: string;
+     image: string;
 }
 
 function getMDXFiles(dir: string): string[] {
@@ -46,6 +49,7 @@ async function readMDXFile(filePath: string): Promise<Post> {
           slug: path.basename(filePath, ".mdx"),
           content: JSON.stringify(mdxSource),
           readingTime: readingTimeText,
+          image: data.image || "/blog-images/default.jpg",
      };
 }
 

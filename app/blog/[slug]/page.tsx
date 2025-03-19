@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ReactElement } from "react";
 
@@ -24,6 +25,15 @@ export default async function BlogPost(props: {
     <div className="mx-auto max-w-2xl">
       <article data-pagefind-body>
         <header className="mb-8">
+          <div className="relative w-full h-64 mb-6 rounded-lg overflow-hidden">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
           <h2 className="mb-2 text-3xl font-bold">{post.title}</h2>
           <div className="text-sm text-muted-foreground">
             <span className="font-medium">{post.author}</span>
@@ -40,6 +50,7 @@ export default async function BlogPost(props: {
             description: post.description,
             date: post.date,
             author: post.author,
+            image: post.image,
           }}
         />
       </article>
