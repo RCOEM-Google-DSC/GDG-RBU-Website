@@ -59,7 +59,7 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-8 font-thin  ">
             <Link href="/" className="nav-link">Home</Link>
             <Link href="/events" className="nav-link">Events</Link>
-            <Link href="/blogs" className="nav-link">Blogs</Link>
+            <Link href="/blog" className="nav-link">Blogs</Link>
             <Link href="/team" className="nav-link">Team</Link>
             <Link href="/domains" className="nav-link">Domains</Link>
             <Link href="/contact" className="nav-link">Contact</Link>

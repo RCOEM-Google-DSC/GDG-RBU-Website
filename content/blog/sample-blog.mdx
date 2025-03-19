@@ -14,6 +14,23 @@ Welcome to this comprehensive guide on writing blog posts for the GDG website. T
 
 Writing technical blog posts is an excellent way to share knowledge and establish yourself as an expert in your field. This guide will show you how to format your content effectively.
 
+### File Structure
+
+When adding new blog posts, add the markdown file to the `content/blog` directory.
+You can include images in the `content/blog-images` directory or link to image.
+
+At the start of your markdown file, include the metadata block with the title, description, date, author, and image.
+sample-blog.mdx
+```markdown
+---
+title: "your title"
+description: "description"
+date: "2025-03-20"
+author: "Annalhq Shaikh"
+image: "/blog-images/your-image.jpg" 
+---
+```
+Alternatively, you can also link to an external image like `image: "https://example.com/your-image.jpg".`
 ### Basic Text Formatting
 
 You can use **bold text** using `** your text **` for emphasis or *italics* for slight emphasis. You can also use ~~strikethrough~~ when needed.

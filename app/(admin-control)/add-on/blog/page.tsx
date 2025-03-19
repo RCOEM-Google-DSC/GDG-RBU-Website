@@ -46,7 +46,7 @@ export default function InsertBlog() {
       const fileName = `${hours}${minutes}${seconds}-${day}-${month}`;
 
       const { data: uploadData, error: uploadError } = await supabase.storage
-        .from("blogs")
+        .from("blog")
         .upload(fileName, imageFile, {
           cacheControl: "3600",
           upsert: false,
@@ -56,7 +56,7 @@ export default function InsertBlog() {
       if (uploadError) throw uploadError;
 
       const { data: insertData, error: insertError } = await supabase
-        .from("blogs")
+        .from("blog")
         .insert([
           {
             writer_id: user.user.id,
@@ -73,7 +73,7 @@ export default function InsertBlog() {
       setContent("");
       setImageFile(null);
       alert("Blog created successfully!");
-      router.push("/blogs");
+      router.push("/blog");
     } catch (error) {
       console.error("Error creating blog:", error);
       setError("Failed to create blog. Please try again.");
