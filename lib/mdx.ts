@@ -12,6 +12,7 @@ export interface Post {
      title: string;
      description: string;
      date: string;
+     author: string;
      slug: string;
      content: string;
      readingTime: string;
@@ -26,7 +27,6 @@ async function readMDXFile(filePath: string): Promise<Post> {
      const { data, content } = matter(rawContent);
      const { text: readingTimeText } = readingTime(content);
 
-     // Process the MDX content with rehype plugins
      const mdxSource = await serialize(content, {
           mdxOptions: {
                rehypePlugins: [
@@ -42,6 +42,7 @@ async function readMDXFile(filePath: string): Promise<Post> {
           title: data.title,
           description: data.description,
           date: data.date,
+          author: data.author || "GDG Team member",
           slug: path.basename(filePath, ".mdx"),
           content: JSON.stringify(mdxSource),
           readingTime: readingTimeText,

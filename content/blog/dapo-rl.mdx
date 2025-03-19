@@ -1,0 +1,55 @@
+---
+title: "Introducing DAPO: A Breakthrough in RL Algorithms"
+description: "ByteDance Seed, Tsinghua, and UHK just open-sourced a new RL algorithm for building reasoning models."
+date: "2025-03-20"
+author: "Annalhq Shaikh"
+---
+
+# DAPO Algorithm: A New Era in Reinforcement Learning
+
+ByteDance Seed, Tsinghua, and UHK have just open-sourced a revolutionary RL algorithm for building reasoning models—**DAPO** (Decoupled Clip and Dynamic Sampling Policy Optimization). This algorithm is poised to significantly change the landscape of reinforcement learning.
+
+**DAPO-Zero-32B** is a fully open-source RL reasoning model that has surpassed the previous state-of-the-art, **DeepSeek-R1-Zero-Qwen-32B**, by achieving **50% better performance** on AIME 2024 with **50% fewer training steps**. It has been trained using **zero-shot reinforcement learning (RL)** from the **Qwen-32b** pre-trained model.
+
+Everything related to the algorithm, including the code and dataset, is now fully open-source and available to the research community.
+
+## Why DAPO Matters
+
+By making DAPO publicly available, ByteDance Seed, Tsinghua, and UHK are providing the broader research community with practical access to scalable reinforcement learning. This opens up new opportunities for others to benefit from the advancements in RL modeling.
+
+The system is based on the **verl framework**, and the research team expresses their gratitude for the contributions of the verl framework developers.
+
+DAPO's application to the **Qwen2.5-32B** base model has demonstrated its superiority, outperforming the previous **DeepSeek-R1-Zero-Qwen-32B** model on AIME 2024, with the following improvements:
+1. Achieving **50% accuracy** with **50% fewer steps**.
+2. Reducing the training time significantly while improving results.
+
+## Key Insights into DAPO
+
+DAPO introduces several novel techniques that make it unique and more efficient in training RL models. Here's a breakdown of the key components of the DAPO algorithm:
+
+### 1. **Clip-Higher**
+
+This technique promotes the diversity of the system and avoids entropy collapse. The team observed an entropy-collapse phenomenon during initial experiments and introduced the **Clip-Higher** strategy. By increasing the upper clip range of the importance sampling ratio in policy gradient loss, this strategy helps mitigate entropy collapse, allowing the model to explore a wider range of policies.
+
+### 2. **Dynamic Sampling**
+
+DAPO employs **dynamic sampling**, which improves training efficiency and stability. This strategy filters out prompt groups with accuracy equal to 1 or 0 and ensures a consistent number of prompts with effective gradients across batches. This enhances the overall stability and reliability of training.
+
+### 3. **Token-Level Policy Gradient Loss**
+
+This technique is essential for handling **long-CoT RL scenarios**. By applying policy gradient loss at the token level, DAPO allows for better fine-tuning of the model, improving performance during complex training sessions.
+
+### 4. **Overlong Reward Shaping**
+
+In long-term training sessions, reward noise can often destabilize the learning process. DAPO addresses this challenge with **Overlong Reward Shaping**, which helps to reduce noise and stabilize the training, ensuring more consistent and accurate learning over time.
+
+---
+
+## Conclusion
+
+The release of the **DAPO algorithm** by ByteDance Seed, Tsinghua, and UHK marks a significant milestone in the field of reinforcement learning. By applying innovative techniques like **Clip-Higher**, **Dynamic Sampling**, **Token-level Policy Gradient Loss**, and **Overlong Reward Shaping**, DAPO is setting a new standard for building efficient and scalable RL models.
+
+This open-source release provides invaluable resources for researchers and developers, enabling them to explore and build upon this groundbreaking work.
+
+We look forward to seeing how the community adopts and improves upon the **DAPO** algorithm!
+
