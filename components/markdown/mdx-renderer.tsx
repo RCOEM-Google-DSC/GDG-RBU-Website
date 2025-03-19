@@ -1,6 +1,3 @@
-/* Author: Annalhq Shaikh 
-Date: 20-03-2025 */
-
 "use client";
 
 import { MDXRemote } from "next-mdx-remote";
@@ -55,7 +52,7 @@ const components = {
     return (
       <a
         href={href}
-        target=""
+        target="_blank"
         rel="noopener noreferrer"
         className="text-primary hover:text-primary/80 hover:underline"
       >
@@ -75,17 +72,19 @@ const components = {
       {...props}
     />
   ),
+  // Fixed component - now returns an Image directly instead of wrapping it in a div
   img: (props: any) => (
-    <div className="my-6">
-      <Image
-        {...props}
-        alt={props.alt || ""}
-        width={800}
-        height={400}
-        className="rounded-lg mx-auto"
-      />
-    </div>
+    <Image
+      {...props}
+      alt={props.alt || ""}
+      width={800}
+      height={400}
+      className="rounded-lg mx-auto my-6"
+    />
   ),
+  // Alternative fix - create a custom wrapper component instead of using p
+  // This can be used if you still want the div wrapper
+  wrapper: (props: any) => <div className="my-6">{props.children}</div>,
   hr: () => <hr className="my-6 border-border" />,
   table: (props: any) => (
     <table className="w-full border-collapse my-6 text-foreground" {...props} />
