@@ -13,7 +13,7 @@ export async function generateStaticParams() {
 export default async function BlogPost(props: {
   params: { slug: string };
 }): Promise<ReactElement> {
-  const { params } = await props;
+  const { params } = props;
   const { slug } = params;
   const post = await getPost("blog", slug);
 
