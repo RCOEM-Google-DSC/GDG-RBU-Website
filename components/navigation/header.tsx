@@ -36,6 +36,18 @@ export function Header() {
     fetchUser();
   }, []);
 
+  // Close mobile menu when screen size changes to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isOpen]);
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.push("/");
@@ -45,8 +57,8 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-lg shadow-sm"
-          : "bg-transparent"
+          ? "bg-background shadow-sm"
+          : "bg-background"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -56,7 +68,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8 font-thin  ">
+          <div className="hidden md:flex items-center space-x-8 font-thin">
             <Link href="/" className="nav-link">Home</Link>
             <Link href="/events" className="nav-link">Events</Link>
             <Link href="/blog" className="nav-link">Blogs</Link>
@@ -96,7 +108,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed inset-0 bg-background/90 z-40 flex flex-col items-center p-6 space-y-6">
+        <div className="fixed inset-0 bg-background z-40 flex flex-col items-center p-6 space-y-6">
           <button
             className="absolute top-4 right-4 p-2"
             onClick={() => setIsOpen(false)}
