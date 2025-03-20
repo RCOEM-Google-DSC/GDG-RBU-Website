@@ -10,12 +10,15 @@ interface MarkdownRendererProps {
   content: string;
   frontmatter?: Record<string, any>;
 }
-const CodeBlock = ({ children }: { children: string }) => {
+const CodeBlock = ({ children }: { children: React.ReactNode }) => {
   const [copied, setCopied] = useState(false);
-
+  
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(children);
+      const codeElement = document.querySelector('.code-block-content');
+      const textToCopy = codeElement?.textContent || '';
+      
+      await navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
@@ -37,7 +40,7 @@ const CodeBlock = ({ children }: { children: string }) => {
             <Copy className="w-4 h-4 text-gray-300" />
           )}
         </button>
-        <code className="block">{children}</code>
+        <code className="block code-block-content">{children}</code>
       </pre>
     </div>
   );
