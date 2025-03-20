@@ -40,7 +40,7 @@ export default function Events() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-gray-100 font-thin">Our Events</h1>
+      <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-gray-100 font-semibold">Our Events</h1>
       
       <div className="w-full mb-12 bg-black rounded-lg overflow-hidden shadow-lg">
         <div className="flex flex-col lg:flex-row">
@@ -86,7 +86,7 @@ export default function Events() {
       </div>
 
      
-      <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-gray-100 font-thin">Past Events</h1>
+      <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-gray-100 font-semibold">Past Events</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-0 border-white lg:border-white  dark:border-white font-thin">
         
         {events.map((event) => (

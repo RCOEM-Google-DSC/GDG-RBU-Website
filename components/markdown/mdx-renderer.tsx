@@ -1,13 +1,48 @@
 "use client";
 
+import { useState } from "react";
 import { MDXRemote } from "next-mdx-remote";
 import Image from "next/image";
 import Link from "next/link";
+import { Copy, Check } from "lucide-react";
 
 interface MarkdownRendererProps {
   content: string;
   frontmatter?: Record<string, any>;
 }
+const CodeBlock = ({ children }: { children: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(children);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error("Failed to copy:", error);
+    }
+  };
+
+  return (
+    <div className="relative group">
+      <pre className="bg-[#1e1e1e] rounded-lg p-4 overflow-x-auto my-4 text-gray-200 relative">
+        <button
+          onClick={handleCopy}
+          className="absolute top-2 right-2 p-2 rounded-md bg-gray-700/70 hover:bg-gray-600/70 transition-colors duration-200"
+          aria-label="Copy code"
+        >
+          {copied ? (
+            <Check className="w-4 h-4 text-green-400" />
+          ) : (
+            <Copy className="w-4 h-4 text-gray-300" />
+          )}
+        </button>
+        <code className="block">{children}</code>
+      </pre>
+    </div>
+  );
+};
+
 
 const components = {
   h1: (props: any) => (
@@ -52,7 +87,7 @@ const components = {
     return (
       <a
         href={href}
-        target="_blank"
+        target=""
         rel="noopener noreferrer"
         className="text-primary hover:text-primary/80 hover:underline"
       >
@@ -60,19 +95,7 @@ const components = {
       </a>
     );
   },
-  pre: (props: any) => (
-    <pre
-      className="bg-muted rounded-lg p-4 overflow-x-auto my-4 text-foreground"
-      {...props}
-    />
-  ),
-  code: (props: any) => (
-    <code
-      className="bg-muted rounded px-1 py-0.5 text-sm text-foreground"
-      {...props}
-    />
-  ),
-  // Fixed component - now returns an Image directly instead of wrapping it in a div
+  pre: (props: any) => <CodeBlock>{props.children}</CodeBlock>,
   img: (props: any) => (
     <Image
       {...props}
@@ -82,8 +105,6 @@ const components = {
       className="rounded-lg mx-auto my-6"
     />
   ),
-  // Alternative fix - create a custom wrapper component instead of using p
-  // This can be used if you still want the div wrapper
   wrapper: (props: any) => <div className="my-6">{props.children}</div>,
   hr: () => <hr className="my-6 border-border" />,
   table: (props: any) => (

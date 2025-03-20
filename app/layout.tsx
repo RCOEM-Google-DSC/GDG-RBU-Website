@@ -1,5 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/navigation/header";
+import { GeistSans } from "geist/font/sans";
+
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -23,7 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="font-sans" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${GeistSans.className} dark`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen bg-background text-foreground">
         <ThemeProvider
           attribute="class"

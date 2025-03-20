@@ -166,7 +166,7 @@ export default async function Members() {
                           <li key={index}>
                             <a
                               href={link}
-                              target="_blank"
+                              target=""
                               rel="noopener noreferrer"
                               className="text-blue-500 hover:underline break-words text-sm"
                             >

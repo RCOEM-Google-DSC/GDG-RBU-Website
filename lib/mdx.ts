@@ -30,16 +30,16 @@ async function readMDXFile(filePath: string): Promise<Post> {
      const { data, content } = matter(rawContent);
      const { text: readingTimeText } = readingTime(content);
 
-     const mdxSource = await serialize(content, {
-          mdxOptions: {
-               rehypePlugins: [
-                    rehypeSlug,
-                    [rehypePrettyCode as any, { theme: "github-dark" }],
-                    [rehypeAutolinkHeadings, { behavior: "wrap" }],
-               ],
-          },
-          parseFrontmatter: false,
-     });
+          const mdxSource = await serialize(content, {
+               mdxOptions: {
+                    rehypePlugins: [
+                         rehypeSlug,
+                         [rehypePrettyCode as any, { theme: "material-theme-darker" }],
+                         [rehypeAutolinkHeadings, { behavior: "wrap" }],
+                    ],
+               },
+               parseFrontmatter: false,
+          });
 
      return {
           title: data.title,

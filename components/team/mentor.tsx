@@ -5,7 +5,7 @@ export default function Mentor() {
     <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white px-4 sm:px-6 md:px-8 py-10 sm:py-16">
       {/* Team Header Section */}
       <div className="text-center mb-8 sm:mb-12">
-        <h1 className="text-3xl sm:text-4xl font-thin mb-2">Our Team</h1>
+        <h1 className="text-3xl sm:text-4xl font-semibold mb-2">Our Team</h1>
         <p className="font-thin">Get to know the minds shaping our GDG community!</p>
       </div>
 

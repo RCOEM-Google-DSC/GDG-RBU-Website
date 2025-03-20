@@ -68,7 +68,7 @@ export function Header() {
           </Link>
 
          
-          <div className="hidden md:flex items-center space-x-8 font-thin">
+          <div className="hidden md:flex items-center space-x-8">
             <Link href="/" className="nav-link">Home</Link>
             <Link href="/events" className="nav-link">Events</Link>
             <Link href="/blog" className="nav-link">Blogs</Link>
