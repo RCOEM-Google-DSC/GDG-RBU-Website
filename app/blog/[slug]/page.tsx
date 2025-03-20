@@ -10,12 +10,15 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export default async function BlogPost(props: {
-  params: { slug: string };
-}): Promise<ReactElement> {
-  const { params } = props;
-  const { slug } = params;
-  const post = await getPost("blog", slug);
+interface BlogPostProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function BlogPost({
+  params,
+}: BlogPostProps): Promise<ReactElement> {
+  const resolvedParams = await params;
+  const post = await getPost("blog", resolvedParams.slug);
 
   if (!post) {
     notFound();
