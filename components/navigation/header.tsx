@@ -36,7 +36,7 @@ export function Header() {
     fetchUser();
   }, []);
 
-  // Close mobile menu when screen size changes to desktop
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && isOpen) {
@@ -67,7 +67,7 @@ export function Header() {
             <img src="/gdgico.svg" alt="GDG Logo" className="w-10 h-10" />
           </Link>
 
-          {/* Desktop Navigation */}
+         
           <div className="hidden md:flex items-center space-x-8 font-thin">
             <Link href="/" className="nav-link">Home</Link>
             <Link href="/events" className="nav-link">Events</Link>
@@ -95,7 +95,7 @@ export function Header() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+  
           <button
             className="md:hidden p-2"
             onClick={() => setIsOpen(!isOpen)}
@@ -106,7 +106,7 @@ export function Header() {
         </nav>
       </div>
 
-      {/* Mobile Menu */}
+
       {isOpen && (
         <div className="fixed inset-0 bg-background z-40 flex flex-col items-center p-6 space-y-6">
           <button
