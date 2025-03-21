@@ -1,5 +1,6 @@
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import HomeClientComponent from "@/components/home-client";
+
+import Home from "@/components/home/home";
 
 export default async function Page() {
   if (!hasEnvVars) {
@@ -14,5 +15,5 @@ export default async function Page() {
     );
   }
 
-  return <HomeClientComponent />;
+  return <Home />;
 }
