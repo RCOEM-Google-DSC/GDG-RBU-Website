@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
+
 import {
   FC,
   useEffect,
@@ -10,9 +9,9 @@ import {
   ReactNode,
   CSSProperties,
 } from "react";
-import HeaderAuth from "@/components/header-auth";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+
+import { HeroGeometric } from "@/components/user/shape-landing-hero";
+import { Preview } from "./preview";
 
 interface HomeClientComponentProps {
   headerAuthComponent?: ReactNode;
@@ -281,98 +280,19 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
   };
 
   return (
-    <div
-      ref={pageRef}
-      className={`${!animationComplete ? "h-screen overflow-hidden" : ""}`}
-    >
-      <main className="container">
-        
-        {/* Domain name heading */}
-        <h1 className="text-7xl  text-center mb-16 font-thin">rbu.gdgoc.one</h1>
+    <div className="flex flex-col">
+      <section className="w-full relative">
+        <HeroGeometric
+          badge="Upcoming event on 29th March"
+          title1="Innovate, Code"
+          title2="with GDG RBU"
+        />
+        <Preview />
+      </section>
 
-        {/* Cards display with animation */}
-        <div className="relative h-80 mb-20">
-          {/* Card stack with position animation */}
-          <div className="relative ml-60 h-full">
-            {/* Each card positioned with animation */}
-            {cardImages.map((src, index) => (
-              <div
-                key={src}
-                className="absolute origin-bottom-right"
-                style={getCardStyle(index, cardImages.length)}
-              >
-                {/* Card tag positioned relative to its card */}
-                {cardTags[index] && (
-                  <div
-                    className={`text-white px-3 py-1 rounded-full absolute -top-8 left-1/2 transform -translate-x-1/2 ${
-                      index % 2 === 0 ? "bg-blue-500" : "bg-green-500"
-                    }`}
-                    style={{
-                      zIndex: 10,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {cardTags[index]}
-                  </div>
-                )}
-                <Image
-                  src={src}
-                  alt={cardAlts[index]}
-                  width={280}
-                  height={380}
-                  className="rounded-2xl"
-                  style={{ backgroundColor: "transparent" }}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Description text with fade-in effect */}
-          <div
-            className="text-center max-w-3xl mx-auto mb-12"
-            style={{
-              opacity: Math.min(scrollProgress * 2, 1),
-              transform: `translateY(${20 - scrollProgress * 20}px)`,
-              transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
-            }}
-          >
-            <p className="text-xl font-thin">
-              Google Developer Groups are community groups for college and
-              university students interested in Google developer technologies.
-            </p>
-          </div>
-
-          {/* Join Us button with fade-in effect */}
-          <div
-            className="text-center mb-16"
-            style={{
-              opacity: Math.min((scrollProgress - 0.3) * 2, 1),
-              transform: `translateY(${30 - scrollProgress * 30}px)`,
-              transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
-            }}
-          >
-            <button
-              className="bg-gray-800 text-white px-10 py-3 rounded-full hover:bg-gray-700 transition-colors font-thin"
-              onClick={handleExplore}
-            >
-              Join Us
-            </button>
-          </div>
-        </div>
-
-        {/* Indicator to show animation is complete */}
-        <div
-          className="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-          style={{
-            opacity: animationComplete
-              ? 0
-              : Math.min((scrollProgress - 0.8) * 5, 1),
-            transition: "opacity 0.3s ease-out",
-          }}
-        ></div>
-      </main>
-
-      {/* Content that appears after animation */}
+      {/* <section className="w-full relative">
+        <Preview />
+      </section> */}
     </div>
   );
 };

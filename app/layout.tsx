@@ -3,6 +3,7 @@ import { Header } from "@/components/navigation/header";
 import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
+import Footer from "@/components/footer/footer";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -16,6 +17,7 @@ export const metadata = {
     icon: "/gdg.ico",
     shortcut: "/gdg.ico",
     apple: "/gdg.ico",
+    android: "/gdg.ico",
   },
 };
 
@@ -33,12 +35,13 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-foreground">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Header />
           <main className="container mx-auto px-4 pt-20 ">{children}</main>
+          <Footer/>
         </ThemeProvider>
       </body>
     </html>

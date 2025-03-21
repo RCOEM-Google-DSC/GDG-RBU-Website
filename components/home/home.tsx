@@ -12,6 +12,7 @@ export default function Home() {
           title1="Innovate, Code"
           title2="with GDG RBU"
         />
+        <Preview />
       </section>
 
       {/* <section className="w-full relative">

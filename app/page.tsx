@@ -2,6 +2,7 @@ import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 
 import Home from "@/components/home/home";
 
+
 export default async function Page() {
   if (!hasEnvVars) {
     return (
@@ -15,5 +16,9 @@ export default async function Page() {
     );
   }
 
-  return <Home />;
+  return (<>
+  <Home />
+  
+  </>
+  );
 }

@@ -78,7 +78,7 @@ export function Header() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4 font-thin">
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}
             {user ? (
               <Button onClick={handleSignOut} variant="outline" className="font-thin">
                 Sign Out
@@ -122,7 +122,7 @@ export function Header() {
           <Link href="/team" className="nav-link" onClick={() => setIsOpen(false)}>Team</Link>
           <Link href="/domains" className="nav-link" onClick={() => setIsOpen(false)}>Domains</Link>
           <Link href="/contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</Link>
-          <ThemeSwitcher />
+          {/* <ThemeSwitcher /> */}
           {user ? (
             <Button onClick={handleSignOut} variant="outline">Sign Out</Button>
           ) : (
