@@ -16,10 +16,10 @@ export const metadata = {
   title: "GDG RBU",
   description: "Google Developer Group on Campus - Ramdeobaba University",
   icons: {
-    icon: "/gdg.ico",
-    shortcut: "/gdg.ico",
-    apple: "/gdg.ico",
-    android: "/gdg.ico",
+    icon: "/gdgico.svg",
+    shortcut: "/gdgico.svg",
+    apple: "/gdgico.svg",
+    android: "/gdgico.svg"
   },
 };
 
