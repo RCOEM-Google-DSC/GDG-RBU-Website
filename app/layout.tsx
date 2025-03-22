@@ -19,7 +19,7 @@ export const metadata = {
     icon: "/gdgico.svg",
     shortcut: "/gdgico.svg",
     apple: "/gdgico.svg",
-    android: "/gdgico.svg"
+    android: "/gdgico.svg",
   },
 };
 
@@ -42,7 +42,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header  />
-          <main className="container mx-auto px-4 pt-20 ">{children}</main>
+          <main className="pt-20 ">{children}</main>
           <Footer/>
         </ThemeProvider>
       </body>
