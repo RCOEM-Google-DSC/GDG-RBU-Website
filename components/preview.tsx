@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "motion/react";
 
 import Floating, { FloatingElement } from "@/components/user/parallax-floating";
-import { Marquee } from "./magicui/marquee";
 import { MarqueeDemo } from "./marquee";
+import Link from "next/link";
 
 const exampleImages = [
   {
@@ -87,11 +87,14 @@ const Preview = () => {
         <p className="text-5xl md:text-7xl  font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ">
           Our Events
         </p>
-        <a href="/events"><button className="bg-gray-800 text-white px-10 py-3 rounded-full hover:bg-gray-700 transition-colors font-thin">Explore More</button></a>
+        <Link href="/events">
+  <button className="bg-gray-900  text-white px-10 py-3 rounded-full hover:bg-gray-600 transition-all font-thin ">
+    Explore More
+  </button>
+</Link>
       </motion.div>
 
       <Floating sensitivity={-1} className="overflow-hidden">
-        {/* Top row elements */}
         <FloatingElement depth={0.5} className="absolute top-[5%] sm:top-[6%] md:top-[7%] lg:top-[8%] left-[5%] sm:left-[8%] md:left-[10%] lg:left-[11%]">
           <motion.img
             initial={{ opacity: 0 }}

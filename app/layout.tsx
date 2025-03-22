@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/navigation/header";
 import { GeistSans } from "geist/font/sans";
 
+
 import "./globals.css";
 import { Footer } from "@/components/footer/footer";
 

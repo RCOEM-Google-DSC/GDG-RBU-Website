@@ -1,31 +1,34 @@
 
-
 import { EnvelopeClosedIcon, InstagramLogoIcon, TwitterLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { IoLocationOutline } from "react-icons/io5";
 
 export function Footer() {
 	return (
-        <>
-		<div className="footer mt-4 bg-black border-t ">
+		<div className="footer mt-4 bg-slate-900">
 			<footer
 				id="footer"
 				className="relative flex w-[100vw] items-center justify-between py-10 max-md:flex-col md:h-80 overflow-hidden"
 			>
 				<div className="flex w-[30vw] md:translate-x-16 flex-col items-center justify-center max-md:w-fit">
-					<img src="/gdgico.svg" alt="logo" className="h-10" />
+					<img src="gdgico.svg" alt="logo" className="h-10" />
 					<p className="pt-4 text-2xl text-slate-100 text-center max-md:text-xl">
 						Google Developer Groups
 					</p>
-                    <span className="text-xl text-blue-500 max-md:text-lg">on Campus</span>
+                    <p>
+                    <span className="text-md text-blue-600 max-md:text-lg">On Campus  </span>
+                    <span className="text-md text-slate-100 max-md:text-lg"> • Ramdeobaba University</span>
+                    </p>
 					
+                   
 				</div>
                 <div className="hidden md:block w-[2px] h-48 bg-white rounded-lg dark:bg-gray-200"></div>
-           <div className="block md:hidden w-4/5 h-[2px] bg-white rounded-lg dark:bg-gray-200 mb-6"></div>
+           <div className="block md:hidden w-4/5 h-[2px] bg-white rounded-lg dark:bg-gray-200 mt-6 mb-6"></div>
 				<div className="flex w-[50vw] flex-col items-start justify-center gap-4 max-md:w-[95vw] max-md:py-8">
 					<div className="flex items-center">
 						<IoLocationOutline className="mx-12 scale-[2] text-slate-100" />
 						<div className="text-md max-md:text-sm w-2/3 text-slate-100">
-							Ramdeobaba University , Ramdeo Tekdi, Gittikhadan, Katol Road, Nagpur - 440013
+							Shri Ramdeobaba College of Engineering and Management, Ramdeo Tekdi, Gittikhadan, Katol
+							Road, Nagpur - 440013
 						</div>
 					</div>
 					<div className="items-center flex">
@@ -40,31 +43,23 @@ export function Footer() {
 					<div className="flex items-center gap-12 py-8">
 						<div className="text-md ml-8 text-slate-100 max-md:ml-12">Follow Us: </div>
 						<div className="flex gap-8">
-							<a href="https://www.instagram.com/gdg_rbu/" target="_blank">
+							<a href="https://www.instagram.com/gdsc_rcoem/" target="_blank">
 								<InstagramLogoIcon className="scale-150 cursor-pointer text-slate-100 transition-all hover:scale-[1.8]" />
 							</a>
-							<a href="https://x.com/gdsc_rcoem?lang=en">
+							<a href="https://mobile.twitter.com/gdsc_rcoem">
 								<TwitterLogoIcon className="scale-150 cursor-pointer text-slate-100 transition-all hover:scale-[1.8]" />
 							</a>
-							<a href="https://www.linkedin.com/company/gdg-rbu/posts/?feedView=all">
+							<a href="https://in.linkedin.com/company/gdsc-rcoem">
 								<LinkedInLogoIcon className="scale-150 cursor-pointer text-slate-100 transition-all hover:scale-[1.8]" />
 							</a>
 						</div>
 					</div>
 				</div>
-				
+				<img src="/images/shapes.svg" alt="shapes" className="absolute -bottom-24 max-md:-bottom-10 max-md:h-36 object-cover" />
 			</footer>
 		</div>
-        <div className="flex flex-row overflow-hidden">
-        <img src='/footer/bottom.png' alt='GDG Objects' className='w-1/4 h-1/2 relative bg-gray-100 dark:bg-black'/>
-        <img src='/footer/bottom1.png' alt='GDG Objects' className='w-1/4 relative bg-gray-100 dark:bg-black'/>
-        <img src='/footer/bottom2.png' alt='GDG Objects' className='w-1/4 relative bg-gray-100 dark:bg-black'/>
-        <img src='/footer/bottom.png' alt='GDG Objects' className='w-1/4 relative bg-gray-100 dark:bg-black'/>
-      </div>
-        </>
 	);
 }
-
 
 
 // import React from "react";
