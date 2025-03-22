@@ -3,7 +3,8 @@ import { Header } from "@/components/navigation/header";
 import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
-import Footer from "@/components/footer/footer";
+import { Footer } from "@/components/footer/footer";
+
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -39,7 +40,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Header />
+          <Header  />
           <main className="container mx-auto px-4 pt-20 ">{children}</main>
           <Footer/>
         </ThemeProvider>

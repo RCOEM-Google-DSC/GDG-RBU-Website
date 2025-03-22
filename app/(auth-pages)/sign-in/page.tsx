@@ -5,7 +5,7 @@ import { FormMessage, type Message } from "@/components/form-message"
 import { SubmitButton } from "@/components/submit-button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import Image from "next/image"
+
 import Link from "next/link"
 
 export default async function SignIn(props: {
@@ -58,13 +58,7 @@ export default async function SignIn(props: {
       </form>
 
      
-      <Image
-        src="/sidebar.svg"
-        alt="Sidebar"
-        height={200}
-        width={200}
-        className="absolute md:w-1/5 right-0 top-0 z-20 hidden md:block"
-      />
+      
       </>
       
 

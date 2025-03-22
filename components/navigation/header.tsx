@@ -118,7 +118,7 @@ export function Header() {
           </button>
           <Link href="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</Link>
           <Link href="/events" className="nav-link" onClick={() => setIsOpen(false)}>Events</Link>
-          <Link href="/blogs" className="nav-link" onClick={() => setIsOpen(false)}>Blogs</Link>
+          <Link href="/blog" className="nav-link" onClick={() => setIsOpen(false)}>Blogs</Link>
           <Link href="/team" className="nav-link" onClick={() => setIsOpen(false)}>Team</Link>
           <Link href="/domains" className="nav-link" onClick={() => setIsOpen(false)}>Domains</Link>
           <Link href="/contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</Link>

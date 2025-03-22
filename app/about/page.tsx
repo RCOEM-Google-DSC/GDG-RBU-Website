@@ -54,7 +54,7 @@ export default async function Members() {
   return (
     <div>
       {/* Nav Bar */}
-      <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28">
+      <nav className="flex items-center justify-between mb-8 w-[76rem] mr-28 ml-28 bg-black">
         <img
           src="/gdgico.svg"
           alt="GDG Logo"
