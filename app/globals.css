@@ -2,9 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Geist+Sans:wght@400;500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Geist+Sans:wght@400;500;700&display=swap'); */
 
+@font-face {
+  font-family: 'ProductSans';
+  src: url('/fonts/ProductSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
+body {
+  font-family: 'ProductSans', sans-serif;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.className} dark`}
+      className={`dark`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-black text-foreground">
