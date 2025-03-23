@@ -18,7 +18,7 @@ export default function Design() {
         {/* Team Lead */}
         <div className="flex flex-col items-center mx-auto md:mx-16 mb-10 md:mb-0">
           <Image
-            src="/teampic/design.svg"
+            src="/teampic/khushi.webp"
             alt="Khushi Sonkusare"
             width={300}
             height={350}
@@ -45,9 +45,9 @@ export default function Design() {
           {/* Team members grid aligned to the end */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-7 mx-2 md:mx-10 items-end">
             {[
-              { name: "Mayuri Barapatre", img: "d1.svg" },
-              { name: "Jiya Vij", img: "d2.svg" },
-              { name: "Amishi Ranjan", img: "d3.svg" },
+              { name: "Mayuri Barapatre", img: "mayuri.webp" },
+              { name: "Jiya Vij", img: "jiya_vij.webp" },
+              { name: "Amishi Ranjan", img: "amishi.webp" },
             ].map((member, index) => (
               <div key={index} className="flex flex-col items-end">
                 <div className="overflow-hidden">

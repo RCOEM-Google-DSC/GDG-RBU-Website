@@ -18,7 +18,7 @@ export default function Mac() {
         {/* Team Lead - full width on mobile, right side on desktop */}
         <div className="flex flex-col items-center mx-auto md:mx-16 mb-10 md:mb-0 md:order-2">
           <Image
-            src="/teampic/market.svg"
+            src="/teampic/dixita.webp"
             alt="Team Lead"
             width={300} // Increased size
             height={350}
@@ -47,7 +47,7 @@ export default function Mac() {
             {/* Team member 1 */}
             <div className="flex flex-col items-center">
               <Image
-                src="/teampic/ma1.svg"
+                src="/teampic/pratyush.webp"
                 alt="Team member"
                 width={200}
                 height={150}
@@ -59,7 +59,7 @@ export default function Mac() {
             {/* Team member 2 */}
             <div className="flex flex-col items-center">
               <Image
-                src="/teampic/mg2.svg"
+                src="/teampic/jiya.webp"
                 alt="Team member"
                 width={200}
                 height={150}
@@ -71,7 +71,7 @@ export default function Mac() {
             {/* Team member 3 */}
             <div className="flex flex-col items-center">
               <Image
-                src="/teampic/mg3.svg"
+                src="/teampic/rahul.webp"
                 alt="Team member"
                 width={200}
                 height={150}

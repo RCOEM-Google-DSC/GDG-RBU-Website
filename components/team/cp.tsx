@@ -18,7 +18,7 @@ export default function CPTeam() {
         {/* Team Lead - Enlarged Image */}
         <div className="flex flex-col items-center mx-auto md:mx-16 mb-10 md:mb-0">
           <Image
-            src="/teampic/cp.svg"
+            src="/teampic/aditya.webp"
             alt="Aditya Singh"
             width={300}
             height={350}
@@ -45,10 +45,10 @@ export default function CPTeam() {
           {/* Team members grid aligned to the end */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-7 mx-2 md:mx-10 items-end">
             {[
-              { name: "Hariom Nabira", img: "c1.svg" },
-              { name: "Adwait Channawar", img: "c4.svg" },
-              { name: "Purva Khandelwal", img: "c2.svg" },
-              { name: "Aniket Barapatre", img: "c3.svg" },
+              { name: "Hariom Nabira", img: "hariom.webp" },
+              { name: "Adwait Channawar", img: "adwait.webp" },
+              { name: "Purva Khandelwal", img: "purva.webp" },
+              { name: "Aniket Barapatre", img: "aniket.webp" },
             ].map((member, index) => (
               <div key={index} className="flex flex-col items-end">
                 <div className="overflow-hidden">

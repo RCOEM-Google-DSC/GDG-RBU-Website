@@ -18,7 +18,7 @@ export default function Mac() {
         {/* Team Lead - full width on mobile, right side on desktop */}
         <div className="flex flex-col items-center mx-auto md:mx-16 mb-10 md:mb-0 md:order-2">
           <Image
-            src="/teampic/mac.svg"
+            src="/teampic/aarsh.webp"
             alt="Team Lead"
             width={300} // Increased size
             height={350}
@@ -45,10 +45,10 @@ export default function Mac() {
           {/* Team members grid - 2 columns on mobile, 4 on desktop */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mx-2 md:mx-10">
             {[
-              { name: "Annalhq Shaikh", img: "m1.svg" },
-              { name: "Bhuvnesh Verma", img: "m2.svg" },
-              { name: "Harsh Pashine", img: "m3.svg" },
-              { name: "Shantanu Anantwar", img: "m4.svg" },
+              { name: "Annalhq Shaikh", img: "annalqh.webp" },
+              { name: "Bhuvnesh Verma", img: "bhuvnesh.webp" },
+              { name: "Harsh Pashine", img: "harsh.webp" },
+              { name: "Shantanu Anantwar", img: "shantanu.webp" },
             ].map((member, index) => (
               <div key={index} className="flex flex-col items-center">
                 <Image

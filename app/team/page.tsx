@@ -24,7 +24,7 @@ export default function TeamPage() {
                 }`}
               >
                 <Image
-                  src={`/teampic/tp${index + 1}.svg`}
+                  src={`/teampic/tp${index + 1}.webp`}
                   alt="Team member"
                   width={250}
                   height={300}
@@ -57,7 +57,7 @@ export default function TeamPage() {
                 }`}
               >
                 <Image
-                  src={`/teampic/tp${index + 10}.svg`}
+                  src={`/teampic/tp${index + 10}.webp`}
                   alt="Team member"
                   width={250}
                   height={300}

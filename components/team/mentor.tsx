@@ -15,7 +15,7 @@ export default function Mentor() {
         <div className="flex flex-col items-center mx-auto lg:mx-4 xl:mx-12">
           <div className="w-48 sm:w-64 md:w-72 lg:w-80">
             <Image
-              src="/teampic/lead.svg"
+              src="/teampic/jayesh.webp"
               alt="Team member"
               width={200}
               height={350}
@@ -31,14 +31,14 @@ export default function Mentor() {
           <h2 className="text-xl font-thin text-center mb-6">Mentors</h2>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
-              { name: "Mohit Sahare", img: "mohit.svg" },
-              { name: "Mahesh Bora", img: "tp19.svg" },
-              { name: "Sanchit Mishra", img: "tp20.svg" },
-              { name: "Arnav Kadu", img: "tp21.svg" },
-              { name: "Jaya Singh", img: "tp22.svg" },
-              { name: "Adnan Hussain", img: "tp23.svg" },
-              { name: "Tanisha Bharvesh", img: "tp24.svg" },
-              { name: "Rishika Kumar", img: "tp25.svg" },
+              { name: "Mohit Sahare", img: "mohit 17.34.17.webp" },
+              { name: "Mahesh Bora", img: "Mask group-4.webp" },
+              { name: "Sanchit Mishra", img: "sanchit.webp" },
+              { name: "Arnav Kadu", img: "arnav.webp" },
+              { name: "Jaya Singh", img: "jaya.webp" },
+              { name: "Adnan Hussain", img: "adnan.webp" },
+              { name: "Tanisha Bharvesh", img: "tanisha.webp" },
+              { name: "Rishika Kumar", img: "rishika.webp" },
             ].map((mentor, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div className="rounded-2xl overflow-hidden">

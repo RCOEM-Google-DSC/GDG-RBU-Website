@@ -18,7 +18,7 @@ export default function Web() {
         {/* Team Lead */}
         <div className="flex flex-col items-center mx-auto md:mx-16 mb-10 md:mb-0">
           <Image
-            src="/teampic/web.svg"
+            src="/teampic/aakhyan.webp"
             alt="Team member"
             width={300} 
             height={350} 
@@ -45,10 +45,10 @@ export default function Web() {
           {/* Team members grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-7 mx-2 md:mx-10">
             {[
-              { name: "Mayur Kawale", img: "w1.svg" },
-              { name: "Ashutosh Pandey", img: "w2.svg" },
-              { name: "Abhay Mishra", img: "w3.svg" },
-              { name: "Jay Gupta", img: "w4.svg" },
+              { name: "Mayur Kawale", img: "mayur.webp" },
+              { name: "Ashutosh Pandey", img: "ashutosh.webp" },
+              { name: "Abhay Mishra", img: "abhay.webp" },
+              { name: "Jay Gupta", img: "jay.webp" },
             ].map((member, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div className="overflow-hidden">
