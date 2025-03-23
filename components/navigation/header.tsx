@@ -57,7 +57,7 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         isScrolled
-          ? "bg-background shadow-sm"
+          ? "bg-background  shadow-sm"
           : "bg-background"
       }`}
     >
@@ -74,7 +74,7 @@ export function Header() {
             <Link href="/blog" className="nav-link">Blogs</Link>
             <Link href="/team" className="nav-link">Team</Link>
             <Link href="/domains" className="nav-link">Domains</Link>
-            <Link href="/contact" className="nav-link">Contact</Link>
+            
           </div>
 
           <div className="hidden md:flex items-center space-x-4 font-thin">
@@ -108,35 +108,37 @@ export function Header() {
 
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black z-40 flex flex-col items-center p-6 space-y-6">
-          <button
-            className="absolute top-4 right-4 p-2"
-            onClick={() => setIsOpen(false)}
-            aria-label="Close menu"
-          >
-            <X size={24} />
-          </button>
-          <Link href="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link href="/events" className="nav-link" onClick={() => setIsOpen(false)}>Events</Link>
-          <Link href="/blog" className="nav-link" onClick={() => setIsOpen(false)}>Blogs</Link>
-          <Link href="/team" className="nav-link" onClick={() => setIsOpen(false)}>Team</Link>
-          <Link href="/domains" className="nav-link" onClick={() => setIsOpen(false)}>Domains</Link>
-          <Link href="/contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</Link>
-          {/* <ThemeSwitcher /> */}
-          {user ? (
-            <Button onClick={handleSignOut} variant="outline">Sign Out</Button>
-          ) : (
-            <>
-              <Button asChild variant="outline">
-                <Link href="/sign-in">Sign In</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/sign-up">Sign Up</Link>
-              </Button>
-            </>
-          )}
-        </div>
-      )}
+  <div className="fixed inset-0 bg-black z-40 flex flex-col items-center p-6 space-y-6">
+    <button
+      className="absolute top-4 right-4 p-2"
+      onClick={() => setIsOpen(false)}
+      aria-label="Close menu"
+    >
+      <X size={24} />
+    </button>
+    <Link href="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</Link>
+    <Link href="/events" className="nav-link" onClick={() => setIsOpen(false)}>Events</Link>
+    <Link href="/blog" className="nav-link" onClick={() => setIsOpen(false)}>Blogs</Link>
+    <Link href="/team" className="nav-link" onClick={() => setIsOpen(false)}>Team</Link>
+    <Link href="/domains" className="nav-link" onClick={() => setIsOpen(false)}>Domains</Link>
+
+    {user ? (
+      <Button onClick={() => { handleSignOut(); setIsOpen(false); }} variant="outline">
+        Sign Out
+      </Button>
+    ) : (
+      <>
+        <Button asChild variant="outline">
+          <Link href="/sign-in" onClick={() => setIsOpen(false)}>Sign In</Link>
+        </Button>
+        <Button asChild>
+          <Link href="/sign-up" onClick={() => setIsOpen(false)}>Sign Up</Link>
+        </Button>
+      </>
+    )}
+  </div>
+)}
+
     </header>
   );
 }

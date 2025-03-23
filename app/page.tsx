@@ -1,6 +1,9 @@
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 
 import Home from "@/components/home/home";
+import About from "../components/about/about";
+import TwoColumnLayout from "@/components/feature/feature";
+import FAQSection from "@/components/faq/faq";
 
 
 export default async function Page() {
@@ -17,8 +20,10 @@ export default async function Page() {
   }
 
   return (<>
-  <Home />
-  
+        <Home/>
+        <About/>
+        <TwoColumnLayout/>
+        <FAQSection/>
   </>
   );
 }

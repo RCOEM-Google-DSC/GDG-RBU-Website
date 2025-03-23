@@ -157,8 +157,8 @@ const ExpandableCardStack = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <div className="min-h-[100vh] pt-2 px-4 bg-white dark:bg-black dark:text-white transition-all duration-500">
+    <div className="min-h-screen bg-white dark:bg-black ">
+      <div className="min-h-[100vh] pt-24 px-4 bg-white dark:bg-black dark:text-white transition-all duration-500">
         <h1
           className={`text-4xl md:text-5xl font-thin text-center -mt-3  transition-opacity duration-500 ${
             scrolled ? "opacity-0" : "opacity-100"

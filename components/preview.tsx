@@ -5,7 +5,6 @@ import { motion, stagger, useAnimate } from "motion/react";
 
 import Floating, { FloatingElement } from "@/components/user/parallax-floating";
 import { MarqueeDemo } from "./marquee";
-import Link from "next/link";
 
 const exampleImages = [
   {
@@ -79,19 +78,22 @@ const Preview = () => {
     >
        
       <motion.div
-        className="text-center space-y-4 items-center flex flex-col"
+        className="text-center space-y-4 items-center flex flex-col z-10"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.88, delay: 1.5 }}
       >
-        <p className="text-5xl md:text-7xl  font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 ">
+        <p className="text-5xl md:text-7xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300">
           Our Events
         </p>
-        <Link href="/events">
-  <button className="bg-gray-900  text-white px-10 py-3 rounded-full hover:bg-gray-600 transition-all font-thin ">
+        <a href="/events" className="inline-block">
+  <button 
+    className="bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white px-10 py-3 rounded-full hover:from-indigo-600 hover:via-purple-700 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 active:scale-95 font-thin focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-opacity-50 shadow-lg"
+    onClick={() => window.location.href = "/events"}
+  >
     Explore More
   </button>
-</Link>
+</a>
       </motion.div>
 
       <Floating sensitivity={-1} className="overflow-hidden">

@@ -2,15 +2,7 @@ import React from 'react';
 
 export default function Events() {
   const events = [
-    {
-      id: 1,
-      name: "Web Wizards 3.0",
-      date: "27 March 2025",
-      image: "event/event4.png",
-      description: "Web Wizards 3.0 is a one-day event to explore the exciting world of tech with GDG RBU!",
-      location: "DT Seminar Hall",
-      time: "10:00 AM - 5:00 PM"
-    },
+    
     {
       id: 2,
       name: "EXPLORE 2.0",
@@ -33,27 +25,48 @@ export default function Events() {
       date: "24 Dec 2024",
       image: "event/event3.svg",
       description: "This winter gonna be techy. Want to learn new tech like Web Development, App Development? Join us at Tech Winter Break."
+    },
+    {
+      id: 5,
+      name: "Web Wizards 2.0",
+      date: "27 March 2024",
+      image: "event/event4.png",
+      description: "Web Wizards 2.0 is a one-day event to explore the exciting world of tech with GDG RBU!",
+      location: "DT Seminar Hall",
+      time: "10:00 AM - 5:00 PM"
     }
   ];
 
-  const upcomingEvent = events[0];
+  const upcomingEvents=[
+    {
+      id: 1,
+      name: "Web Wizards 3.0",
+      date: "27 March 2025",
+      image: "/surprise.png",
+      description: "Web Wizards 3.0 is a one-day event to explore the exciting world of tech with GDG RBU!",
+      location: "DT Seminar Hall",
+      time: "10:00 AM - 5:00 PM"
+    }
+  ]
+  const upcomingEvent = upcomingEvents[0];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="container mx-auto px-4 pt-24 max-w-7xl">
       <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-gray-100 font-semibold">Our Events</h1>
       
-      <div className="w-full mb-12 bg-black rounded-lg overflow-hidden shadow-lg">
+      <div className="w-full mb-12 bg-black border border-white rounded-lg overflow-hidden shadow-lg">
         <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-2/5 h-64 lg:h-auto relative">
+          <div className="lg:w-2/5 h-64 lg:h-auto relative ">
             <img 
               src={upcomingEvent.image} 
               alt={upcomingEvent.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover blur-2xl"
             />
             <div className="absolute top-0 left-0 bg-blue-900 text-white px-4 py-2 rounded-br-lg font-thin">
               UPCOMING EVENT
             </div>
           </div>
+          
           
           <div className="lg:w-3/5 p-6 lg:p-10 text-white">
             <div className="mb-2 font-thin">{upcomingEvent.date}</div>
@@ -75,10 +88,10 @@ export default function Events() {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-md transition-colors duration-200 font-thin">
-                Register Now
+                Registration Open Soon
               </button>
               <button className="bg-transparent border border-white text-white hover:bg-white/10 px-6 py-2 rounded-md font-thin transition-colors duration-200">
-                Learn More
+                Learn More -{">"}
               </button>
             </div>
           </div>
@@ -230,4 +243,4 @@ export default function Events() {
 //       )}
 //     </div>
 //   );
-// }
+// }https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngtree.com%2Fso%2Fsurprise&psig=AOvVaw1zEnR_Zog6m7SguHpEwMrl&ust=1742777563469000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMDGzcD-nowDFQAAAAAdAAAAABAE

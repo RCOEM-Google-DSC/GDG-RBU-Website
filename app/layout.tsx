@@ -34,7 +34,7 @@ export default function RootLayout({
       className={`dark`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-black text-foreground">
+      <body className="min-h-screen bg-[#030303] text-foreground">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -42,7 +42,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header  />
-          <main className="pt-20 ">{children}</main>
+          <main className="">{children}</main>
           <Footer/>
         </ThemeProvider>
       </body>

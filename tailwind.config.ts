@@ -73,11 +73,27 @@ const config = {
 				"marquee": {
 					to: { transform: "translateX(-50%)" },
 				},
+				// New keyframe for the logo showcase component
+				"fadeIn": {
+					"0%": { opacity: "0", transform: "translateY(20px)" },
+					"100%": { opacity: "1", transform: "translateY(0)" },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 				"marquee": "marquee 10s linear infinite forwards",
+				// New animation for the logo showcase component
+				"fade-in": "fadeIn 0.8s ease-in-out forwards",
+			},
+			// New transition delays for the logo showcase component
+			transitionDelay: {
+				"100": "100ms",
+				"150": "150ms",
+				"200": "200ms",
+				"300": "300ms",
+				"400": "400ms",
+				"500": "500ms",
 			},
 		},
 	},

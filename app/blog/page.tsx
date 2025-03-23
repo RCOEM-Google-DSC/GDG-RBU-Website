@@ -22,7 +22,7 @@ export default async function BlogPage() {
     .sort((a, b) => b - a);
 
   return (
-    <div className="mx-auto max-w-6xl space-y-12 px-6 py-12">
+    <div className="mx-auto max-w-6xl space-y-12 px-6 pt-24">
       <div className="text-center space-y-2">
         <h1 className="text-4xl font-bold text-foreground">Our Blog</h1>
         <p className="text-muted-foreground text-lg">

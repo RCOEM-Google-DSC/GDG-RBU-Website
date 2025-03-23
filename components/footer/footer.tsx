@@ -43,7 +43,7 @@ export function Footer() {
 					<div className="flex items-center gap-12 py-8">
 						<div className="text-md ml-8 text-slate-100 max-md:ml-12">Follow Us: </div>
 						<div className="flex gap-8">
-							<a href="https://www.instagram.com/gdsc_rcoem/" target="_blank">
+							<a href="https://www.instagram.com/gdg_rbu/" target="_blank">
 								<InstagramLogoIcon className="scale-150 cursor-pointer text-slate-100 transition-all hover:scale-[1.8]" />
 							</a>
 							<a href="https://mobile.twitter.com/gdsc_rcoem">
