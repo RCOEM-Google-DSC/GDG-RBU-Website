@@ -51,10 +51,10 @@ export default function Events() {
   const upcomingEvent = upcomingEvents[0];
 
   return (
-    <div className="container mx-auto px-4 pt-24 max-w-7xl">
+    <div className="container mx-auto px-4 pt-24 max-w-7xl mb-10">
       <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-gray-100 font-semibold">Our Events</h1>
       
-      <div className="w-full mb-12 bg-black border border-white rounded-lg overflow-hidden shadow-lg">
+      <div className="w-full mb-12 bg-black border border-white  rounded-lg overflow-hidden shadow-lg">
         <div className="flex flex-col lg:flex-row">
           <div className="lg:w-2/5 h-64 lg:h-auto relative ">
             <img 
@@ -98,12 +98,12 @@ export default function Events() {
         </div>
       </div>
 
-     
-      <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-gray-100 font-semibold">Past Events</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-0 border-white lg:border-white  dark:border-white font-thin">
+     <div className='rounded-3xl bg-white py-6 px-6'>
+      <h1 className="text-4xl md:text-5xl  text-center mb-8 md:mb-12 text-gray-800 dark:text-black font-semibold">Past Events</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-4 border-white lg:border-white  dark:border-white font-thin ">
         
         {events.map((event) => (
-          <div key={event.id} className="flex flex-col border border-gray-200 dark:border-white shadow-sm hover:shadow-md transition-shadow duration-300 p-4 md:p-6 h-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-thin">
+          <div key={event.id} className="flex flex-col border rounded-3xl border-gray-200 dark:border-white shadow-sm hover:shadow-md transition-shadow duration-300 p-4 md:p-6 h-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-thin">
             <div className="text-center mb-3 md:mb-4 text-black dark:text-white font-thin">{event.date}</div>
             
             <div className="mb-4 md:mb-6 w-full h-48 md:h-64 relative overflow-hidden rounded font-thin">
@@ -134,6 +134,7 @@ export default function Events() {
           Show More Events
         </button>
       </div>
+    </div>
     </div>
   );
 }

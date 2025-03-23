@@ -22,17 +22,17 @@ const About: React.FC<BusinessHeroProps> = ({
   return (
     <>
 
-    <div className="bg-black text-white min-h-screen flex flex-col lg:flex-row items-center py-8 lg:py-16">
-      <div className="container px-4 mx-auto flex flex-col lg:flex-row items-center justify-between">
+    <div className="bg-black text-black min-h-screen flex flex-col lg:flex-row items-center py-8 lg:py-16  ">
+      <div id='' className="container px-4   md:mx-12 flex flex-col lg:flex-row items-center justify-between border rounded-3xl py-10  bg-white">
         {/* Image div - order-2 on mobile, normal order on desktop */}
         <div className="w-full lg:w-1/2 order-2 lg:order-none mb-8 lg:mb-0 flex justify-center lg:justify-start">
-          <div className="relative w-full max-w-md lg:max-w-lg">
+          <div className="relative w-full max-w-md lg:max-w-lg mx-8">
             <Image 
               src="/teampic.png" 
               width={550} 
               height={400} 
               alt="Team picture"
-              className="border rounded-t-full rounded-b-lg "
+              className="  rounded-3xl "
             />
           </div>
         </div>
