@@ -20,9 +20,9 @@ export default function Social() {
           <Image
             src="/teampic/social.svg"
             alt="Tanay Pande"
-            width={600}
-            height={700}
-            className="object-cover w-72 md:w-[500px]"
+            width={300}
+            height={350}
+            className="object-cover w-48 md:w-64"
           />
           <div className="text-center mt-4">
             <h1 className="text-3xl font-thin">Tanay Pande</h1>
