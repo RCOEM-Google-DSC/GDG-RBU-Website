@@ -199,13 +199,13 @@ function HeroGeometric({
             animate="visible"
           >
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-white/30">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#EA4335] to-[#0F9D58]">
                 {title1}
               </span>
               <br />
               <span
                 className={cn(
-                  "bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-yellow-400 to-green-600 "
+                  "bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4]  to-[#FBBC04] "
                 )}
               >
                 {title2}
