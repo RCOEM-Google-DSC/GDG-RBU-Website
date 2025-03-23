@@ -20,9 +20,9 @@ export default function Mac() {
           <Image
             src="/teampic/market.svg"
             alt="Team Lead"
-            width={460} // Increased size
-            height={600}
-            className="object-cover w-72 md:w-[500px] mx-4"
+            width={300} // Increased size
+            height={350}
+            className="object-cover w-48 md:w-64 mx-4"
           />
           <div className="text-center mt-4">
             <h1 className="text-3xl font-thin">Dixita Hawelikar</h1>
