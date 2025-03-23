@@ -20,9 +20,9 @@ export default function CPTeam() {
           <Image
             src="/teampic/cp.svg"
             alt="Aditya Singh"
-            width={600}
-            height={700}
-            className="object-cover w-60 md:w-[500px]"
+            width={300}
+            height={350}
+            className="object-cover w-48 md:w-64"
           />
           <div className="text-center mt-4">
             <h1 className="text-3xl font-thin">Aditya Singh</h1>
