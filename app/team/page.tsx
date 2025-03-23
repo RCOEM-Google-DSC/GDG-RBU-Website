@@ -12,7 +12,7 @@ import Social from "@/components/team/socials";
 export default function TeamPage() {
   return (
     <div className="min-h-screen md:min-h-screen bg-white dark:bg-black text-black dark:text-white">
-      <main className="container mx-auto px-2 sm:px-4 py-10 sm:py-20 overflow-hidden">
+      <main className="container mx-auto px-2 sm:px-4 pt-24 sm:pt-24 overflow-hidden">
         {/* Top team members grid */}
         <Marquee pauseOnHover className="[--duration:20s] overflow-hidden">
           <div className="grid grid-cols-9 gap-2 sm:gap-4 mb-4 sm:mb-8 p-2 sm:p-4">

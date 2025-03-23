@@ -32,7 +32,7 @@ const About: React.FC<BusinessHeroProps> = ({
               width={550} 
               height={400} 
               alt="Team picture"
-              className="rounded-2xl border"
+              className="border rounded-t-full rounded-b-lg "
             />
           </div>
         </div>
@@ -53,13 +53,11 @@ const About: React.FC<BusinessHeroProps> = ({
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8 leading-tight">
               {headline}
             </h1>
-            
             <p className="text-base md:text-lg text-gray-400 mb-8 lg:mb-10 leading-relaxed">
               {subheadline}
             </p>
-            
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/sign-up" className="bg-gradient-to-r from-red-600 via-blue-600 to-yellow-500 text-white px-10 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-3 focus:ring-white">
+              <Link href="/sign-up" className="bg-gradient-to-r from-red-600 via-blue-600 to-yellow-500 text-white px-10 py-3 rounded-3xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-3 focus:ring-white">
                 <span className="flex items-center justify-center">
                   {callLabel}
                   <span className="ml-2">
@@ -70,8 +68,6 @@ const About: React.FC<BusinessHeroProps> = ({
                   </span>
                 </span>
               </Link>
-
-              
             </div>
           </div>
         </div>
