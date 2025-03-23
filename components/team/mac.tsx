@@ -20,9 +20,9 @@ export default function Mac() {
           <Image
             src="/teampic/mac.svg"
             alt="Team Lead"
-            width={460} // Increased size
-            height={510}
-            className="object-cover w-72 md:w-auto"
+            width={300} // Increased size
+            height={350}
+            className="object-cover w-48 md:w-64"
           />
           <div className="text-center mt-4">
             <h1 className="text-3xl font-thin">Aarsh Gangulwar</h1>
