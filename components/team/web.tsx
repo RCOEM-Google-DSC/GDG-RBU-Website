@@ -20,9 +20,9 @@ export default function Web() {
           <Image
             src="/teampic/web.svg"
             alt="Team member"
-            width={700} 
-            height={800} 
-            className="object-cover w-72 md:w-[500px]" 
+            width={300} 
+            height={350} 
+            className="object-cover w-48 md:w-64" 
           />
           <div className="text-center mt-4">
             <h1 className="text-3xl font-thin">Aakhyan Jeyush</h1>
