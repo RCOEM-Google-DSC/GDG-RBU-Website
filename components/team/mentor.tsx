@@ -41,13 +41,13 @@ export default function Mentor() {
               { name: "Rishika Kumar", img: "tp25.svg" },
             ].map((mentor, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="rounded-2xl overflow-hidden w-full">
+                <div className="rounded-2xl overflow-hidden">
                   <Image
                     src={`/teampic/${mentor.img}`}
                     alt={mentor.name}
                     width={100}
                     height={150}
-                    className="w-full h-full object-cover"
+                    className="w-32 md:w-auto h-full object-cover"
                   />
                 </div>
                 <h3 className="text-sm sm:text-md font-thin mt-2 text-center">{mentor.name}</h3>
