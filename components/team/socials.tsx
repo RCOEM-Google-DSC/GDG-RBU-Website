@@ -22,7 +22,7 @@ export default function Social() {
             alt="Tanay Pande"
             width={300}
             height={350}
-            className="object-cover w-48 md:w-64"
+            className="object-cover w-48 md:w-70"
           />
           <div className="text-center mt-4">
             <h1 className="text-3xl font-thin">Tanay Pande</h1>
