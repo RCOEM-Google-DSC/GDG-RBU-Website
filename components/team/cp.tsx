@@ -22,7 +22,7 @@ export default function CPTeam() {
             alt="Aditya Singh"
             width={600}
             height={700}
-            className="object-cover w-72 md:w-[500px]"
+            className="object-cover w-60 md:w-[500px]"
           />
           <div className="text-center mt-4">
             <h1 className="text-3xl font-thin">Aditya Singh</h1>
