@@ -11,7 +11,10 @@ import {
 } from "react";
 
 import { HeroGeometric } from "@/components/user/shape-landing-hero";
-import { Preview } from "./preview";
+
+import About from "./about/about";
+import TwoColumnLayout from "./feature/feature";
+import FAQSection from "./faq/faq";
 
 interface HomeClientComponentProps {
   headerAuthComponent?: ReactNode;
@@ -287,12 +290,12 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
           title1="Innovate, Code"
           title2="with GDG RBU"
         />
-        <Preview />
+        <About/>
+        <TwoColumnLayout/>
+        <FAQSection/>
       </section>
 
-      {/* <section className="w-full relative">
-        <Preview />
-      </section> */}
+     
     </div>
   );
 };
