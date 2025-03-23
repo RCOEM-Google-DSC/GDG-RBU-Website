@@ -17,8 +17,8 @@ export default function Mentor() {
             <Image
               src="/teampic/lead.svg"
               alt="Team member"
-              width={300}
-              height={500}
+              width={200}
+              height={350}
               className="object-cover w-full"
             />
           </div>
@@ -45,8 +45,8 @@ export default function Mentor() {
                   <Image
                     src={`/teampic/${mentor.img}`}
                     alt={mentor.name}
-                    width={200}
-                    height={250}
+                    width={100}
+                    height={150}
                     className="w-full h-full object-cover"
                   />
                 </div>
