@@ -28,13 +28,32 @@ export default function Events() {
     },
     {
       id: 5,
+      name: "Bappa Ka Prashad 4.0",
+      date: "15 Sept 2024",
+      image: "/bkp1.png",
+      description: "With Ganesh Chaturthi in full swing, we are thrilled to announce Bappa Ka Prashad 4.0 on 15th September! 🙏✨ Join us as we blend tradition with competitive coding, sharing the 'Prashad' of knowledge and skill. Get ready to test your abilities and be part of this exciting coding journey.",
+      location: "Codeforces",
+      time: "10:00 AM - 5:00 PM"
+    },
+    {
+      id: 6,
+      name: "A Step Towards CP 2.0",
+      date: "22 Aug 2024",
+      image: "/stcp.png",
+      description: "Introducing... “A Step Towards CP 2.0” - your gateway to the world of programming! 💻🚀 .Competitive Programming: Your key to landing a job at the worlds leading tech companies. By honing your problem-solving prowess and coding expertise, you will make yourself an irresistible hire.",
+      location: "DT Seminar Hall",
+      time: "10:00 AM - 5:00 PM"
+    },
+    {
+      id: 7,
       name: "Web Wizards 2.0",
       date: "27 March 2024",
       image: "event/event4.png",
       description: "Web Wizards 2.0 is a one-day event to explore the exciting world of tech with GDG RBU!",
       location: "DT Seminar Hall",
       time: "10:00 AM - 5:00 PM"
-    }
+    },
+    
   ];
 
   const upcomingEvents=[
