@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Circle } from 'lucide-react';
 
 
 interface BusinessHeroProps {
@@ -40,7 +41,9 @@ const About: React.FC<BusinessHeroProps> = ({
         <div className="w-full lg:w-1/2 order-1 lg:order-none mb-8 lg:mb-0">
           {isLive && (
             <div className="mb-4 lg:mb-8">
-              <span className="inline-block bg-black border border-white/30 text-white px-4 py-1 rounded-full text-sm">
+              
+              <span className="inline-flex items-center gap-2 bg-black border border-white/80 text-white px-4 py-1 rounded-full text-md">
+              <Circle className="h-2 w-2 fill-rose-500/80" />
                 We're live!
               </span>
             </div>
@@ -56,7 +59,7 @@ const About: React.FC<BusinessHeroProps> = ({
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/signup" className="inline-block bg-white text-black px-6 py-3 rounded text-center hover:bg-gray-200 transition duration-200">
+              <Link href="/sign-up" className="bg-gradient-to-r from-red-600 via-blue-600 to-yellow-500 text-white px-10 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-3 focus:ring-white">
                 <span className="flex items-center justify-center">
                   {callLabel}
                   <span className="ml-2">
@@ -67,6 +70,8 @@ const About: React.FC<BusinessHeroProps> = ({
                   </span>
                 </span>
               </Link>
+
+              
             </div>
           </div>
         </div>

@@ -40,12 +40,12 @@ export default function Events() {
   const upcomingEvents=[
     {
       id: 1,
-      name: "Zhb Zlcdugv 3.0",
-      date: "27 qZeam 2025",
+      name: "Web Wizard 3.0",
+      date: "27 March 2025",
       image: "/surprise.png",
-      description: "Zhb Zlcdugv 3.0 lv d rqh-gdb hyhqw wr hasoruh wkh hafwlqj zruog ri whfk zlwk JGJ UEX!",
-      location: "To Be Disclosed Soon",
-      time: "00:00 AM - 23:59 PM"
+      description: "Web Wizards 3.0 is a one-day event to explore the exciting world of tech with GDG RBU",
+      location: "Venu : To Be Disclosed Soon",
+      time: "Time : 00:00 AM - 23:59 PM"
     }
   ]
   const upcomingEvent = upcomingEvents[0];
