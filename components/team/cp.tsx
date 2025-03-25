@@ -18,7 +18,7 @@ export default function CPTeam() {
         {/* Team Lead - Enlarged Image */}
         <div className="flex flex-col items-center mx-auto md:mx-16 mb-10 md:mb-0">
           <Image
-            src="/teampic/aditya.webp"
+            src="/teampic/cplead.svg"
             alt="Aditya Singh"
             width={300}
             height={350}
