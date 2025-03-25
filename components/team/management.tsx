@@ -77,7 +77,7 @@ export default function Mac() {
                 height={150}
                 className="object-cover w-32 md:w-auto"
               />
-              <h3 className="text-base md:text-xl font-thin mt-2 text-center">Devyani Kheche</h3>
+              <h3 className="text-base md:text-xl font-thin mt-2 text-center">Devyani Keche</h3>
             </div>
           </div>
         </div>
