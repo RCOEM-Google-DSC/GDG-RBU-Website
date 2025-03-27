@@ -52,17 +52,19 @@ export default function FAQSection() {
     <section className="w-full bg-black text-white py-12 px-4 md:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-7xl font-bold mb-6 leading-tight flex justify-center">FAQ</h2>
+          <h2 className="text-4xl md:text-7xl font-bold mb-6 leading-tight flex justify-center bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-100/80 dark:to-slate-400/80">
+            FAQ
+          </h2>
           <p className="text-base md:text-lg text-gray-400 flex text-center">
-            Everything you need to know about GDG On Campus RBU . Can't find the answer you're looking for?
-            Feel free to contact our management team.
+            Everything you need to know about GDG On Campus RBU . Can't find the
+            answer you're looking for? Feel free to contact our management team.
           </p>
         </div>
 
         <div className="space-y-4">
           {faqData.map((item) => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className="border-b border-gray-800 last:border-0"
             >
               <button
@@ -83,12 +85,10 @@ export default function FAQSection() {
               <div
                 id={`faq-answer-${item.id}`}
                 className={`overflow-hidden transition-all duration-300 ${
-                  openItems[item.id] ? 'max-h-96 pb-5' : 'max-h-0'
+                  openItems[item.id] ? "max-h-96 pb-5" : "max-h-0"
                 }`}
               >
-                <div className="text-gray-400">
-                  {item.answer}
-                </div>
+                <div className="text-gray-400">{item.answer}</div>
               </div>
             </div>
           ))}

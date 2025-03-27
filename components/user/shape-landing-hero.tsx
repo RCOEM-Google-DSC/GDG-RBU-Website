@@ -2,9 +2,8 @@
 
 "use client";
 
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import { Circle } from "lucide-react";
-import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 function ElegantShape({
@@ -166,7 +165,7 @@ function HeroGeometric({
             animate="visible"
           >
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-100/80 dark:to-slate-400/80">
                 {title1}
               </span>
               <br />
@@ -186,7 +185,7 @@ function HeroGeometric({
             initial="hidden"
             animate="visible"
           >
-            <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-normal tracking-wide max-w-xl mx-auto px-4">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 leading-relaxed font-normal tracking-wide max-w-xl mx-auto px-4">
               Empowering students with cutting-edge tech skills, community, and
               resources for a future in technology. Join us to learn, build, and
               connect with fellow developers!
