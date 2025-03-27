@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Circle } from "lucide-react";
+import { Circle, ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
 interface BusinessHeroProps {
@@ -100,26 +100,11 @@ const About: React.FC<BusinessHeroProps> = ({
             >
               <Link
                 href="/sign-up"
-                className="group bg-gradient-to-r from-red-600 via-blue-600 to-yellow-500 text-white px-10 py-3.5 rounded-3xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-3 focus:ring-white/30"
+                className="group bg-gradient-to-r from-[#4285F4]/90 to-[#EA4335]/90 text-gray-100 px-10 py-3.5 rounded-3xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-3 focus:ring-white/30"
               >
                 <span className="flex items-center justify-center">
                   {callLabel}
-                  <span className="ml-2 transform transition-transform group-hover:translate-x-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </span>
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </Link>
             </motion.div>

@@ -171,7 +171,7 @@ function HeroGeometric({
               <br />
               <span
                 className={cn(
-                  "bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4]/90 via-[#FBBC05]/60 to-[#EA4335]/90 "
+                  "bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4]/90 via-[#FBBC05]/60 to-[#EA4335]/90"
                 )}
               >
                 {title2}

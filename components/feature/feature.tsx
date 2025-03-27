@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import React, { useRef } from "react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
 const fadeUpVariant = {
@@ -52,8 +53,11 @@ const TwoColumnLayout: React.FC = () => {
       {/* Button Section */}
       <div className="flex items-center justify-center mt-2 mb-10">
         <a href="/events" className="inline-block">
-          <button className="bg-gradient-to-r from-red-600 via-blue-600 to-yellow-500 text-white px-10 py-3 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-300">
-            Explore More
+          <button className="group bg-gradient-to-r from-[#4285F4]/90 to-[#EA4335]/90 text-gray-100 px-10 py-3.5 rounded-3xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-3 focus:ring-white/30">
+        <span className="flex items-center justify-center">
+          Explore More
+          <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+        </span>
           </button>
         </a>
       </div>
