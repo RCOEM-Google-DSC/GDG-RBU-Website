@@ -65,7 +65,7 @@ export default function Mac() {
                 height={150}
                 className="object-cover w-32 md:w-auto"
               />
-              <h3 className="text-base md:text-xl font-thin mt-2 text-center">Jiya Panidta</h3>
+              <h3 className="text-base md:text-xl font-thin mt-2 text-center">Jiya Pandita</h3>
             </div>
 
             {/* Team member 3 */}
