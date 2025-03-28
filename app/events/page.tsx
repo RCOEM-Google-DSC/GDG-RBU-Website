@@ -79,7 +79,7 @@ export default function Events() {
             <img 
               src={upcomingEvent.image} 
               alt={upcomingEvent.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full "
             />
             <div className="absolute top-0 left-0 bg-blue-400 text-white px-4 py-2 rounded-br-lg font-thin">
               UPCOMING EVENT
