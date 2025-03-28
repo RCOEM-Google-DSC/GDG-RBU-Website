@@ -17,13 +17,13 @@ const HomeClientComponent: FC<HomeClientComponentProps> = ({
     <div className="flex flex-col bg-black">
       <section className="w-full relative">
         <HeroGeometric
-          badge="Upcoming event on 29th March"
+          badge="Upcoming event on 5th April"
           title1="Innovate, Code"
           title2="with GDG RBU"
         />
-        <About/>
-        <TwoColumnLayout/>
-        <FAQSection/>
+        <About />
+        <TwoColumnLayout />
+        <FAQSection />
       </section>
     </div>
   );
