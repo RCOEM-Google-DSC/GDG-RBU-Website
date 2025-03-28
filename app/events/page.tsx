@@ -61,7 +61,7 @@ export default function Events() {
       id: 1,
       name: "Web Wizard 3.0",
       date: "5 April 2025",
-      image: "event/web-wizards.png",
+      image: "/blog-images/web-wizards.png",
       description: "Web Wizards 3.0 is a one-day event plus week long bootcamp to explore the exciting world of tech with GDG RBU",
       location: "Venu : To Be Disclosed Soon",
       time: "Time : 2:00 AM - 5 PM"
