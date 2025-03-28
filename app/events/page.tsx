@@ -60,11 +60,11 @@ export default function Events() {
     {
       id: 1,
       name: "Web Wizard 3.0",
-      date: "27 March 2025",
-      image: "/surprise.png",
-      description: "Web Wizards 3.0 is a one-day event to explore the exciting world of tech with GDG RBU",
+      date: "5 April 2025",
+      image: "/blog-images/pst2.png",
+      description: "Web Wizards 3.0 is a one-day event plus week long bootcamp to explore the exciting world of tech with GDG RBU",
       location: "Venu : To Be Disclosed Soon",
-      time: "Time : 00:00 AM - 23:59 PM"
+      time: "Time : 2:00 AM - 5 PM"
     }
   ]
   const upcomingEvent = upcomingEvents[0];
@@ -79,7 +79,7 @@ export default function Events() {
             <img 
               src={upcomingEvent.image} 
               alt={upcomingEvent.name}
-              className="w-full h-full object-cover blur-2xl"
+              className="w-full h-full object-cover"
             />
             <div className="absolute top-0 left-0 bg-blue-400 text-white px-4 py-2 rounded-br-lg font-thin">
               UPCOMING EVENT
@@ -105,12 +105,14 @@ export default function Events() {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-md transition-colors duration-200 font-thin">
-                Registration Open Soon
-              </button>
+              <a href="https://lu.ma/g4xh2udx?fbclid=PAZXh0bgNhZW0CMTEAAaaClU7dkl28slxaMIDiYVh09yyGplBQoFhcu52xi45jkUbxPKBV3qUfElg_aem_NKLlJJswjh-wcSEZZG13xg"><button className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-md transition-colors duration-200 font-thin">
+                Register Now
+              </button></a>
+              <a href="https://gdg-rbu.netlify.app/blog/web-wizards-3">
               <button className="bg-transparent border border-white text-white hover:bg-white/10 px-6 py-2 rounded-md font-thin transition-colors duration-200">
                 Learn More -{">"}
               </button>
+              </a>
             </div>
           </div>
         </div>
