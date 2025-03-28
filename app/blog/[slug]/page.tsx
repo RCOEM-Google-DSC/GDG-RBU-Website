@@ -6,9 +6,12 @@ import { getBlogPosts, getPost } from "@/lib/mdx";
 import dynamic from "next/dynamic";
 
 const DynamicMarkdownRenderer = dynamic(
-  () => import("@/components/markdown/mdx-renderer").then((mod) => mod.MarkdownRenderer),
+  () =>
+    import("@/components/markdown/mdx-renderer").then(
+      (mod) => mod.MarkdownRenderer
+    ),
   { ssr: !!false }
-)
+);
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -30,10 +33,13 @@ export default async function BlogPost({
   }
 
   return (
-    <div className="mx-auto max-w-2xl">
-      <article data-pagefind-body>
-        <header className="mb-8">
-          <div className="relative w-full h-64 mb-6 rounded-lg overflow-hidden">
+    <div className="container mx-auto max-w-2xl px-4 py-8">
+      <article
+        className="prose prose-lg dark:prose-invert max-w-none"
+        data-pagefind-body
+      >
+        <header className="mb-12">
+          <div className="relative w-full h-64 mb-8 rounded-lg overflow-hidden shadow-md">
             <Image
               src={post.image}
               alt={post.title}
@@ -42,8 +48,8 @@ export default async function BlogPost({
               priority
             />
           </div>
-          <h2 className="mb-2 text-3xl font-bold">{post.title}</h2>
-          <div className="text-sm text-muted-foreground">
+          <h2 className="mb-4 text-3xl font-bold">{post.title}</h2>
+          <div className="flex items-center text-sm text-muted-foreground mb-2">
             <span className="font-medium">{post.author}</span>
             <span className="mx-2">•</span>
             <time dateTime={post.date}>{post.date}</time>
@@ -51,16 +57,19 @@ export default async function BlogPost({
             <span>{post.readingTime}</span>
           </div>
         </header>
-        <DynamicMarkdownRenderer
-          content={post.content}
-          frontmatter={{
-            title: post.title,
-            description: post.description,
-            date: post.date,
-            author: post.author,
-            image: post.image,
-          }}
-        />
+
+        <div className="mt-8 space-y-6">
+          <DynamicMarkdownRenderer
+            content={post.content}
+            frontmatter={{
+              title: post.title,
+              description: post.description,
+              date: post.date,
+              author: post.author,
+              image: post.image,
+            }}
+          />
+        </div>
       </article>
     </div>
   );
