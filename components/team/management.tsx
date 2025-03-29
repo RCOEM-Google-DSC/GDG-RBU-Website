@@ -9,7 +9,7 @@ export default function Mac() {
         <p className="text-xl font-thin mt-2">
         Efficiency is not optional
           <br />
-          —it is our expertise.
+          —it is our expertise .
         </p>
       </div>
 

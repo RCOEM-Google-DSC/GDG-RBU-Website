@@ -9,7 +9,7 @@ export default function Mac() {
         <p className="text-xl font-thin mt-2">
         The trifecta of tech
           <br />
-          —ML, Apps, and Cloud.
+          —ML, Apps, and Cloud .
         </p>
       </div>
 

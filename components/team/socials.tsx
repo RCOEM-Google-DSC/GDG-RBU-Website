@@ -9,7 +9,7 @@ export default function Social() {
         <p className="text-xl font-thin mt-2">
         From hashtags to headlines, 
           <br />
-          we make it happen.
+          we make it happen .
         </p>
       </div>
 
