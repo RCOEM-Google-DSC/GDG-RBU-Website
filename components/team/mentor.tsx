@@ -33,7 +33,7 @@ export default function Mentor() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-4 md:gap-6 lg:gap-8">
             {[
               { name: "Mohit Sahare", img: "mohit 17.34.17.webp" },
-              { name: "Krushna Dande", img: "krushna.png" },
+              { name: "Krushna Dande", img: "krushna.webp" },
               { name: "Mahesh Bora", img: "Mask group-4.webp" },
               { name: "Sanchit Mishra", img: "sanchit.webp" },
               { name: "Arnav Kadu", img: "arnav.webp" },

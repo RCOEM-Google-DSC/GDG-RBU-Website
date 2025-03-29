@@ -48,8 +48,8 @@ export default function TeamPage() {
 
         {/* Bottom team members grid */}
         <Marquee reverse={true} pauseOnHover className="[--duration:20s] overflow-hidden">
-          <div className="grid grid-cols-7 gap-2 sm:gap-4 mt-8 sm:mt-16">
-            {[...Array(7)].map((_, index) => (
+          <div className="grid grid-cols-9 gap-2 sm:gap-4 mt-8 sm:mt-16">
+            {[...Array(9)].map((_, index) => (
               <div
                 key={index}
                 className={`col-span-1 rounded-[20px] sm:rounded-[30px] overflow-hidden h-20 sm:h-40 ${
@@ -57,7 +57,7 @@ export default function TeamPage() {
                 }`}
               >
                 <Image
-                  src={`/teampic/tp${index + 10}.webp`}
+                  src={`/teampic/tp${index + 10}.png`}
                   alt="Team member"
                   width={250}
                   height={300}
