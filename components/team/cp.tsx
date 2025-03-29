@@ -7,9 +7,7 @@ export default function CPTeam() {
       <div className="block md:hidden text-center px-4 mt-8 mb-6">
         <h1 className="text-5xl font-thin">CP Team</h1>
         <p className="text-xl mt-2 font-thin">
-          Bringing ideas to life with creativity
-          <br />
-          and precision!
+        From AC to ICPC, we rise!
         </p>
       </div>
 

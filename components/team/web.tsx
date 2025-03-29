@@ -36,9 +36,9 @@ export default function Web() {
           <div className="hidden md:block text-right pr-8 mb-24">
             <h1 className="text-8xl font-thin">Web Team</h1>
             <p className="text-3xl font-thin">
-              Bringing ideas to life with creativity
+            We don’t just build websites, 
               <br />
-              and precision!
+              we craft experiences.
             </p>
           </div>
 

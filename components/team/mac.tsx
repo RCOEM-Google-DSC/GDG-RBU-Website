@@ -7,9 +7,9 @@ export default function Mac() {
       <div className="block md:hidden text-center px-4 mt-8 mb-6">
         <h1 className="text-5xl font-thin">MAC Team</h1>
         <p className="text-xl font-thin mt-2">
-          Bringing ideas to life with creativity
+        The trifecta of tech
           <br />
-          and precision!
+          —ML, Apps, and Cloud.
         </p>
       </div>
 
