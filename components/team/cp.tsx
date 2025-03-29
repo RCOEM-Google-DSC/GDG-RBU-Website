@@ -15,15 +15,18 @@ export default function CPTeam() {
 
       {/* Main container */}
       <div className="flex flex-col md:flex-row justify-between items-center md:mt-32 px-4 md:px-0">
-        {/* Team Lead - Enlarged Image */}
+        {/* Team Lead - Enlarged Image (significantly larger on desktop) */}
         <div className="flex flex-col items-center mx-auto md:mx-16 mb-10 md:mb-0">
-          <Image
-            src="/teampic/cplead.svg"
-            alt="Aditya Singh"
-            width={300}
-            height={350}
-            className="object-cover w-48 md:w-70"
-          />
+          <div className="w-48 sm:w-56 md:w-80 lg:w-96">
+            <Image
+              src="/teampic/cplead.svg"
+              alt="Aditya Singh"
+              width={300}
+              height={350}
+              className="object-cover w-48 md:w-64"
+              priority
+            />
+          </div>
           <div className="text-center mt-4">
             <h1 className="text-3xl font-thin">Aditya Singh</h1>
             <h2 className="text-xl mt-1 font-thin">CP Lead</h2>
@@ -57,7 +60,7 @@ export default function CPTeam() {
                     alt={member.name}
                     width={200}
                     height={150}
-                    className="object-cover w-32 md:w-auto"
+                    className="object-cover w-32 md:w-40 lg:w-48"
                   />
                 </div>
                 <h3 className="text-base md:text-xl font-thin mt-2 text-right">{member.name}</h3>

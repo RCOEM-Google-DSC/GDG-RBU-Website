@@ -24,7 +24,7 @@ export default function TeamPage() {
                 }`}
               >
                 <Image
-                  src={`/teampic/tp${index + 1}.webp`}
+                  src={`/teampic/tp${index + 1}.png`}
                   alt="Team member"
                   width={250}
                   height={300}
